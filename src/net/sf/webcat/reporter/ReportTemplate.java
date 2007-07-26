@@ -515,12 +515,22 @@ public class ReportTemplate
     {
         SessionHandle designSession = Reporter.getInstance().newDesignSession();
         int count = 0;
-
+        
         try
         {
             ReportDesignHandle reportHandle = designSession.openDesign(
             		filePath());
-            count = countOfDataSetReferencesRecursive(reportHandle.getBody());
+ 
+            SlotHandle slot = reportHandle.getBody();
+        	Iterator it = slot.iterator();
+        	while(it.hasNext())
+        	{
+        		DesignElementHandle element = (DesignElementHandle)it.next();
+        		Object dataSetValue = element.getProperty("dataSet");
+        		
+        		if(dataSetValue != null)
+        			count++;
+        	}
         }
         catch(BirtException e)
         {
@@ -529,23 +539,7 @@ public class ReportTemplate
         
         return count;
     }
-    
-    private int countOfDataSetReferencesRecursive(SlotHandle slot)
-    {
-    	int count = 0;
 
-    	Iterator it = slot.iterator();
-    	while(it.hasNext())
-    	{
-    		DesignElementHandle element = (DesignElementHandle)it.next();
-    		Object dataSetValue = element.getProperty("dataSet");
-    		System.out.print(element.toString() + ", ");
-    		System.out.println(dataSetValue);
-    		count++;
-    	}
-
-    	return count;
-    }
     
 // If you add instance variables to store property values you
 // should add empty implementions of the Serialization methods

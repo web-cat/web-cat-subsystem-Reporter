@@ -45,7 +45,7 @@ import com.webobjects.eocontrol.*;
 public class GeneratedReport
     extends _GeneratedReport
 {
-	private static final String RENDER_TOKEN = ".rendered";
+	private static final String RENDER_TOKEN_PREFIX = ".rendered.";
 
     //~ Constructors ..........................................................
 
@@ -100,14 +100,15 @@ public class GeneratedReport
     	return renderedResourcesDir(uuid) + "/" + filename;
     }
 
-    public void markAsRendered()
+    public void markAsRenderedWithMethod(String method)
     {
     	File renderDir = new File(renderedResourcesDir(uuid()));
     	if(renderDir.exists())
     	{
     		try
     		{
-        		File renderToken = new File(renderDir, RENDER_TOKEN);
+    			String tokenName = RENDER_TOKEN_PREFIX + method;
+        		File renderToken = new File(renderDir, tokenName);
 				FileOutputStream stream = new FileOutputStream(renderToken);
 				stream.write(0);
 				stream.close();
@@ -119,12 +120,13 @@ public class GeneratedReport
     	}
     }
     
-    public boolean isRendered()
+    public boolean isRenderedWithMethod(String method)
     {
     	File renderDir = new File(renderedResourcesDir(uuid()));
     	if(renderDir.exists())
     	{
-    		File renderToken = new File(renderDir, RENDER_TOKEN);
+    		String tokenName = RENDER_TOKEN_PREFIX + method;
+    		File renderToken = new File(renderDir, tokenName);
     		if(renderToken.exists())
     		{
     			return true;
