@@ -77,8 +77,15 @@ public class ReportQuery
     {
     	if(queryInfo() == null)
     		setQueryInfo(new MutableDictionary());
-    	
-    	queryInfo().setObjectForKey(q, "qualifier");
+
+    	if(q == null)
+    	{
+    		queryInfo().removeObjectForKey("qualifier");
+    	}
+    	else
+    	{
+    		queryInfo().setObjectForKey(q, "qualifier");
+    	}
     }
 
 
