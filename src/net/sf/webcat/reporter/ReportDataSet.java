@@ -59,9 +59,8 @@ public class ReportDataSet
     public static ReportDataSet createNewReportDataSet(
     		EOEditingContext ec,
     		ReportTemplate reportTemplate,
-    		String uuid,
-    		String entityName,
-    		String description)
+    		String uuid, String entityName,
+    		String name, String description, int referenceCount)
     {
         ReportDataSet dataSet = new ReportDataSet();
         ec.insertObject( dataSet );
@@ -69,7 +68,9 @@ public class ReportDataSet
         dataSet.setReportTemplateRelationship(reportTemplate);
         dataSet.setUuid(uuid);
         dataSet.setWcEntityName(entityName);
+        dataSet.setName(name);
         dataSet.setDescription(description);
+        dataSet.setReferenceCount(referenceCount);
 
         return dataSet;
     }
