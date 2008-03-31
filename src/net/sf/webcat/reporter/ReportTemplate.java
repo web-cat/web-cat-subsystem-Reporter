@@ -321,6 +321,7 @@ public class ReportTemplate
      * @param author       the user uploading the template
      * @param uploadedName the template's file name
      * @param uploadedData the file's data
+     * @param version      the version number to use
      * @param errors       a dictionary in which to store any error messages
      *                     for display to the user
      * @return the new report template, if successful, or null if unsuccessful
@@ -420,8 +421,14 @@ public class ReportTemplate
 		}
 		finally
 		{
-			try { designSession.closeAll(false); }
-			catch(Exception e) { }
+			try
+            {
+			    designSession.closeAll(false);
+            }
+			catch (Exception e)
+            {
+			    // Nothing to do
+            }
 		}
 	}
 
@@ -481,8 +488,14 @@ public class ReportTemplate
     	}
     	finally
     	{
-    		try { designSession.closeAll(false); }
-    		catch(Exception e) { }
+    		try
+            {
+                designSession.closeAll(false);
+            }
+    		catch (Exception e)
+            {
+    		    // Nothing to do
+            }
     	}
     }
 

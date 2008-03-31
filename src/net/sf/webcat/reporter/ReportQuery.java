@@ -34,7 +34,7 @@ import com.webobjects.eocontrol.*;
 /**
  * TODO: place a real description here.
  *
- * @author 
+ * @author
  * @version $Id$
  */
 public class ReportQuery
@@ -57,11 +57,12 @@ public class ReportQuery
     // ----------------------------------------------------------
     /**
      * Gets the qualifier that applies to this query.
+     * @return the qualifier
      */
     public EOQualifier qualifier()
     {
     	MutableDictionary info = queryInfo();
-    	
+
     	if(info == null)
     		return null;
     	else
@@ -72,6 +73,7 @@ public class ReportQuery
     // ----------------------------------------------------------
     /**
      * Sets the qualifier that applies to this query.
+     * @param q the qualifier to use
      */
     public void setQualifier(EOQualifier q)
     {
