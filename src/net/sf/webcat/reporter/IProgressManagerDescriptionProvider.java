@@ -41,6 +41,7 @@ public interface IProgressManagerDescriptionProvider
     /**
      * Get the description for a given job.
      * @param jobToken The job to describe
+     * @return The description.
      */
 	String description(Object jobToken);
 }
