@@ -1,5 +1,5 @@
 /*==========================================================================*\
- |  EnqueuedReportJob.java
+ |  $Id$
  |*-------------------------------------------------------------------------*|
  |  Copyright (C) 2006 Virginia Tech
  |
@@ -25,10 +25,9 @@
 
 package net.sf.webcat.reporter;
 
-import net.sf.webcat.core.Application;
-
 import com.webobjects.foundation.*;
 import com.webobjects.eocontrol.*;
+import net.sf.webcat.core.Application;
 
 // -------------------------------------------------------------------------
 /**
@@ -65,6 +64,7 @@ public class EnqueuedReportJob
     }
 
 
+    // ----------------------------------------------------------
     public String generatedReportFile()
     {
     	return GeneratedReport.generatedReportFilePathForUser(user(), uuid());
