@@ -1,5 +1,5 @@
 /*==========================================================================*\
- |  ReportQuery.java
+ |  $Id$
  |*-------------------------------------------------------------------------*|
  |  Copyright (C) 2006 Virginia Tech
  |
@@ -25,10 +25,9 @@
 
 package net.sf.webcat.reporter;
 
-import net.sf.webcat.core.MutableDictionary;
-
-import com.webobjects.foundation.*;
 import com.webobjects.eocontrol.*;
+import com.webobjects.foundation.*;
+import net.sf.webcat.core.MutableDictionary;
 
 // -------------------------------------------------------------------------
 /**
@@ -40,7 +39,7 @@ import com.webobjects.eocontrol.*;
 public class ReportQuery
     extends _ReportQuery
 {
-    //~ Constructors ..........................................................
+    //~ Constructor ...........................................................
 
     // ----------------------------------------------------------
     /**
