@@ -47,7 +47,6 @@ import java.io.ObjectOutputStream;
 import java.io.StringReader;
 import java.util.Enumeration;
 import net.sf.webcat.core.Application;
-import net.sf.webcat.oda.WebCATDataException;
 import net.sf.webcat.reporter.QualifierUtils;
 import net.sf.webcat.reporter.queryassistants.AdvancedQueryComparison;
 import net.sf.webcat.reporter.queryassistants.AdvancedQueryCriterion;
@@ -257,10 +256,8 @@ public class designerPreview
     // ----------------------------------------------------------
 	private void setCanceledInSession()
 	{
-		System.out.println("setting canceled");
 		synchronized (designerPreview.class)
 		{
-			System.out.println("inside sync block");
 			session().setObjectForKey(Boolean.TRUE, SESSION_CANCELED);
 		}
 	}

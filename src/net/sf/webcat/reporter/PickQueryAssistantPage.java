@@ -60,6 +60,7 @@ public class PickQueryAssistantPage
     public QueryAssistantDescriptor queryAssistant;
     public NSArray<ReportQuery> savedQueries;
     public ReportQuery savedQuery;
+    public ReportQuery selectedSavedQuery;
 
 
     //~ Methods ...............................................................
@@ -122,7 +123,7 @@ public class PickQueryAssistantPage
     // ----------------------------------------------------------
     public WOComponent useSavedQuery()
     {
-    	localPageController().selectNextSavedQuery(savedQuery);
+    	localPageController().selectNextSavedQuery(selectedSavedQuery);
     	return localPageController().nextPage();
     }
 }

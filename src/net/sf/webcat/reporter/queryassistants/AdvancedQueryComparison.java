@@ -219,7 +219,10 @@ public abstract class AdvancedQueryComparison
         	AdvancedQueryCriterion criterion =
         		comparison._criterionForQualifier(q);
 
-        	criterion.setComparison(comparison);
+        	if(criterion != null)
+        	{
+        	    criterion.setComparison(comparison);
+        	}
 
         	return criterion;
     	}
@@ -544,7 +547,11 @@ public abstract class AdvancedQueryComparison
 	    		{
 	    			bq = (ERXBetweenQualifier)nq.qualifier();
 	    		}
-                // TODO: what if the if fails?  How does bq get a value?
+	    	}
+
+	    	if(bq == null)
+	    	{
+	    	    return null;
 	    	}
 
 	    	criterion.setKeyPath(bq.key());
