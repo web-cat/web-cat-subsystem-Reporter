@@ -347,8 +347,7 @@ public class CourseAndAssignmentSubmissionsAssistant
     		{
     			boolean found = false;
 
-       			for (AssignmentOffering ao :
-       				(NSArray<AssignmentOffering>)assn.offerings())
+       			for (AssignmentOffering ao : assn.offerings())
        			{
        				CourseOffering co = ao.courseOffering();
 
