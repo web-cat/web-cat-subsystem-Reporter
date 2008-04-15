@@ -27,7 +27,7 @@ import com.webobjects.appserver.*;
 /**
  * A page that allows one to schedule reports and manage scheduled reports.
  *
- * @author aallowat
+ * @author Tony Allevato
  * @version $Id$
  */
 public class ScheduleReportPage

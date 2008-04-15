@@ -40,7 +40,7 @@ import com.webobjects.foundation.NSSelector;
  * to the ognl.AST* classes, but they only have package visibility. Dumping it
  * in the ognl package is easier than using reflection everywhere.
  *
- * @author aallowat
+ * @author Tony Allevato
  * @version $Id$
  */
 public class OgnlQualifierUtils

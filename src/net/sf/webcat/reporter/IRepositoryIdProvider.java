@@ -21,23 +21,29 @@
 
 package net.sf.webcat.reporter;
 
-//-------------------------------------------------------------------------
+// ------------------------------------------------------------------------
 /**
- * Defines the interface for objects that can provide job descriptions
- * to the {@link ProgressManager}.
+ * <p>
+ * Objects that implement this interface are passed into the
+ * updateRepositoryDataAndFinalize method of the ReportTemplate class so that
+ * it can generate repository IDs for the reports that are uploaded to Web-CAT.
+ * </p><p>
+ * Since our repository IDs are based on direct action URLs, which require a
+ * WOContext in order to be generated, this class isolates the ReportTemplate
+ * entity from this implementation detail.
+ * </p>
  *
- * @author  Anthony Allevato
+ * @author Tony Allevato
  * @version $Id$
  */
-public interface IProgressManagerDescriptionProvider
+public interface IRepositoryIdProvider
 {
-    //~ Methods ...............................................................
-
     // ----------------------------------------------------------
     /**
-     * Get the description for a given job.
-     * @param jobToken The job to describe
-     * @return The description.
+     * Gets the unique repository identifier for the specified report template.
+     *
+     * @param template the report template
+     * @return the unique repository identifier of the template
      */
-	String description(Object jobToken);
+    String idForReportTemplate(ReportTemplate template);
 }

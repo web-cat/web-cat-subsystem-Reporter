@@ -21,18 +21,33 @@
 
 package net.sf.webcat.reporter;
 
-//-------------------------------------------------------------------------
+import com.webobjects.foundation.*;
+import com.webobjects.eocontrol.*;
+import net.sf.webcat.core.Application;
+
+// -------------------------------------------------------------------------
 /**
- * Defines a handler for a {@link ReporterLongResponse} component.
+ * Represents the generation phase of a report in Web-CAT. The rendering phase
+ * is handled by the {@link EnqueuedReportRenderJob} entity.
  *
- * @author aallowat
+ * @author Tony Allevato
  * @version $Id$
  */
-public interface AjaxLongResponseHandler
+public class EnqueuedReportGenerationJob
+    extends _EnqueuedReportGenerationJob
 {
+    //~ Constructors ..........................................................
+
     // ----------------------------------------------------------
     /**
-     * Take action when the long response's "cancel" button is pressed.
+     * Creates a new EnqueuedReportJob object.
      */
-	void cancel();
+    public EnqueuedReportGenerationJob()
+    {
+        super();
+    }
+
+
+    //~ Methods ...............................................................
+
 }

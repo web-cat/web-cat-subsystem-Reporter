@@ -26,9 +26,11 @@ import com.webobjects.foundation.*;
 
 // -------------------------------------------------------------------------
 /**
- * TODO: place a real description here.
+ * For a report generation job or a generated report, this class maps a data set
+ * in the report to a query that defines the result set to be used in the
+ * report.
  *
- * @author
+ * @author Tony Allevato
  * @version $Id$
  */
 public class ReportDataSetQuery

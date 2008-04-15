@@ -32,7 +32,7 @@ import net.sf.webcat.reporter.queryassistants.QueryAssistantManager;
 /**
  * This page allows the user to pick which query assistant they want to use.
  *
- * @author aallowat
+ * @author Tony Allevato
  * @version $Id$
  */
 public class PickQueryAssistantPage
@@ -68,29 +68,29 @@ public class PickQueryAssistantPage
     // ----------------------------------------------------------
     public void appendToResponse(WOResponse response, WOContext context)
     {
-    	queryAssistants = QueryAssistantManager.getInstance().
-    		assistantsForEntity(dataSet.wcEntityName());
+        queryAssistants = QueryAssistantManager.getInstance().
+            assistantsForEntity(dataSet.wcEntityName());
 
-    	savedQueries = ReportQuery.objectsForUserAndEntitySavedQueries(
-    		localContext(), user(), dataSet.wcEntityName());
+        savedQueries = ReportQuery.objectsForUserAndEntitySavedQueries(
+            localContext(), user(), dataSet.wcEntityName());
 
-    	super.appendToResponse(response, context);
+        super.appendToResponse(response, context);
     }
 
 
     // ----------------------------------------------------------
     public String linkPartOfQueryAssistantDescription()
     {
-    	String desc = queryAssistant.description();
-    	int pipe = desc.indexOf('|');
+        String desc = queryAssistant.description();
+        int pipe = desc.indexOf('|');
 
-    	if (pipe >= 0)
+        if (pipe >= 0)
         {
-    		return desc.substring(0, pipe);
+            return desc.substring(0, pipe);
         }
-    	else
+        else
         {
-    		return desc;
+            return desc;
         }
     }
 
@@ -98,16 +98,16 @@ public class PickQueryAssistantPage
     // ----------------------------------------------------------
     public String nonLinkPartOfQueryAssistantDescription()
     {
-    	String desc = queryAssistant.description();
-    	int pipe = desc.indexOf('|');
+        String desc = queryAssistant.description();
+        int pipe = desc.indexOf('|');
 
-    	if (pipe >= 0)
+        if (pipe >= 0)
         {
-    		return desc.substring(pipe + 1);
+            return desc.substring(pipe + 1);
         }
-    	else
+        else
         {
-    		return desc;
+            return desc;
         }
     }
 
@@ -115,15 +115,15 @@ public class PickQueryAssistantPage
     // ----------------------------------------------------------
     public WOComponent chooseQueryAssistant()
     {
-    	localPageController().selectNextQueryAssistant(queryAssistant);
-    	return localPageController().nextPage();
+        localPageController().selectNextQueryAssistant(queryAssistant);
+        return localPageController().nextPage();
     }
 
 
     // ----------------------------------------------------------
     public WOComponent useSavedQuery()
     {
-    	localPageController().selectNextSavedQuery(selectedSavedQuery);
-    	return localPageController().nextPage();
+        localPageController().selectNextSavedQuery(selectedSavedQuery);
+        return localPageController().nextPage();
     }
 }

@@ -26,9 +26,9 @@ import com.webobjects.foundation.*;
 
 // -------------------------------------------------------------------------
 /**
- * TODO: place a real description here.
+ * Represents a data set in a report template.
  *
- * @author
+ * @author Tony Allevato
  * @version $Id$
  */
 public class ReportDataSet
@@ -50,11 +50,10 @@ public class ReportDataSet
 
     // ----------------------------------------------------------
     public static ReportDataSet createNewReportDataSet(
-    		EOEditingContext ec,
-    		ReportTemplate reportTemplate,
-    		String uuid,
+            EOEditingContext ec,
+            ReportTemplate reportTemplate,
             String entityName,
-    		String name,
+            String name,
             String description,
             int    referenceCount)
     {
@@ -62,11 +61,12 @@ public class ReportDataSet
         ec.insertObject( dataSet );
 
         dataSet.setReportTemplateRelationship(reportTemplate);
-        dataSet.setUuid(uuid);
-        dataSet.setWcEntityName(entityName);
         dataSet.setName(name);
         dataSet.setDescription(description);
+        dataSet.setWcEntityName(entityName);
         dataSet.setReferenceCount(referenceCount);
+
+        ec.saveChanges();
 
         return dataSet;
     }

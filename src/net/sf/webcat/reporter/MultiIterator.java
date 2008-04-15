@@ -32,7 +32,7 @@ import java.util.Iterator;
  * @param <T> The type of object returned by all the iterators contained
  *            within this multi-iterator.
  *
- * @author  Anthony Allevato
+ * @author  Tony Allevato
  * @version $Id$
  */
 public class MultiIterator<T>
@@ -45,43 +45,43 @@ public class MultiIterator<T>
      * Construct a new object.
      * @param iters The sequence of iterators to traverse
      */
-	public MultiIterator(Iterator[] iters)
-	{
-		this.iterators = iters;
-		index = 0;
-	}
+    public MultiIterator(Iterator[] iters)
+    {
+        this.iterators = iters;
+        index = 0;
+    }
 
 
     //~ Methods ...............................................................
 
     // ----------------------------------------------------------
-	public boolean hasNext()
-	{
-		while (index < iterators.length
+    public boolean hasNext()
+    {
+        while (index < iterators.length
                && (iterators[index] == null || !iterators[index].hasNext()))
-		{
-			index++;
-		}
+        {
+            index++;
+        }
         return index < iterators.length && iterators[index].hasNext();
-	}
+    }
 
 
     // ----------------------------------------------------------
-	public T next()
-	{
-		return (T)iterators[index].next();
-	}
+    public T next()
+    {
+        return (T)iterators[index].next();
+    }
 
 
     // ----------------------------------------------------------
-	public void remove()
-	{
-		throw new RuntimeException("remove() is not supported");
-	}
+    public void remove()
+    {
+        throw new RuntimeException("remove() is not supported");
+    }
 
 
     //~ Instance/static variables .............................................
 
-	private Iterator[] iterators;
-	private int index;
+    private Iterator[] iterators;
+    private int index;
 }

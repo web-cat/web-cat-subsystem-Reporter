@@ -39,7 +39,7 @@ import org.eclipse.birt.report.engine.api.RenderOption;
 /**
  * Render method for Excel data files.
  *
- * @author aallowat
+ * @author Tony Allevato
  * @version $Id$
  */
 public class ExcelRenderingMethod
@@ -66,7 +66,7 @@ public class ExcelRenderingMethod
     {
         StringBuilder content = new StringBuilder();
         NSMutableDictionary query = new NSMutableDictionary();
-        query.setObjectForKey(report.uuid(), "uuid");
+        query.setObjectForKey(report.id(), "reportId");
 
         String filename = "report.xls";
 
@@ -114,8 +114,7 @@ public class ExcelRenderingMethod
 
         RenderOption option = new RenderOption();
         option.setOutputFormat("XLS");
-        option.setOutputFileName(GeneratedReport.renderedResourcePath(
-            report.uuid(), filename));
+        option.setOutputFileName(report.renderedResourcePath(filename));
 
         IRenderTask task = reportEngine().createRenderTask(document);
         task.setRenderOption(option);

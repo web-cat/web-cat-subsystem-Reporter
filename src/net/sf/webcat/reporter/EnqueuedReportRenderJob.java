@@ -1,7 +1,7 @@
 /*==========================================================================*\
  |  $Id$
  |*-------------------------------------------------------------------------*|
- |  Copyright (C) 2006-2008 Virginia Tech
+ |  Copyright (C) 2006 Virginia Tech
  |
  |  This file is part of Web-CAT.
  |
@@ -21,27 +21,27 @@
 
 package net.sf.webcat.reporter;
 
-import com.webobjects.foundation.*;
 import com.webobjects.eocontrol.*;
-import net.sf.webcat.core.Application;
+import com.webobjects.foundation.*;
 
 // -------------------------------------------------------------------------
 /**
- * TODO: place a real description here.
+ * Represents the rendering of a report. The generation of a report is handled
+ * by the {@link EnqueuedReportGenerationJob} class.
  *
- * @author
+ * @author Tony Allevato
  * @version $Id$
  */
-public class EnqueuedReportJob
-    extends _EnqueuedReportJob
+public class EnqueuedReportRenderJob
+    extends _EnqueuedReportRenderJob
 {
     //~ Constructors ..........................................................
 
     // ----------------------------------------------------------
     /**
-     * Creates a new EnqueuedReportJob object.
+     * Creates a new EnqueuedReportRenderJob object.
      */
-    public EnqueuedReportJob()
+    public EnqueuedReportRenderJob()
     {
         super();
     }
@@ -49,20 +49,4 @@ public class EnqueuedReportJob
 
     //~ Methods ...............................................................
 
-    // ----------------------------------------------------------
-    /**
-     * Retrieve the name of the directory where this submission is stored.
-     * @return the directory name
-     */
-    public String generatedReportDir()
-    {
-    	return GeneratedReport.generatedReportDirForUser(user());
-    }
-
-
-    // ----------------------------------------------------------
-    public String generatedReportFile()
-    {
-    	return GeneratedReport.generatedReportFilePathForUser(user(), uuid());
-    }
 }

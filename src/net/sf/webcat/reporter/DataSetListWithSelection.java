@@ -37,7 +37,7 @@ import net.sf.webcat.core.WCComponent;
  * @binding selection a data set equal to one of the elements in dataSets,
  *          this entry will be highlighted when the list is displayed
  *
- * @author aallowat
+ * @author Tony Allevato
  * @version $Id$
  */
 public class DataSetListWithSelection

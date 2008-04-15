@@ -19,26 +19,44 @@
  |  along with Web-CAT; if not, see <http://www.gnu.org/licenses/>.
 \*==========================================================================*/
 
-package net.sf.webcat.reporter;
+package net.sf.webcat.reporter.actions;
 
-import org.eclipse.birt.report.model.api.DesignElementHandle;
+import net.sf.webcat.core.DirectAction;
+import com.webobjects.appserver.WOActionResults;
+import com.webobjects.appserver.WORequest;
 
-//-------------------------------------------------------------------------
+// ------------------------------------------------------------------------
 /**
- * An interface defining the kinds of objects that can be used in the
- * visitor pattern over design elements in a report template.
+ * Acts as an external portal to the report template repository. Unique
+ * identifiers for templates are URLs based on this direct action and can be
+ * visited by a user to display useful information about and grant other access
+ * to a template.
  *
- * @author  Anthony Allevato
+ * @author Tony Allevato
  * @version $Id$
  */
-public interface IDesignElementVisitor
+public class reportTemplate extends DirectAction
 {
-    //~ Public Methods ........................................................
+    //~ Constructor ...........................................................
 
     // ----------------------------------------------------------
     /**
-     * Visit one design element and process it.
-     * @param handle The current design element
+     * Creates a new object.
+     *
+     * @param request The incoming request
      */
-	void accept(DesignElementHandle handle);
+    public reportTemplate(WORequest request)
+    {
+        super(request);
+    }
+
+
+    //~ Public Methods ........................................................
+
+    // ----------------------------------------------------------
+    public WOActionResults reportTemplateAction()
+    {
+        // TODO: implement a useful portal
+        return null;
+    }
 }

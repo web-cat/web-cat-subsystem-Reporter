@@ -57,7 +57,7 @@ import net.sf.webcat.reporter.ReporterHTMLImageHandler;
 /**
  * Render method for CSV data files (comma-separated values).
  *
- * @author aallowat
+ * @author Tony Allevato
  * @version $Id$
  */
 public class CSVRenderingMethod
@@ -117,10 +117,9 @@ public class CSVRenderingMethod
 
         StringBuilder content = new StringBuilder();
         NSMutableDictionary query = new NSMutableDictionary();
-        query.setObjectForKey(report.uuid(), "uuid");
+        query.setObjectForKey(report.id(), "reportId");
 
-        String indexPath = GeneratedReport.renderedResourcePath(
-                report.uuid(), INDEX_FILE);
+        String indexPath = report.renderedResourcePath(INDEX_FILE);
         BufferedReader reader = new BufferedReader(new FileReader(indexPath));
         String resultSetName;
 
@@ -168,8 +167,7 @@ public class CSVRenderingMethod
         public void render()
             throws Exception
         {
-            String indexPath = GeneratedReport.renderedResourcePath(
-                    report.uuid(), INDEX_FILE);
+            String indexPath = report.renderedResourcePath(INDEX_FILE);
             PrintWriter indexWriter = new PrintWriter(indexPath);
 
             List resultSets = task.getResultSetList();
@@ -206,8 +204,7 @@ public class CSVRenderingMethod
                 indexWriter.println(name);
 
                 // Create the CSV file.
-                String csvPath = GeneratedReport.renderedResourcePath(
-                        report.uuid(), name + ".csv");
+                String csvPath = report.renderedResourcePath(name + ".csv");
                 File csvFile = new File(csvPath);
                 PrintWriter writer = new PrintWriter(csvFile);
 

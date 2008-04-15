@@ -28,7 +28,7 @@ import org.eclipse.birt.report.engine.api.IReportEngine;
 /**
  * Abstract base class for rendering methods.
  *
- * @author aallowat
+ * @author Tony Allevato
  * @version $Id$
  */
 public abstract class AbstractRenderingMethod

@@ -32,7 +32,7 @@ import org.apache.log4j.Logger;
  * @author Tony Allevato
  * @version $Id$
  */
-public class ReportQueue
+public class ReportGenerationQueue
 {
     //~ Constructors ..........................................................
 
@@ -40,7 +40,7 @@ public class ReportQueue
     /**
      * Default constructor
      */
-    public ReportQueue()
+    public ReportGenerationQueue()
     {
         queue = new Vector();
     }
@@ -109,5 +109,5 @@ public class ReportQueue
     /** The queue is maintained as a vector. */
     private Vector queue;
 
-    static Logger log = Logger.getLogger( ReportQueue.class );
+    static Logger log = Logger.getLogger( ReportGenerationQueue.class );
 }

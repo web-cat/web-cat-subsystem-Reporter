@@ -29,7 +29,8 @@ import net.sf.webcat.reporter.queryassistants.QueryAssistantManager;
 
 //-------------------------------------------------------------------------
 /**
- * A page ...
+ * A page that acts as a container for a query assistant component used in the
+ * data set query editor wizard.
  *
  * @author Tony Allevato
  * @version $Id$

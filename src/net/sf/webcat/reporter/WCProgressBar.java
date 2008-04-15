@@ -27,7 +27,7 @@ import com.webobjects.appserver.*;
 /**
  * An AJAX-based progress bar component.
  *
- * @author aallowat
+ * @author Tony Allevato
  * @version $Id$
  */
 public class WCProgressBar

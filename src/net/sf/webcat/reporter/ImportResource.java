@@ -34,9 +34,11 @@ import net.sf.webcat.core.WCResourceManager;
 
 //-------------------------------------------------------------------------
 /**
- * A dynamic element ...
+ * A dynamic element that lets a page or nested component request that script
+ * or stylesheet resources be included in the &lt;head&gt; of a page, regardless
+ * of where in the component content this element is used.
  *
- * @author  Anthony Allevato
+ * @author  Tony Allevato
  * @version $Id$
  */
 public class ImportResource
@@ -51,54 +53,54 @@ public class ImportResource
      * @param associations the bindings for this instance of the component
      * @param template
      */
-	public ImportResource(
+    public ImportResource(
         String aName, NSDictionary associations, WOElement template)
-	{
-		super(aName, associations, template);
+    {
+        super(aName, associations, template);
 
-		aType = (WOAssociation)associations.objectForKey("type");
-		aFramework = (WOAssociation)associations.objectForKey("framework");
-		aFilename = (WOAssociation)associations.objectForKey("filename");
-	}
+        aType = (WOAssociation)associations.objectForKey("type");
+        aFramework = (WOAssociation)associations.objectForKey("framework");
+        aFilename = (WOAssociation)associations.objectForKey("filename");
+    }
 
 
     //~ Methods ...............................................................
 
     // ----------------------------------------------------------
-	public void appendToResponse(WOResponse response, WOContext context)
-	{
-		WOComponent component = context.component();
+    public void appendToResponse(WOResponse response, WOContext context)
+    {
+        WOComponent component = context.component();
 
-		String type = aType != null
+        String type = aType != null
             ? (String)aType.valueInComponent(component)
             : null;
-		String framework = aFramework != null
+        String framework = aFramework != null
             ? (String)aFramework.valueInComponent(component)
             : null;
-		String filename = aFilename != null
+        String filename = aFilename != null
             ? (String)aFilename.valueInComponent(component)
             : null;
 
-		// If no framework is specified, get the one from the calling
-		// component.
-		if (framework == null)
-		{
-			NSBundle bundle = NSBundle.bundleForClass(
-				context.component().getClass());
-			framework = bundle.name();
-		}
+        // If no framework is specified, get the one from the calling
+        // component.
+        if (framework == null)
+        {
+            NSBundle bundle = NSBundle.bundleForClass(
+                context.component().getClass());
+            framework = bundle.name();
+        }
 
-		if (type.equalsIgnoreCase("script"))
-		{
-			AjaxUtils.addScriptResourceInHead(
+        if (type.equalsIgnoreCase("script"))
+        {
+            AjaxUtils.addScriptResourceInHead(
                 context, response, framework, filename);
-		}
-		else if (type.equalsIgnoreCase("stylesheet"))
-		{
-			AjaxUtils.addStylesheetResourceInHead(
+        }
+        else if (type.equalsIgnoreCase("stylesheet"))
+        {
+            AjaxUtils.addStylesheetResourceInHead(
                 context, response, framework, filename);
-		}
-	}
+        }
+    }
 
 
     //~ Instance/static variables .............................................

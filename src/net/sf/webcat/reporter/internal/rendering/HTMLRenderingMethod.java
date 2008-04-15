@@ -43,7 +43,7 @@ import org.eclipse.birt.report.engine.api.IReportEngine;
 /**
  * Render method for HTML-viewable reports.
  *
- * @author aallowat
+ * @author Tony Allevato
  * @version $Id$
  */
 public class HTMLRenderingMethod
@@ -89,8 +89,7 @@ public class HTMLRenderingMethod
         option.setEmbeddable(true);
         option.setImageHandler(new ReporterHTMLImageHandler(report,
             actionUrl));
-        option.setOutputFileName(GeneratedReport.renderedResourcePath(
-            report.uuid(), REPORT_ROOT_HTML));
+        option.setOutputFileName(report.renderedResourcePath(REPORT_ROOT_HTML));
 
         IRenderTask task = reportEngine().createRenderTask(document);
         task.setRenderOption(option);
@@ -104,8 +103,7 @@ public class HTMLRenderingMethod
         GeneratedReport report, WOResponse response, WOContext context)
         throws IOException
     {
-        String htmlPath = GeneratedReport.renderedResourcePath(
-            report.uuid(), REPORT_ROOT_HTML);
+        String htmlPath = report.renderedResourcePath(REPORT_ROOT_HTML);
         File htmlFile = new File(htmlPath);
 
         NSData htmlData = new NSData(

@@ -30,7 +30,7 @@ import com.webobjects.foundation.NSTimestampFormatter;
 /**
  * This page summarizes the report that will be generated.
  *
- * @author  Anthony Allevato
+ * @author  Tony Allevato
  * @version $Id$
  */
 public class GenerationSummaryPage
@@ -51,13 +51,13 @@ public class GenerationSummaryPage
 
     //~ KVC Attributes (must be public) .......................................
 
-	public ReportTemplate         reportTemplate;
-	public NSArray<ReportDataSet> dataSets;
-	public ReportDataSet          dataSet;
-	public int                    index;
-	public String                 reportDescription;
-	public IRenderingMethod       renderingMethod;
-	public IRenderingMethod       selectedRenderingMethod;
+    public ReportTemplate         reportTemplate;
+    public NSArray<ReportDataSet> dataSets;
+    public ReportDataSet          dataSet;
+    public int                    index;
+    public String                 reportDescription;
+    public IRenderingMethod       renderingMethod;
+    public IRenderingMethod       selectedRenderingMethod;
 
 
     //~ Public Methods ........................................................
@@ -65,48 +65,48 @@ public class GenerationSummaryPage
     // ----------------------------------------------------------
     public void appendToResponse(WOResponse response, WOContext context)
     {
-    	reportTemplate = localReportTemplate();
-    	dataSets = reportTemplate.dataSets();
+        reportTemplate = localReportTemplate();
+        dataSets = reportTemplate.dataSets();
 
-    	super.appendToResponse(response, context);
+        super.appendToResponse(response, context);
     }
 
 
     // ----------------------------------------------------------
     public String defaultDescription()
     {
-    	return reportTemplate.name();
+        return reportTemplate.name();
     }
 
 
     // ----------------------------------------------------------
     public String querySummaryForDataSet()
     {
-    	ReportQuery query = queryForLocalDataSetUuid(dataSet.uuid());
-    	return query.qualifier().toString();
+        ReportQuery query = queryForLocalDataSetId(dataSet.id());
+        return query.qualifier().toString();
     }
 
 
     // ----------------------------------------------------------
     public NSArray<IRenderingMethod> renderingMethods()
     {
-    	return Reporter.getInstance().allRenderingMethods();
+        return Reporter.getInstance().allRenderingMethods();
     }
 
 
     // ----------------------------------------------------------
     public WOComponent goNext()
     {
-    	String desc = reportDescription;
-    	if (desc == null)
-    	{
-    		desc = defaultDescription();
-    	}
+        String desc = reportDescription;
+        if (desc == null)
+        {
+            desc = defaultDescription();
+        }
 
-    	setLocalReportDescription(desc);
-    	setLocalRenderingMethod(selectedRenderingMethod.methodName());
+        setLocalReportDescription(desc);
+        setLocalRenderingMethod(selectedRenderingMethod.methodName());
 
-    	commitReportGeneration();
-    	return pageWithName(GeneratedReportPage.class.getName());
+        commitReportGeneration();
+        return pageWithName(GeneratedReportPage.class.getName());
     }
 }

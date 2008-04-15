@@ -27,9 +27,10 @@ import net.sf.webcat.core.MutableDictionary;
 
 // -------------------------------------------------------------------------
 /**
- * TODO: place a real description here.
+ * A query in the reporter is a qualifier, along with other metadata, that
+ * determines the data that will go into a result set.
  *
- * @author
+ * @author Tony Allevato
  * @version $Id$
  */
 public class ReportQuery
@@ -56,12 +57,12 @@ public class ReportQuery
      */
     public EOQualifier qualifier()
     {
-    	MutableDictionary info = queryInfo();
+        MutableDictionary info = queryInfo();
 
-    	if(info == null)
-    		return null;
-    	else
-    		return (EOQualifier)info.objectForKey("qualifier");
+        if(info == null)
+            return null;
+        else
+            return (EOQualifier)info.objectForKey("qualifier");
     }
 
 
@@ -72,16 +73,16 @@ public class ReportQuery
      */
     public void setQualifier(EOQualifier q)
     {
-    	if(queryInfo() == null)
-    		setQueryInfo(new MutableDictionary());
+        if(queryInfo() == null)
+            setQueryInfo(new MutableDictionary());
 
-    	if(q == null)
-    	{
-    		queryInfo().removeObjectForKey("qualifier");
-    	}
-    	else
-    	{
-    		queryInfo().setObjectForKey(q, "qualifier");
-    	}
+        if(q == null)
+        {
+            queryInfo().removeObjectForKey("qualifier");
+        }
+        else
+        {
+            queryInfo().setObjectForKey(q, "qualifier");
+        }
     }
 }
