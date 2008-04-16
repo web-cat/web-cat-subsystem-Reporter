@@ -94,7 +94,7 @@ public class HTMLRenderingMethod
         IRenderTask task = reportEngine().createRenderTask(document);
         task.setRenderOption(option);
 
-        return new HTMLController(task);
+        return new BasicController(task);
     }
 
 
@@ -109,47 +109,6 @@ public class HTMLRenderingMethod
         NSData htmlData = new NSData(
             new FileInputStream(htmlFile), (int)htmlFile.length());
         response.appendContentData(htmlData);
-    }
-
-
-    //~ Private Methods/Classes ...............................................
-
-    // ----------------------------------------------------------
-    private static class HTMLController
-        implements Controller
-    {
-        //~ Constructor .......................................................
-
-        // ----------------------------------------------------------
-        public HTMLController(IRenderTask task)
-        {
-            this.task = task;
-        }
-
-
-        //~ Public Methods ....................................................
-
-        // ----------------------------------------------------------
-        public void render() throws Exception
-        {
-            org.mozilla.javascript.Context.enter();
-            task.render();
-            org.mozilla.javascript.Context.exit();
-
-            task.close();
-        }
-
-
-        // ----------------------------------------------------------
-        public void cancel()
-        {
-            task.cancel();
-        }
-
-
-        //~ Instance/static variables .........................................
-
-        private IRenderTask task;
     }
 
 

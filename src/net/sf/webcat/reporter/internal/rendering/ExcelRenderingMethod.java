@@ -119,47 +119,6 @@ public class ExcelRenderingMethod
         IRenderTask task = reportEngine().createRenderTask(document);
         task.setRenderOption(option);
 
-        return new ExcelController(task);
-    }
-
-
-    //~ Private Methods/Classes ...............................................
-
-    // ----------------------------------------------------------
-    private static class ExcelController
-        implements Controller
-    {
-        //~ Constructor .......................................................
-
-        // ----------------------------------------------------------
-        public ExcelController(IRenderTask task)
-        {
-            this.task = task;
-        }
-
-
-        //~ Public Methods ....................................................
-
-        // ----------------------------------------------------------
-        public void render() throws Exception
-        {
-            org.mozilla.javascript.Context.enter();
-            task.render();
-            org.mozilla.javascript.Context.exit();
-
-            task.close();
-        }
-
-
-        // ----------------------------------------------------------
-        public void cancel()
-        {
-            task.cancel();
-        }
-
-
-        //~ Instance/static variables .........................................
-
-        private IRenderTask task;
+        return new BasicController(task);
     }
 }

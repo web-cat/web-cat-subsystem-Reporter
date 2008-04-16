@@ -142,11 +142,24 @@ public class reportResource
                 request().stringFormValueForKey("reportId"));
         String name = request().stringFormValueForKey("name");
         String type = request().stringFormValueForKey("contentType");
+        String deliveredName = request().stringFormValueForKey("deliveredName");
+        boolean inline = Boolean.parseBoolean(
+                request().stringFormValueForKey("inline"));
+
         String filename = name;
 
+        if(deliveredName == null)
+        {
+            deliveredName = filename;
+        }
+
         response.setHeader(type, "Content-Type");
-        response.setHeader("attachment; filename=\"" + filename + "\"",
-            "Content-Disposition");
+
+        if(!inline)
+        {
+            response.setHeader("attachment; filename=\"" + deliveredName + "\"",
+                "Content-Disposition");
+        }
 
         EOEditingContext ec = Application.newPeerEditingContext();
         GeneratedReport report = GeneratedReport.forId(ec, reportId);

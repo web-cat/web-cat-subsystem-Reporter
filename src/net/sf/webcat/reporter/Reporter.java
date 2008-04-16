@@ -60,6 +60,7 @@ import net.sf.webcat.grader.GraderQueueProcessor;
 import net.sf.webcat.reporter.internal.rendering.CSVRenderingMethod;
 import net.sf.webcat.reporter.internal.rendering.ExcelRenderingMethod;
 import net.sf.webcat.reporter.internal.rendering.HTMLRenderingMethod;
+import net.sf.webcat.reporter.internal.rendering.PDFRenderingMethod;
 import org.apache.log4j.Logger;
 import org.eclipse.birt.core.exception.BirtException;
 import org.eclipse.birt.core.framework.IExtension;
@@ -178,6 +179,7 @@ public class Reporter
 
         NSMutableArray methods = new NSMutableArray();
         methods.addObject(new HTMLRenderingMethod(reportEngine));
+        methods.addObject(new PDFRenderingMethod(reportEngine));
         methods.addObject(new CSVRenderingMethod(reportEngine));
         methods.addObject(new ExcelRenderingMethod(reportEngine));
         renderingMethods = methods;

@@ -22,6 +22,8 @@
 package net.sf.webcat.reporter.internal.rendering;
 
 import net.sf.webcat.reporter.IRenderingMethod;
+import net.sf.webcat.reporter.IRenderingMethod.Controller;
+import org.eclipse.birt.report.engine.api.IRenderTask;
 import org.eclipse.birt.report.engine.api.IReportEngine;
 
 //-------------------------------------------------------------------------
@@ -43,12 +45,55 @@ public abstract class AbstractRenderingMethod
     }
 
 
-    //~ Protected Methods .....................................................
+    //~ Protected Methods/Classes .............................................
 
     // ----------------------------------------------------------
     protected IReportEngine reportEngine()
     {
         return reportEngine;
+    }
+
+
+    // ----------------------------------------------------------
+    /**
+     * A basic rendering controller that simply delegates operations to the
+     * BIRT {@link IRenderTask}.
+     */
+    protected static class BasicController
+        implements Controller
+    {
+        //~ Constructor .......................................................
+
+        // ----------------------------------------------------------
+        public BasicController(IRenderTask task)
+        {
+            this.task = task;
+        }
+
+
+        //~ Public Methods ....................................................
+
+        // ----------------------------------------------------------
+        public void render() throws Exception
+        {
+            org.mozilla.javascript.Context.enter();
+            task.render();
+            org.mozilla.javascript.Context.exit();
+
+            task.close();
+        }
+
+
+        // ----------------------------------------------------------
+        public void cancel()
+        {
+            task.cancel();
+        }
+
+
+        //~ Instance/static variables .........................................
+
+        private IRenderTask task;
     }
 
 
