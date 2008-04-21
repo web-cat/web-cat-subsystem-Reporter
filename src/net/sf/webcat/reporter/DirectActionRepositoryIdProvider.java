@@ -48,7 +48,7 @@ public class DirectActionRepositoryIdProvider implements IRepositoryIdProvider
      */
     public DirectActionRepositoryIdProvider(WOContext context)
     {
-        this.context = (ERXWOContext) context;
+        this.context = context;
     }
 
 
@@ -70,8 +70,9 @@ public class DirectActionRepositoryIdProvider implements IRepositoryIdProvider
         String handler = Application.application()
                 .directActionRequestHandlerKey();
 
-        return context.completeURLWithRequestHandlerKey(handler, actionName,
-                params, false, 0);
+        return Application.completeURLWithRequestHandlerKey(
+            context, handler, actionName,
+            params, false, 0);
     }
 
 
@@ -79,5 +80,5 @@ public class DirectActionRepositoryIdProvider implements IRepositoryIdProvider
 
     private static final String actionName = "reportTemplate";
 
-    private ERXWOContext context;
+    private WOContext context;
 }
