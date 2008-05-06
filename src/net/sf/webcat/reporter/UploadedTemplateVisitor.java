@@ -99,13 +99,16 @@ public class UploadedTemplateVisitor extends DeepLayoutVisitor
         List<HideRule> rules =
             handle.getListProperty(TableHandle.VISIBILITY_PROP);
 
-        for(HideRule rule : rules)
+        if (rules != null)
         {
-            if("all".equals(rule.getFormat()))
+            for(HideRule rule : rules)
             {
-                if("true".equals(rule.getExpression()))
+                if("all".equals(rule.getFormat()))
                 {
-                    alwaysHidden = true;
+                    if("true".equals(rule.getExpression()))
+                    {
+                        alwaysHidden = true;
+                    }
                 }
             }
         }
