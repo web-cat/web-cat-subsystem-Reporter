@@ -254,6 +254,7 @@ public class ReportGenerationQueueProcessor extends Thread
 
         // Register the GeneratedReport object with the tracker so that the
         // progress page can observe it.
+        log.debug("Registering job with tracker");
         ReportGenerationTracker.getInstance().startReportForJobId(
                 job.id().intValue(), report.id().intValue(), dataSetRefs);
 
@@ -273,6 +274,7 @@ public class ReportGenerationQueueProcessor extends Thread
 
         try
         {
+            log.debug("Generating report");
             wasCanceled = generateReportDocument(job, report);
         }
         catch (ReportGenerationException e)
@@ -447,6 +449,7 @@ public class ReportGenerationQueueProcessor extends Thread
         // ----------------------------------------------------------
         public void run()
         {
+            log.debug("Beginning report generation thread");
             EOEditingContext context = Application.newPeerEditingContext();
 
             EnqueuedReportGenerationJob job = EnqueuedReportGenerationJob
@@ -459,9 +462,11 @@ public class ReportGenerationQueueProcessor extends Thread
 
             try
             {
+                log.debug("Generation thread: setting up run task");
                 runTask = Reporter.getInstance().setupRunTaskForJob(job);
                 runTask.setErrorHandlingOption(IEngineTask.CANCEL_ON_ERROR);
 
+                log.debug("Generation thread: running BIRT reporting task");
                 runTask.run(reportPath);
 
                 generationErrors = runTask.getErrors();
@@ -488,6 +493,7 @@ public class ReportGenerationQueueProcessor extends Thread
 
             org.mozilla.javascript.Context.exit();
             Application.releasePeerEditingContext(context);
+            log.debug("Generation thread: finishing");
         }
 
 

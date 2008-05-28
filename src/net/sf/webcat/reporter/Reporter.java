@@ -372,6 +372,11 @@ public class Reporter
 
         Application.releasePeerEditingContext(ec);
 
+        if (log.isDebugEnabled())
+        {
+            log.debug("refreshThrottleStatus(): " + isThrottled());
+        }
+
         return isThrottled();
     }
 
