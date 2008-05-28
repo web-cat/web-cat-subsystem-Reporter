@@ -207,7 +207,7 @@ public class ReportGenerationTracker
     public synchronized float fractionOfWorkDoneForJobId(int jobId)
     {
         ReportProgress progress = jobToProgressMap.objectForKey(jobId);
-        return progress.fractionOfWorkDone();
+        return progress == null ? 0.0f : progress.fractionOfWorkDone();
     }
 
 
