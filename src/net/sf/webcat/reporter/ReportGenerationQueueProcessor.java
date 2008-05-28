@@ -281,6 +281,7 @@ public class ReportGenerationQueueProcessor extends Thread
 
             for (Exception ex : e.errors())
             {
+                log.error("Error generating report:", ex);
                 exceptions.addObject(ex);
             }
         }
