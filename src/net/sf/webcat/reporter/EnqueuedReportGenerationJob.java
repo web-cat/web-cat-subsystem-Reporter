@@ -40,7 +40,7 @@ public class EnqueuedReportGenerationJob
 
     // ----------------------------------------------------------
     /**
-     * Creates a new EnqueuedReportJob object.
+     * Creates a new EnqueuedReportGenerationJob object.
      */
     public EnqueuedReportGenerationJob()
     {
