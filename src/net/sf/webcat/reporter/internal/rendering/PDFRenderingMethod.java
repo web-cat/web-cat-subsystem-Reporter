@@ -77,7 +77,7 @@ public class PDFRenderingMethod extends AbstractRenderingMethod
 
     // ----------------------------------------------------------
     public void appendContentToResponse(GeneratedReport report,
-            WOResponse response, WOContext context) throws IOException
+            WOResponse response, WOContext context)
     {
         NSMutableDictionary query = new NSMutableDictionary();
         query.setObjectForKey(report.id(), "reportId");
