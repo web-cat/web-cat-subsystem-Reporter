@@ -94,6 +94,15 @@ public class PickReportToViewPage
 
 
     // ----------------------------------------------------------
+    public WOComponent deleteReport()
+    {
+        localContext().deleteObject( generatedReport );
+        localContext().saveChanges();
+        return null;
+    }
+
+
+    // ----------------------------------------------------------
     public WOComponent viewReportProgress()
     {
         setLocalReportGenerationJob(enqueuedReport);
