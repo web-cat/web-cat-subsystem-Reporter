@@ -349,8 +349,12 @@ public class ReportGenerationQueueProcessor extends Thread
         if (reportId != null)
         {
             GeneratedReport report = GeneratedReport.forId(context, idInt);
-            context.deleteObject(report);
-            context.saveChanges();
+
+            if (report != null)
+            {
+                context.deleteObject(report);
+                context.saveChanges();
+            }
 
             ReportGenerationTracker.getInstance().removeReportIdForJobId(idInt);
         }
