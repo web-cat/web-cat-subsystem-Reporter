@@ -21,16 +21,15 @@
 
 package net.sf.webcat.reporter;
 
-import com.webobjects.foundation.*;
-import com.webobjects.eocontrol.*;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import net.sf.webcat.core.MutableArray;
-import net.sf.webcat.core.MutableDictionary;
 import net.sf.webcat.core.User;
+import com.webobjects.eocontrol.EOEditingContext;
+import com.webobjects.eocontrol.EOObjectStore;
+import com.webobjects.foundation.NSData;
 
 // -------------------------------------------------------------------------
 /**
@@ -225,7 +224,54 @@ public class GeneratedReport
     }
 
 
-    //~ Constructors ..........................................................
+    // ----------------------------------------------------------
+    @Override
+    public void mightDelete()
+    {
+        log.debug("mightDelete()");
+        if (isNewObject()) return;
+
+        reportDocToDelete = generatedReportFile();
+        renderedDirToDelete = renderedResourcesDir();
+
+        super.mightDelete();
+    }
+
+
+    // ----------------------------------------------------------
+    @Override
+    public void didDelete( EOEditingContext context )
+    {
+        log.debug("didDelete()");
+        super.didDelete( context );
+
+        // should check to see if this is a child ec
+        EOObjectStore parent = context.parentObjectStore();
+        if (parent == null || !(parent instanceof EOEditingContext))
+        {
+            if (reportDocToDelete != null)
+            {
+                File file = new File(reportDocToDelete);
+
+                if (file.exists())
+                {
+                    file.delete();
+                }
+            }
+
+            if (renderedDirToDelete != null)
+            {
+                File dir = new File(renderedDirToDelete);
+                if (dir.exists())
+                {
+                    net.sf.webcat.archives.FileUtilities.deleteDirectory(dir);
+                }
+            }
+        }
+    }
+
+
+    //~ Static/instance variables .............................................
 
     public static final String REPORT_EXTENSION = ".rptdocument";
 
@@ -238,4 +284,8 @@ public class GeneratedReport
 
     private static final String RENDERED_REPORTS_SUBDIR_NAME =
         "RenderedReports";
+
+    private String reportDocToDelete;
+
+    private String renderedDirToDelete;
 }
