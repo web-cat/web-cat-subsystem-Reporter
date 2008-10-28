@@ -19,30 +19,29 @@
  |  along with Web-CAT; if not, see <http://www.gnu.org/licenses/>.
 \*==========================================================================*/
 
-package net.sf.webcat.reporter;
+package net.sf.webcat.reporter.queryassistants;
 
-import com.webobjects.appserver.WOComponent;
+import net.sf.webcat.reporter.ReportDataSet;
+import net.sf.webcat.reporter.ReporterComponent;
 import com.webobjects.appserver.WOContext;
-import com.webobjects.foundation.NSArray;
 
 //-------------------------------------------------------------------------
 /**
- * This page allows the user to select the template to use for a new report.
+ * The previewer associated with AdvancedQueryAssistant.
  *
- * @author Tony Allevato
+ * @author aallowat
  * @version $Id$
  */
-public class PickTemplateToGeneratePage
-    extends ReporterComponent
+public class AdvancedQueryPreview extends ReporterComponent
 {
     //~ Constructor ...........................................................
 
     // ----------------------------------------------------------
     /**
-     * Create a new page.
-     * @param context The page's context
+     * Create a new object.
+     * @param context the page's context
      */
-    public PickTemplateToGeneratePage(WOContext context)
+    public AdvancedQueryPreview(WOContext context)
     {
         super(context);
     }
@@ -50,34 +49,18 @@ public class PickTemplateToGeneratePage
 
     //~ KVC Attributes (must be public) .......................................
 
-    public NSArray<ReportTemplate> reportTemplates;
-    public ReportTemplate reportTemplate;
-    public int index;
+    public ReportDataSet dataSet;
+    public AdvancedQueryModel model;
+
+    // Repetition variables
+    public AdvancedQueryCriterion criterion;
 
 
     //~ Methods ...............................................................
 
-    // ----------------------------------------------------------
-    public NSArray<ReportTemplate> reportTemplates()
+    public boolean isCriterionComparandLiteral()
     {
-        if (reportTemplates == null)
-        {
-            reportTemplates =
-                ReportTemplate.objectsForAllTemplates(localContext());
-        }
-        return reportTemplates;
-    }
-
-
-    // ----------------------------------------------------------
-    public WOComponent templateChosen()
-    {
-        clearLocalReportState();
-
-        setLocalReportTemplate(reportTemplate);
-        setLocalCurrentReportDataSet(0);
-        createLocalPageController();
-
-        return localPageController().nextPage();
+        return (criterion.comparandType() ==
+            AdvancedQueryCriterion.COMPARAND_LITERAL);
     }
 }

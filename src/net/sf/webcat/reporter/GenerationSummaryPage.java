@@ -21,10 +21,13 @@
 
 package net.sf.webcat.reporter;
 
-import com.webobjects.appserver.*;
+import net.sf.webcat.reporter.queryassistants.AbstractQueryAssistantModel;
+import net.sf.webcat.reporter.queryassistants.QueryAssistantDescriptor;
+import com.webobjects.appserver.WOComponent;
+import com.webobjects.appserver.WOContext;
+import com.webobjects.appserver.WOResponse;
+import com.webobjects.eocontrol.EOQualifier;
 import com.webobjects.foundation.NSArray;
-import com.webobjects.foundation.NSTimestamp;
-import com.webobjects.foundation.NSTimestampFormatter;
 
 //-------------------------------------------------------------------------
 /**
@@ -108,5 +111,49 @@ public class GenerationSummaryPage
 
         commitReportGeneration();
         return pageWithName(GeneratedReportPage.class.getName());
+    }
+
+
+    // ----------------------------------------------------------
+    public String previewComponentNameAtIndex()
+    {
+        return localPageController().queryAssistantAtIndex(index).
+            previewComponentName();
+    }
+
+
+    // ----------------------------------------------------------
+    public ReportDataSet dataSetAtIndex()
+    {
+        return dataSets.objectAtIndex(index);
+    }
+
+
+    // ----------------------------------------------------------
+    public void setDataSetAtIndex(ReportDataSet dummy)
+    {
+        // Keep KVC from complaining.
+    }
+
+
+    // ----------------------------------------------------------
+    public AbstractQueryAssistantModel modelAtIndex()
+    {
+        QueryAssistantDescriptor qad =
+            localPageController().queryAssistantAtIndex(index);
+        ReportQuery query = queryForLocalDataSetId(dataSetAtIndex().id());
+
+        AbstractQueryAssistantModel model = qad.createModel();
+        EOQualifier q = QualifierSerialization.convertGIDsToEOs(
+                query.qualifier(), localContext());
+        model.takeValuesFromQualifier(q);
+        return model;
+    }
+
+
+    // ----------------------------------------------------------
+    public void setModelAtIndex(AbstractQueryAssistantModel dummy)
+    {
+        // Keep KVC from complaining.
     }
 }

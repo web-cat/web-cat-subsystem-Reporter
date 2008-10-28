@@ -21,10 +21,22 @@
 
 package net.sf.webcat.reporter.queryassistants;
 
+import net.sf.webcat.core.Application;
+import com.webobjects.eoaccess.EOAdaptor;
+import com.webobjects.eoaccess.EOEntity;
+import com.webobjects.eoaccess.EOEntityClassDescription;
+import com.webobjects.eoaccess.EOModel;
+import com.webobjects.eoaccess.EOSQLExpression;
+import com.webobjects.eoaccess.EOSQLExpressionFactory;
 import com.webobjects.eocontrol.EOAndQualifier;
+import com.webobjects.eocontrol.EOClassDescription;
+import com.webobjects.eocontrol.EOEditingContext;
+import com.webobjects.eocontrol.EOFetchSpecification;
 import com.webobjects.eocontrol.EOQualifier;
 import com.webobjects.foundation.NSArray;
 import com.webobjects.foundation.NSMutableArray;
+import com.webobjects.jdbcadaptor.JDBCExpression;
+import er.extensions.ERXSQLHelper;
 
 //-------------------------------------------------------------------------
 /**
@@ -39,104 +51,105 @@ public class AdvancedQueryModel
     //~ Constructor ...........................................................
 
     // ----------------------------------------------------------
-	public AdvancedQueryModel()
-	{
-		// Create a default criterion.
+    public AdvancedQueryModel()
+    {
+        // Create a default criterion.
 
-		criteria = new NSMutableArray<AdvancedQueryCriterion>();
-		insertNewCriterionAtIndex(0);
-	}
+        criteria = new NSMutableArray<AdvancedQueryCriterion>();
+        insertNewCriterionAtIndex(0);
+    }
 
 
     //~ Public Methods ........................................................
 
     // ----------------------------------------------------------
-	@Override
-	public EOQualifier qualifierFromValues()
-	{
-    	NSMutableArray<EOQualifier> terms = new NSMutableArray<EOQualifier>();
+    @Override
+    public EOQualifier qualifierFromValues()
+    {
+        NSMutableArray<EOQualifier> terms = new NSMutableArray<EOQualifier>();
 
-    	for (AdvancedQueryCriterion cri : criteria)
-    	{
-    		EOQualifier termQual =
-    			AdvancedQueryComparison.qualifierForCriterion(cri);
-
-    		if (termQual != null)
-            {
-    			terms.addObject(termQual);
-            }
-    	}
-
-    	return new EOAndQualifier(terms);
-	}
-
-
-    // ----------------------------------------------------------
-	@Override
-	public void takeValuesFromQualifier(EOQualifier qualifier)
-	{
-		criteria = new NSMutableArray<AdvancedQueryCriterion>();
-
-		if (qualifier instanceof EOAndQualifier)
-		{
-			EOAndQualifier qAnd = (EOAndQualifier)qualifier;
-
-			for (EOQualifier q : (NSArray<EOQualifier>)qAnd.qualifiers())
-			{
-				AdvancedQueryCriterion cri =
-					AdvancedQueryComparison.criterionForQualifier(q);
-
-				if (cri != null)
-                {
-					criteria.addObject(cri);
-                }
-			}
-		}
-
-		// Insert a blank criterion if the qualifier produces none, so that
-		// editing can be performed correctly.
-		if (criteria.count() == 0)
+        for (AdvancedQueryCriterion cri : criteria)
         {
-			insertNewCriterionAtIndex(0);
+            EOQualifier termQual =
+                AdvancedQueryComparison.qualifierForCriterion(cri);
+
+            if (termQual != null)
+            {
+                System.out.println(termQual.toString());
+                terms.addObject(termQual);
+            }
         }
-	}
+
+        return new EOAndQualifier(terms);
+    }
 
 
     // ----------------------------------------------------------
-	public NSArray<AdvancedQueryCriterion> criteria()
-	{
-		return criteria;
-	}
+    @Override
+    public void takeValuesFromQualifier(EOQualifier qualifier)
+    {
+        criteria = new NSMutableArray<AdvancedQueryCriterion>();
+
+        if (qualifier instanceof EOAndQualifier)
+        {
+            EOAndQualifier qAnd = (EOAndQualifier)qualifier;
+
+            for (EOQualifier q : qAnd.qualifiers())
+            {
+                AdvancedQueryCriterion cri =
+                    AdvancedQueryComparison.criterionForQualifier(q);
+
+                if (cri != null)
+                {
+                    criteria.addObject(cri);
+                }
+            }
+        }
+
+        // Insert a blank criterion if the qualifier produces none, so that
+        // editing can be performed correctly.
+        if (criteria.count() == 0)
+        {
+            insertNewCriterionAtIndex(0);
+        }
+    }
 
 
     // ----------------------------------------------------------
-	public void setCriteria(NSArray<AdvancedQueryCriterion> value)
-	{
-		criteria = value.mutableClone();
-	}
+    public NSArray<AdvancedQueryCriterion> criteria()
+    {
+        return criteria;
+    }
+
+
+    // ----------------------------------------------------------
+    public void setCriteria(NSArray<AdvancedQueryCriterion> value)
+    {
+        criteria = value.mutableClone();
+    }
 
 
     // ----------------------------------------------------------
     public void insertNewCriterionAtIndex(int index)
     {
-    	AdvancedQueryCriterion newCriterion = new AdvancedQueryCriterion();
+        AdvancedQueryCriterion newCriterion = new AdvancedQueryCriterion();
 
-    	newCriterion.setCastType(String.class);
-    	newCriterion.setComparison(AdvancedQueryComparison.IS_EQUAL_TO);
-    	newCriterion.setComparandType(AdvancedQueryCriterion.COMPARAND_LITERAL);
+        newCriterion.setCastType(String.class);
+        newCriterion.setComparison(AdvancedQueryComparison.IS_EQUAL_TO);
+        newCriterion.setComparandType(AdvancedQueryCriterion.COMPARAND_LITERAL);
 
-    	criteria.insertObjectAtIndex(newCriterion, index);
+        criteria.insertObjectAtIndex(newCriterion, index);
     }
 
 
     // ----------------------------------------------------------
     public void removeCriterionAtIndex(int index)
     {
-    	criteria.removeObjectAtIndex(index);
+        criteria.removeObjectAtIndex(index);
 
-    	if (criteria.count() == 0)
+        if (criteria.count() == 0)
         {
-    		insertNewCriterionAtIndex(0);
+            insertNewCriterionAtIndex(0);
         }
     }
 

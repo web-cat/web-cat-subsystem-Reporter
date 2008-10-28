@@ -21,30 +21,15 @@
 
 package net.sf.webcat.reporter;
 
+import net.sf.webcat.core.WCComponent;
+import org.apache.log4j.Logger;
 import com.webobjects.appserver.WOContext;
-import com.webobjects.eoaccess.EOUtilities;
-import com.webobjects.eocontrol.EOAndQualifier;
 import com.webobjects.eocontrol.EOEditingContext;
-import com.webobjects.eocontrol.EOFetchSpecification;
-import com.webobjects.eocontrol.EOKeyValueQualifier;
 import com.webobjects.eocontrol.EOQualifier;
-import com.webobjects.eocontrol.EOSortOrdering;
 import com.webobjects.foundation.NSArray;
 import com.webobjects.foundation.NSDictionary;
-import com.webobjects.foundation.NSMutableArray;
 import com.webobjects.foundation.NSMutableDictionary;
 import com.webobjects.foundation.NSTimestamp;
-import com.webobjects.foundation.NSTimestampFormatter;
-import er.extensions.ERXConstant;
-import java.io.File;
-import java.io.FileOutputStream;
-import net.sf.webcat.core.Application;
-import net.sf.webcat.core.MutableDictionary;
-import net.sf.webcat.core.User;
-import net.sf.webcat.core.WCComponent;
-import net.sf.webcat.grader.FinalReportPage;
-
-import org.apache.log4j.Logger;
 
 //-------------------------------------------------------------------------
 /**
@@ -326,12 +311,14 @@ public class ReporterComponent
 
     // ----------------------------------------------------------
     public void commitNewQueryForDataSet(
-        ReportDataSet dataSet, String description, EOQualifier qualifier)
+        ReportDataSet dataSet, String description, String queryAsstId,
+        EOQualifier qualifier)
     {
         ReportQuery query = new ReportQuery();
         localContext().insertObject(query);
         query.setDescription(description);
         query.setQualifier(qualifier);
+        query.setQueryAssistantId(queryAsstId);
         query.setUserRelationship(user());
         query.setWcEntityName(dataSet.wcEntityName());
         applyLocalChanges();

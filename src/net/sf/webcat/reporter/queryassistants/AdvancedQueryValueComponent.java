@@ -21,7 +21,10 @@
 
 package net.sf.webcat.reporter.queryassistants;
 
-import com.webobjects.appserver.*;
+import java.text.ParseException;
+import net.sf.webcat.core.WCComponent;
+import com.webobjects.appserver.WOContext;
+import com.webobjects.appserver.WOResponse;
 import com.webobjects.eocontrol.EOClassDescription;
 import com.webobjects.eocontrol.EOEnterpriseObject;
 import com.webobjects.eocontrol.EOFetchSpecification;
@@ -29,8 +32,6 @@ import com.webobjects.foundation.NSArray;
 import com.webobjects.foundation.NSMutableArray;
 import com.webobjects.foundation.NSTimestamp;
 import com.webobjects.foundation.NSTimestampFormatter;
-import java.text.ParseException;
-import net.sf.webcat.core.WCComponent;
 
 //-------------------------------------------------------------------------
 /**

@@ -103,15 +103,15 @@ public class AdvancedQueryAssistant
     // ----------------------------------------------------------
     public String currentKeyPath()
     {
-           String keypath = criterion.keyPath();
+        String keypath = criterion.keyPath();
 
-           if (keypath == null)
+        if (keypath == null)
         {
-               return "";
+            return "";
         }
-           else
+        else
         {
-               return keypath;
+            return keypath;
         }
     }
 
@@ -167,7 +167,6 @@ public class AdvancedQueryAssistant
     // ----------------------------------------------------------
     public Class<?> currentCastType()
     {
-        System.out.println("cast type == " + criterion.castType());
         if (criterion.castType() == null)
         {
             return String.class;
@@ -182,7 +181,6 @@ public class AdvancedQueryAssistant
     // ----------------------------------------------------------
     public void setCurrentCastType(Class<?> value)
     {
-        System.out.println("new cast type == " + value);
         if (value == null)
         {
             criterion.setCastType(String.class);

@@ -98,7 +98,7 @@ public class OdaResultSet
     {
         recycleEditingContext();
 
-        EOQualifier qualifier = QualifierUtils.qualifierWithEOsForGIDs(
+        EOQualifier qualifier = QualifierSerialization.convertGIDsToEOs(
             query.qualifier(), editingContext);
 
         EOQualifier[] quals = QualifierUtils.partitionQualifier(
