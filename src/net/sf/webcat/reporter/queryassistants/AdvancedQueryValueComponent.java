@@ -23,11 +23,13 @@ package net.sf.webcat.reporter.queryassistants;
 
 import java.text.ParseException;
 import net.sf.webcat.core.WCComponent;
+import net.sf.webcat.reporter.EntityUtils;
 import com.webobjects.appserver.WOContext;
 import com.webobjects.appserver.WOResponse;
 import com.webobjects.eocontrol.EOClassDescription;
 import com.webobjects.eocontrol.EOEnterpriseObject;
 import com.webobjects.eocontrol.EOFetchSpecification;
+import com.webobjects.eocontrol.EOSortOrdering;
 import com.webobjects.foundation.NSArray;
 import com.webobjects.foundation.NSMutableArray;
 import com.webobjects.foundation.NSTimestamp;
@@ -525,9 +527,12 @@ public class AdvancedQueryValueComponent
     		EOClassDescription.classDescriptionForClass(valueType);
     	String entityName = classDesc.entityName();
 
+    	NSArray<EOSortOrdering> orderings =
+    	    EntityUtils.sortOrderingsForEntityNamed(entityName);
+    	
     	EOFetchSpecification fetchSpec = new EOFetchSpecification(
-    		entityName, null, null);
-    	fetchSpec.setFetchLimit(250);
+    		entityName, null, orderings);
+    	fetchSpec.setFetchLimit(1000);
 
     	NSArray<EOEnterpriseObject> objects =
     		localContext().objectsWithFetchSpecification(fetchSpec);
