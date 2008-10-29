@@ -63,7 +63,6 @@ public class AdvancedQueryModel
 
             if (termQual != null)
             {
-                System.out.println(termQual.toString());
                 terms.addObject(termQual);
             }
         }
