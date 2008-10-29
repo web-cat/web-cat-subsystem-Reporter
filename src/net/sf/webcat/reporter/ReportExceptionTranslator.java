@@ -25,7 +25,7 @@ import net.sf.webcat.core.MutableArray;
 import net.sf.webcat.core.MutableDictionary;
 import org.eclipse.birt.core.exception.BirtException;
 import com.webobjects.foundation.NSArray;
-import er.extensions.ERXConstant;
+import er.extensions.eof.ERXConstant;
 
 // ------------------------------------------------------------------------
 /**

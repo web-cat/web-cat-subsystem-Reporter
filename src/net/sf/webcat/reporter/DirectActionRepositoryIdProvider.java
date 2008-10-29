@@ -24,7 +24,7 @@ package net.sf.webcat.reporter;
 import net.sf.webcat.core.Application;
 import com.webobjects.appserver.WOContext;
 import com.webobjects.foundation.NSMutableDictionary;
-import er.extensions.ERXWOContext;
+import er.extensions.appserver.ERXWOContext;
 
 // ------------------------------------------------------------------------
 /**

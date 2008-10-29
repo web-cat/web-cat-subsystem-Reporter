@@ -22,7 +22,7 @@
 package net.sf.webcat.reporter;
 
 import com.webobjects.appserver.*;
-import er.extensions.ERXConstant;
+import er.extensions.eof.ERXConstant;
 import org.apache.log4j.Logger;
 
 //-------------------------------------------------------------------------

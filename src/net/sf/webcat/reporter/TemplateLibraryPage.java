@@ -26,7 +26,7 @@ import com.webobjects.eocontrol.EOEditingContext;
 import com.webobjects.foundation.NSArray;
 import com.webobjects.foundation.NSData;
 import com.webobjects.foundation.NSMutableDictionary;
-import er.extensions.ERXValueUtilities;
+import er.extensions.foundation.ERXValueUtilities;
 import java.io.File;
 import java.util.Iterator;
 import net.sf.webcat.core.DeliverFile;

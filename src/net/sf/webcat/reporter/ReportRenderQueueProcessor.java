@@ -36,7 +36,7 @@ import com.webobjects.foundation.NSArray;
 import com.webobjects.foundation.NSMutableArray;
 import com.webobjects.foundation.NSMutableDictionary;
 import com.webobjects.foundation.NSTimestamp;
-import er.extensions.ERXApplication;
+import er.extensions.appserver.ERXApplication;
 
 // -------------------------------------------------------------------------
 /**

@@ -35,7 +35,7 @@ import com.webobjects.foundation.NSArray;
 import com.webobjects.foundation.NSDictionary;
 import com.webobjects.foundation.NSMutableArray;
 import com.webobjects.foundation.NSMutableDictionary;
-import er.extensions.ERXInQualifier;
+import er.extensions.eof.qualifiers.ERXInQualifier;
 
 //-------------------------------------------------------------------------
 /**
@@ -123,7 +123,7 @@ public class QualifierUtils
             NSMutableArray<EOQualifier> nonFetchQualifiers =
                 new NSMutableArray<EOQualifier>();
 
-            for (EOQualifier childQ : (NSArray<EOQualifier>)aq.qualifiers())
+            for (EOQualifier childQ : aq.qualifiers())
             {
                 if (isQualifierFetchable(childQ, entityName))
                 {

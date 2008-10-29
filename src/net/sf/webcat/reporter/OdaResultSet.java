@@ -27,7 +27,7 @@ import com.webobjects.eocontrol.EOQualifier;
 import com.webobjects.foundation.NSArray;
 import com.webobjects.foundation.NSKeyValueCoding;
 import com.webobjects.foundation.NSTimestamp;
-import er.extensions.ERXFetchSpecificationBatchIterator;
+import er.extensions.eof.ERXFetchSpecificationBatchIterator;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.Enumeration;

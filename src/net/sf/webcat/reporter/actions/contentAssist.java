@@ -35,7 +35,7 @@ import com.webobjects.eocontrol.EOSortOrdering;
 import com.webobjects.foundation.NSArray;
 import com.webobjects.foundation.NSDictionary;
 import com.webobjects.foundation.NSMutableDictionary;
-import er.extensions.ERXDirectAction;
+import er.extensions.appserver.ERXDirectAction;
 import net.sf.webcat.core.Application;
 import net.sf.webcat.core.Subsystem;
 import net.sf.webcat.reporter.EntityUtils;
@@ -87,10 +87,9 @@ public class contentAssist
                 versions.objectForKey(subsystem) + "\n");
         }
 
-        for (EOModel model :
-            (NSArray<EOModel>)EOModelGroup.defaultGroup().models())
+        for (EOModel model : EOModelGroup.defaultGroup().models())
         {
-            for (EOEntity entity : (NSArray<EOEntity>)model.entities())
+            for (EOEntity entity : model.entities())
             {
                 String className = entity.className();
                 boolean exclude = false;

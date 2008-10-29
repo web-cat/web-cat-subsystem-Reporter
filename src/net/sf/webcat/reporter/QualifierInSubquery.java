@@ -22,7 +22,7 @@
 package net.sf.webcat.reporter;
 
 import com.webobjects.eocontrol.EOQualifier;
-import er.extensions.ERXQualifierInSubquery;
+import er.extensions.eof.qualifiers.ERXQualifierInSubquery;
 
 //-------------------------------------------------------------------------
 /**

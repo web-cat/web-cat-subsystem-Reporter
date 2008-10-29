@@ -31,8 +31,8 @@ import com.webobjects.foundation.NSDictionary;
 import com.webobjects.foundation.NSMutableArray;
 import com.webobjects.foundation.NSMutableDictionary;
 import com.webobjects.foundation.NSSelector;
-import er.extensions.ERXBetweenQualifier;
-import er.extensions.ERXQualifierInSubquery;
+import er.extensions.eof.qualifiers.ERXBetweenQualifier;
+import er.extensions.eof.qualifiers.ERXQualifierInSubquery;
 import net.sf.webcat.reporter.QualifierInSubquery;
 import net.sf.webcat.reporter.QualifierUtils;
 

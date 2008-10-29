@@ -21,22 +21,10 @@
 
 package net.sf.webcat.reporter.queryassistants;
 
-import net.sf.webcat.core.Application;
-import com.webobjects.eoaccess.EOAdaptor;
-import com.webobjects.eoaccess.EOEntity;
-import com.webobjects.eoaccess.EOEntityClassDescription;
-import com.webobjects.eoaccess.EOModel;
-import com.webobjects.eoaccess.EOSQLExpression;
-import com.webobjects.eoaccess.EOSQLExpressionFactory;
 import com.webobjects.eocontrol.EOAndQualifier;
-import com.webobjects.eocontrol.EOClassDescription;
-import com.webobjects.eocontrol.EOEditingContext;
-import com.webobjects.eocontrol.EOFetchSpecification;
 import com.webobjects.eocontrol.EOQualifier;
 import com.webobjects.foundation.NSArray;
 import com.webobjects.foundation.NSMutableArray;
-import com.webobjects.jdbcadaptor.JDBCExpression;
-import er.extensions.ERXSQLHelper;
 
 //-------------------------------------------------------------------------
 /**

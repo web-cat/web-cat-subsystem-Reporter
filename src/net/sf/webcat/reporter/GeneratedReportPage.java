@@ -30,7 +30,7 @@ import com.webobjects.eocontrol.EOSortOrdering;
 import com.webobjects.foundation.NSArray;
 import com.webobjects.foundation.NSMutableArray;
 import com.webobjects.foundation.NSTimestamp;
-import er.extensions.ERXConstant;
+import er.extensions.eof.ERXConstant;
 import java.io.File;
 import net.sf.webcat.core.MutableDictionary;
 import net.sf.webcat.grader.FinalReportPage;

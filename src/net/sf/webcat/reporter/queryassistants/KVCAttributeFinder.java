@@ -27,7 +27,7 @@ import com.webobjects.foundation.NSComparator;
 import com.webobjects.foundation.NSKeyValueCoding;
 import com.webobjects.foundation.NSMutableArray;
 import com.webobjects.foundation.NSMutableDictionary;
-import er.extensions.ERXGenericRecord;
+import er.extensions.eof.ERXGenericRecord;
 import java.lang.reflect.Field;
 import java.lang.reflect.Member;
 import java.lang.reflect.Method;

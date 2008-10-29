@@ -32,7 +32,7 @@ import com.webobjects.eocontrol.EOQualifier;
 import com.webobjects.foundation.NSArray;
 import com.webobjects.foundation.NSMutableArray;
 import com.webobjects.foundation.NSMutableDictionary;
-import er.extensions.ERXInQualifier;
+import er.extensions.eof.qualifiers.ERXInQualifier;
 import er.extensions.qualifiers.ERXKeyValueQualifier;
 
 //-------------------------------------------------------------------------
@@ -148,7 +148,7 @@ public class QualifierSerialization
             NSMutableArray<EOQualifier> children =
                 new NSMutableArray<EOQualifier>();
 
-            for (EOQualifier child : (NSArray<EOQualifier>) aq.qualifiers())
+            for (EOQualifier child : aq.qualifiers())
             {
                 children.addObject(QualifierSerialization.convertEOsToGIDs(
                         child, ec));
@@ -166,7 +166,7 @@ public class QualifierSerialization
             NSMutableArray<EOQualifier> children =
                 new NSMutableArray<EOQualifier>();
 
-            for (EOQualifier child : (NSArray<EOQualifier>) aq.qualifiers())
+            for (EOQualifier child : aq.qualifiers())
             {
                 children.addObject(QualifierSerialization.convertGIDsToEOs(child,
                         ec));
@@ -188,7 +188,7 @@ public class QualifierSerialization
             NSMutableArray<EOQualifier> children =
                 new NSMutableArray<EOQualifier>();
 
-            for (EOQualifier child : (NSArray<EOQualifier>) oq.qualifiers())
+            for (EOQualifier child : oq.qualifiers())
             {
                 children.addObject(QualifierSerialization.convertEOsToGIDs(child,
                         ec));
@@ -206,7 +206,7 @@ public class QualifierSerialization
             NSMutableArray<EOQualifier> children =
                 new NSMutableArray<EOQualifier>();
 
-            for (EOQualifier child : (NSArray<EOQualifier>) oq.qualifiers())
+            for (EOQualifier child : oq.qualifiers())
             {
                 children.addObject(QualifierSerialization.convertGIDsToEOs(child,
                         ec));

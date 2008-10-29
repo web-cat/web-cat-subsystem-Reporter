@@ -32,7 +32,7 @@ import com.webobjects.foundation.NSDictionary;
 import com.webobjects.foundation.NSMutableArray;
 import com.webobjects.foundation.NSMutableDictionary;
 import er.ajax.AjaxTreeModel;
-import er.extensions.ERXEOControlUtilities;
+import er.extensions.eof.ERXEOControlUtilities;
 import net.sf.webcat.core.Course;
 import net.sf.webcat.core.CourseOffering;
 import net.sf.webcat.grader.Assignment;
