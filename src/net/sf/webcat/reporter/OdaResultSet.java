@@ -33,6 +33,7 @@ import java.sql.Timestamp;
 import java.util.Enumeration;
 import java.util.Map;
 import net.sf.webcat.core.Application;
+import net.sf.webcat.core.ReadOnlyEditingContext;
 import net.sf.webcat.oda.commons.IWebCATResultSet;
 import net.sf.webcat.oda.commons.WebCATDataException;
 import ognl.Node;
@@ -80,7 +81,7 @@ public class OdaResultSet
     // ----------------------------------------------------------
     public void close()
     {
-        Application.releasePeerEditingContext(editingContext);
+        Application.releaseReadOnlyEditingContext(editingContext);
 
         ReportGenerationTracker.getInstance().completeDataSetForJobId(jobId);
     }
@@ -230,8 +231,7 @@ public class OdaResultSet
         }
         else
         {
-            // TODO Probably do some more conversions here.
-            return null;
+            return tryFallbackConversions(column, result, NSTimestamp.class);
         }
     }
 
@@ -248,12 +248,17 @@ public class OdaResultSet
     // ----------------------------------------------------------
     private void recycleEditingContext()
     {
+        boolean suppressLog = false;
+
         if (editingContext != null)
         {
-            Application.releasePeerEditingContext(editingContext);
+            suppressLog = editingContext.isLoggingSuppressed();
+            Application.releaseReadOnlyEditingContext(editingContext);
         }
 
-        editingContext = Application.newPeerEditingContext();
+        editingContext = Application.newReadOnlyEditingContext();
+        editingContext.setSuppressesLogAfterFirstAttempt(true);
+        editingContext.setLoggingSuppressed(suppressLog);
 
         if (iterator != null)
         {
@@ -366,18 +371,71 @@ public class OdaResultSet
             }
             else
             {
-                return (T)defaultContext.getTypeConverter().convertValue(
-                        null, null, null, null, result, destType);
+                try
+                {
+                    return (T)defaultContext.getTypeConverter().convertValue(
+                            null, null, null, null, result, destType);
+                }
+                catch (Exception e)
+                {
+                    return tryFallbackConversions(column, result, destType);
+                }
             }
         }
     }
 
 
+    // ----------------------------------------------------------
+    private <T> T tryFallbackConversions(int column, Object result,
+            Class<T> destType)
+    {
+        if (destType == Integer.class)
+        {
+            // Conversion may have failed if we have a string that is a
+            // floating point value and we want to convert to an integer.
+            
+            try
+            {
+                return (T) Integer.valueOf(
+                        (int) Double.parseDouble(result.toString()));
+            }
+            catch (NumberFormatException e)
+            {
+                // Fall through to the code below.
+            }
+        }
+        else if (destType == NSTimestamp.class)
+        {
+            try
+            {
+                return (T) new NSTimestamp(Long.parseLong(result.toString()));
+            }
+            catch (NumberFormatException e)
+            {
+                // Fall through to the code below.
+            }
+        }
+
+        String destinationType = destType.getSimpleName();
+        if (destType == BigDecimal.class)
+            destinationType = "Decimal";
+        else if (destType == Double.class)
+            destinationType = "Float";
+        else if (destType == NSTimestamp.class)
+            destinationType = "Timestamp";
+        
+        throw new IllegalArgumentException("The result (\"" +
+                result.toString() + "\") of the expression [ " +
+                expressions[column] + " ] could not be converted to type " +
+                destinationType);
+    }
+    
+    
     //~ Instance/static variables .............................................
 
     private int jobId;
     private ReportQuery query;
-    private EOEditingContext editingContext;
+    private ReadOnlyEditingContext editingContext;
     private EOQualifier fetchQualifier;
     private EOQualifier inMemoryQualifier;
     private ERXFetchSpecificationBatchIterator iterator;

@@ -37,6 +37,7 @@ import com.webobjects.foundation.NSDictionary;
 import com.webobjects.foundation.NSMutableDictionary;
 import er.extensions.appserver.ERXDirectAction;
 import net.sf.webcat.core.Application;
+import net.sf.webcat.core.ReadOnlyEditingContext;
 import net.sf.webcat.core.Subsystem;
 import net.sf.webcat.reporter.EntityUtils;
 import net.sf.webcat.reporter.queryassistants.KVCAttributeFinder;
@@ -148,7 +149,7 @@ public class contentAssist
     {
         WOResponse response = new WOResponse();
 
-        EOEditingContext ec = Application.newPeerEditingContext();
+        ReadOnlyEditingContext ec = Application.newReadOnlyEditingContext();
 
         for (String entityName : OBJECTS_TO_DESCRIBE)
         {
@@ -173,6 +174,8 @@ public class contentAssist
                     object.toString() + "\n");
             }
         }
+
+        Application.releaseReadOnlyEditingContext(ec);
 
         return response;
     }
