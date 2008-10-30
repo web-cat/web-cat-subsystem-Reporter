@@ -92,7 +92,7 @@ public class CourseAndAssignmentSubmissionsModel
                 EOQualifier q2 =
                     QualifierUtils.qualifierForKeyPathInRelationship(
                         "user",
-                        "assignmentOffering.courseOffering.TAs");
+                        "assignmentOffering.courseOffering.graders");
 
                 terms.addObject(ERXQ.not(q1));
                 terms.addObject(ERXQ.not(q2));
@@ -113,7 +113,7 @@ public class CourseAndAssignmentSubmissionsModel
         includeOnlySubmissionsForGrading = true;
 
         boolean foundSubsForGradingQualifier = false;
-        boolean excludeTAs = false;
+        boolean excludeGraders = false;
         boolean excludeInstructors = false;
 
         if (qualifier instanceof EOAndQualifier)
@@ -174,9 +174,9 @@ public class CourseAndAssignmentSubmissionsModel
                                 {
                                     excludeInstructors = true;
                                 }
-                                else if ("assignmentOffering.courseOffering.TAs.id".equals(kcq.rightKey()))
+                                else if ("assignmentOffering.courseOffering.graders.id".equals(kcq.rightKey()))
                                 {
-                                    excludeTAs = true;
+                                    excludeGraders = true;
                                 }
                             }
                         }
@@ -190,7 +190,7 @@ public class CourseAndAssignmentSubmissionsModel
             includeOnlySubmissionsForGrading = false;
         }
 
-        if (!excludeInstructors && !excludeTAs && qualifier != null)
+        if (!excludeInstructors && !excludeGraders && qualifier != null)
         {
             includeCourseStaff = true;
         }
