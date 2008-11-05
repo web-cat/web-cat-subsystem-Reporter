@@ -242,7 +242,7 @@ public class KVCAttributeFinder
 				if (!attrs.containsObject(name))
 				{
 					KVCAttributeInfo attr = new KVCAttributeInfo(
-                        name, method.getReturnType().getSimpleName());
+                        name, method.getReturnType().getSimpleName(), method);
 					attrs.addObject(attr);
 				}
 			}
@@ -279,7 +279,7 @@ public class KVCAttributeFinder
 				if (!attrs.containsObject(name))
 				{
 					KVCAttributeInfo attr = new KVCAttributeInfo(
-                        name, field.getType().getSimpleName());
+                        name, field.getType().getSimpleName(), field);
 					attrs.addObject(attr);
 				}
 			}
@@ -290,7 +290,6 @@ public class KVCAttributeFinder
     // ----------------------------------------------------------
 	private static boolean typeIsAcceptable(Class<?> klass)
 	{
-		//return acceptableTypes.containsObject(klass);
 		return klass != Void.class && klass != Void.TYPE;
 	}
 
