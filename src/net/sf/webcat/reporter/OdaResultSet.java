@@ -122,7 +122,7 @@ public class OdaResultSet
         throws WebCATDataException
     {
         this.expressions = myExpressions;
-        defaultContext = new OgnlContext();
+        defaultContext = prepareOgnlContext();
         accessors = new ExpressionAccessor[myExpressions.length];
 
         int i = 0;
@@ -142,6 +142,14 @@ public class OdaResultSet
     }
 
 
+    // ----------------------------------------------------------
+    private OgnlContext prepareOgnlContext()
+    {
+        OgnlContext ctx = ReportUtilityEnvironment.newOgnlContext();
+        return ctx;
+    }
+    
+    
     // ----------------------------------------------------------
     public boolean moveToNextRow()
     {
@@ -221,8 +229,10 @@ public class OdaResultSet
 
     // ----------------------------------------------------------
     public Timestamp timestampValueAtIndex(int column)
+        throws WebCATDataException
     {
-        ExpressionAccessor accessor = accessors[column];
+        return evaluate(column, NSTimestamp.class);
+/*        ExpressionAccessor accessor = accessors[column];
         Object result = accessor.get(defaultContext, currentObject);
 
         if (result instanceof NSTimestamp)
@@ -232,7 +242,7 @@ public class OdaResultSet
         else
         {
             return tryFallbackConversions(column, result, NSTimestamp.class);
-        }
+        }*/
     }
 
 
@@ -328,6 +338,7 @@ public class OdaResultSet
     {
         ExpressionAccessor accessor = accessors[column];
         Object result = null;
+        defaultContext.setRoot(currentObject);
 
         try
         {

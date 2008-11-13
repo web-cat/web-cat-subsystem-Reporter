@@ -61,6 +61,7 @@ import net.sf.webcat.reporter.internal.rendering.CSVRenderingMethod;
 import net.sf.webcat.reporter.internal.rendering.ExcelRenderingMethod;
 import net.sf.webcat.reporter.internal.rendering.HTMLRenderingMethod;
 import net.sf.webcat.reporter.internal.rendering.PDFRenderingMethod;
+import ognl.OgnlRuntime;
 import org.apache.log4j.Logger;
 import org.eclipse.birt.core.exception.BirtException;
 import org.eclipse.birt.core.framework.IExtension;
@@ -372,10 +373,10 @@ public class Reporter
 
         Application.releasePeerEditingContext(ec);
 
-        if (log.isDebugEnabled())
+        /*if (log.isDebugEnabled())
         {
             log.debug("refreshThrottleStatus(): " + isThrottled());
-        }
+        }*/
 
         return isThrottled();
     }
