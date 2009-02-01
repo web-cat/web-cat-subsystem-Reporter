@@ -31,8 +31,8 @@ import com.webobjects.foundation.NSDictionary;
 import com.webobjects.foundation.NSMutableArray;
 import er.extensions.eof.ERXQ;
 import net.sf.webcat.core.CourseOffering;
+import net.sf.webcat.core.QualifierInSubquery;
 import net.sf.webcat.grader.Assignment;
-import net.sf.webcat.reporter.QualifierInSubquery;
 import net.sf.webcat.reporter.QualifierUtils;
 
 //-------------------------------------------------------------------------

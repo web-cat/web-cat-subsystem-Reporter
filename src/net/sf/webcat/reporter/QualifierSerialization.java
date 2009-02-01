@@ -21,6 +21,7 @@
 
 package net.sf.webcat.reporter;
 
+import net.sf.webcat.core.QualifierInSubquery;
 import com.webobjects.eocontrol.EOAndQualifier;
 import com.webobjects.eocontrol.EOEditingContext;
 import com.webobjects.eocontrol.EOEnterpriseObject;
