@@ -58,6 +58,7 @@ import com.webobjects.foundation.NSMutableArray;
 import com.webobjects.foundation.NSTimestamp;
 import er.extensions.appserver.ERXDirectAction;
 import er.extensions.eof.ERXFetchSpecificationBatchIterator;
+import er.extensions.eof.ERXQ;
 
 //-------------------------------------------------------------------------
 /**
@@ -142,12 +143,21 @@ public class designerPreview
             ERXFetchSpecificationBatchIterator iterator =
                 new ERXFetchSpecificationBatchIterator(spec, context);
             iterator.setBatchSize(50);
-
+            
             session.setObjectForKey(iterator, SESSION_ITERATOR);
             session.setObjectForKey(compiled, SESSION_EXPRESSIONS);
             session.setObjectForKey(expressions, SESSION_EXPRESSION_STRINGS);
             session.setObjectForKey(timeout, SESSION_TIMEOUT);
             session.setObjectForKey(Boolean.FALSE, SESSION_CANCELED);
+
+            if (fastQualifier == null)
+            {
+                session.removeObjectForKey(SESSION_FAST_QUALIFIER);
+            }
+            else
+            {
+                session.setObjectForKey(fastQualifier, SESSION_FAST_QUALIFIER);
+            }
 
             if (slowQualifier == null)
             {
@@ -300,11 +310,28 @@ public class designerPreview
                 String[] expressionStrings =
                     (String[])session.objectForKey(SESSION_EXPRESSION_STRINGS);
 
+                EOQualifier fastQualifier =
+                    (EOQualifier)session.objectForKey(SESSION_FAST_QUALIFIER);
+
                 EOQualifier slowQualifier =
                     (EOQualifier)session.objectForKey(SESSION_SLOW_QUALIFIER);
 
+                EOQualifier q = null;
+                if (slowQualifier != null && fastQualifier != null)
+                {
+                    q = ERXQ.and(fastQualifier, slowQualifier);
+                }
+                else if (slowQualifier != null)
+                {
+                    q = slowQualifier;
+                }
+                else if (fastQualifier != null)
+                {
+                    q = fastQualifier;
+                }
+
                 NSArray batch = EOQualifier.filteredArrayWithQualifier(
-                    iterator.nextBatch(), slowQualifier);
+                    iterator.nextBatch(), q);
 
                 boolean isTimedOut = (System.currentTimeMillis() > endTime);
 
@@ -590,6 +617,9 @@ public class designerPreview
 
     private static final String SESSION_EXPRESSION_STRINGS =
         "net.sf.webcat.reporter.actions.designerPreview.expressionStrings";
+
+    private static final String SESSION_FAST_QUALIFIER =
+        "net.sf.webcat.reporter.actions.designerPreview.fastQualifier";
 
     private static final String SESSION_SLOW_QUALIFIER =
         "net.sf.webcat.reporter.actions.designerPreview.slowQualifier";
