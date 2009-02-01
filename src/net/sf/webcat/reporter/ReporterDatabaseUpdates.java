@@ -70,6 +70,21 @@ public class ReporterDatabaseUpdates
     }
 
 
+    // ----------------------------------------------------------
+    /**
+     * Add support for input parameters to report templates.
+     *  
+     * @throws SQLException on error
+     */
+    public void updateIncrement1() throws SQLException
+    {
+        database().executeSQL("ALTER TABLE TREPORTTEMPLATE ADD COLUMN "
+                + "CPARAMETERS BLOB");
+        database().executeSQL("ALTER TABLE TREPORTTEMPLATE ADD COLUMN "
+                + "CUPDATEMUTABLEFIELDS BIT NOT NULL");
+    }
+
+
     //~ Private Methods .......................................................
 
     // ----------------------------------------------------------
