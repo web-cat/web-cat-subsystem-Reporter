@@ -22,8 +22,8 @@
 package net.sf.webcat.reporter.queryassistants;
 
 import java.text.ParseException;
+import net.sf.webcat.core.EntityUtils;
 import net.sf.webcat.core.WCComponent;
-import net.sf.webcat.reporter.EntityUtils;
 import com.webobjects.appserver.WOContext;
 import com.webobjects.appserver.WOResponse;
 import com.webobjects.eocontrol.EOClassDescription;

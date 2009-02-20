@@ -40,9 +40,9 @@ import com.webobjects.foundation.NSDictionary;
 import com.webobjects.foundation.NSMutableDictionary;
 import er.extensions.appserver.ERXDirectAction;
 import net.sf.webcat.core.Application;
+import net.sf.webcat.core.EntityUtils;
 import net.sf.webcat.core.ReadOnlyEditingContext;
 import net.sf.webcat.core.Subsystem;
-import net.sf.webcat.reporter.EntityUtils;
 import net.sf.webcat.reporter.queryassistants.KVCAttributeFinder;
 import net.sf.webcat.reporter.queryassistants.KVCAttributeInfo;
 
