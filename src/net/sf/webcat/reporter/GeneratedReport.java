@@ -87,7 +87,7 @@ public class GeneratedReport
     {
         StringBuffer dir = new StringBuffer( 50 );
         dir.append( net.sf.webcat.core.Application
-            .configurationProperties().getProperty( "grader.workarea" ) );
+            .configurationProperties().getProperty( "grader.submissiondir" ) );
         dir.append( "/" );
         dir.append( RENDERED_REPORTS_SUBDIR_NAME );
         dir.append( "/" );

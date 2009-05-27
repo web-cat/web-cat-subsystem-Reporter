@@ -362,13 +362,13 @@ public class ReportRenderQueueProcessor extends Thread
 
             if (method != null)
             {
-                NSMutableDictionary options = new NSMutableDictionary();
-                options.setObjectForKey(job.renderedResourceActionUrl(),
-                    IRenderingMethod.OPTION_ACTION_URL);
-                controller = method.prepareToRender(report, options);
-
                 try
                 {
+                    NSMutableDictionary options = new NSMutableDictionary();
+                    options.setObjectForKey(job.renderedResourceActionUrl(),
+                        IRenderingMethod.OPTION_ACTION_URL);
+                    controller = method.prepareToRender(report, options);
+
                     controller.render();
                     controller = null;
                     report.markAsRenderedWithMethod(job.renderingMethod());

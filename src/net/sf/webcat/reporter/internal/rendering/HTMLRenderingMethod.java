@@ -103,12 +103,16 @@ public class HTMLRenderingMethod
         GeneratedReport report, WOResponse response, WOContext context)
         throws IOException
     {
+        response.appendContentString("<div id=\"reportBlock\">\n");
+
         String htmlPath = report.renderedResourcePath(REPORT_ROOT_HTML);
         File htmlFile = new File(htmlPath);
 
         NSData htmlData = new NSData(
             new FileInputStream(htmlFile), (int)htmlFile.length());
         response.appendContentData(htmlData);
+        
+        response.appendContentString("</div>\n");
     }
 
 

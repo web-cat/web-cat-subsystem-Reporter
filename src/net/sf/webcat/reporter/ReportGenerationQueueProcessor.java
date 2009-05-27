@@ -365,8 +365,10 @@ public class ReportGenerationQueueProcessor extends Thread
     private boolean generateReportDocument(EnqueuedReportGenerationJob job,
             GeneratedReport report) throws ReportGenerationException
     {
-        GenerateReportThread exeThread = new GenerateReportThread(job.id(),
-                report.id());
+        ThreadGroup group = new ThreadGroup("Report Generation Thread Group");
+        group.setMaxPriority((NORM_PRIORITY + MIN_PRIORITY) / 2); 
+        GenerateReportThread exeThread = new GenerateReportThread(
+                group, job.id(), report.id());
 
         try
         {
@@ -379,6 +381,8 @@ public class ReportGenerationQueueProcessor extends Thread
         {
             // Nothing to do
         }
+
+        group.destroy();
 
         if (exeThread.generationErrors() != null)
         {
@@ -441,8 +445,11 @@ public class ReportGenerationQueueProcessor extends Thread
         //~ Constructor .......................................................
 
         // ----------------------------------------------------------
-        public GenerateReportThread(Number jobId, Number reportId)
+        public GenerateReportThread(ThreadGroup group,
+                Number jobId, Number reportId)
         {
+            super(group, "Report Generation Thread");
+
             this.jobId = jobId.intValue();
             this.reportId = reportId.intValue();
         }

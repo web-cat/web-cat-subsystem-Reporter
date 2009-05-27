@@ -255,28 +255,49 @@ public class ReportGenerationTracker
         {
             currentDataSet++;
 
-            dataSets[currentDataSet] = new DataSetProgress(totalWork);
+            try
+            {
+                dataSets[currentDataSet] = new DataSetProgress(totalWork);
+            }
+            catch (Exception e)
+            {
+                // Do nothing.
+            }
         }
 
 
         // ----------------------------------------------------------
         public void doWork(int units)
         {
-            dataSets[currentDataSet].doWork(units);
+            try
+            {
+                dataSets[currentDataSet].doWork(units);
+            }
+            catch (Exception e)
+            {
+                // Do nothing.
+            }
         }
 
 
         // ----------------------------------------------------------
         public void completeDataSet()
         {
-            dataSets[currentDataSet].complete();
+            try
+            {
+                dataSets[currentDataSet].complete();
+            }
+            catch (Exception e)
+            {
+                // Do nothing.
+            }
         }
 
 
         // ----------------------------------------------------------
         public float fractionOfWorkDone()
         {
-            if (currentDataSet == dataSets.length)
+            if (currentDataSet >= dataSets.length)
             {
                 return 1.0f;
             }
@@ -285,7 +306,14 @@ public class ReportGenerationTracker
 
             for (int i = 0; i <= currentDataSet; i++)
             {
-                progress += dataSets[i].fractionOfWorkDone() / dataSets.length;
+                try
+                {
+                    progress += dataSets[i].fractionOfWorkDone() / dataSets.length;
+                }
+                catch (Exception e)
+                {
+                    // Do nothing.
+                }
             }
 
             return progress;

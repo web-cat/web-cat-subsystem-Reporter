@@ -50,4 +50,18 @@ public class EnqueuedReportGenerationJob
 
     //~ Methods ...............................................................
 
+    // ----------------------------------------------------------
+    /**
+     * Gets the percentage of progress made on this job while it is being
+     * generated.
+     * 
+     * @return the progress percentage, an integer between 0 and 100
+     */
+    public int progressPercentage()
+    {
+        float workDone = ReportGenerationTracker.getInstance().
+            fractionOfWorkDoneForJobId(id().intValue());
+
+        return (int)Math.floor(workDone * 100 + 0.5);
+    }
 }

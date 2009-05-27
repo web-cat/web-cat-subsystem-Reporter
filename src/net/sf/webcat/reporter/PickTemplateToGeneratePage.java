@@ -21,9 +21,20 @@
 
 package net.sf.webcat.reporter;
 
+import net.sf.webcat.core.Course;
+import net.sf.webcat.core.CourseOffering;
+import net.sf.webcat.core.Department;
+import net.sf.webcat.core.Semester;
+import net.sf.webcat.ui.AbstractTreeModel;
+import net.sf.webcat.ui.util.WCTableLayoutBuilder;
 import com.webobjects.appserver.WOComponent;
 import com.webobjects.appserver.WOContext;
+import com.webobjects.appserver.WODisplayGroup;
+import com.webobjects.eocontrol.EOFetchSpecification;
+import com.webobjects.eocontrol.EOSortOrdering;
 import com.webobjects.foundation.NSArray;
+import com.webobjects.foundation.NSMutableArray;
+import er.extensions.eof.ERXS;
 
 //-------------------------------------------------------------------------
 /**
@@ -50,22 +61,25 @@ public class PickTemplateToGeneratePage
 
     //~ KVC Attributes (must be public) .......................................
 
-    public NSArray<ReportTemplate> reportTemplates;
-    public ReportTemplate reportTemplate;
-    public int index;
+    public WODisplayGroup reportTemplatesDisplayGroup;
 
 
     //~ Methods ...............................................................
 
     // ----------------------------------------------------------
-    public NSArray<ReportTemplate> reportTemplates()
+    public WODisplayGroup reportTemplatesDisplayGroup()
     {
-        if (reportTemplates == null)
+        if (reportTemplatesDisplayGroup == null)
         {
-            reportTemplates =
-                ReportTemplate.objectsForAllTemplates(localContext());
+            NSArray<ReportTemplate> templates =
+                ReportTemplate.templatesAccessibleByUser(
+                        localContext(), user());
+
+            reportTemplatesDisplayGroup = new WODisplayGroup();
+            reportTemplatesDisplayGroup.setObjectArray(templates);
         }
-        return reportTemplates;
+
+        return reportTemplatesDisplayGroup;
     }
 
 
@@ -74,10 +88,11 @@ public class PickTemplateToGeneratePage
     {
         clearLocalReportState();
 
-        setLocalReportTemplate(reportTemplate);
-        setLocalCurrentReportDataSet(0);
-        createLocalPageController();
+        ReportTemplate template =
+            (ReportTemplate) reportTemplatesDisplayGroup.selectedObject();
 
-        return localPageController().nextPage();
+        setLocalReportTemplate(template);
+        
+        return pageWithName(DescribeReportInputsPage.class.getName());
     }
 }
