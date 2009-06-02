@@ -85,7 +85,7 @@ public class PickReportToViewPage
 
         if (report != null)
         {
-            commitReportRendering(report);
+            setLocalGeneratedReport(report);
             return pageWithName(GeneratedReportPage.class.getName());
         }
         else

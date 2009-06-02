@@ -56,6 +56,7 @@ import org.apache.log4j.Logger;
 import org.eclipse.birt.core.exception.BirtException;
 import org.eclipse.birt.report.engine.api.EngineException;
 import org.eclipse.birt.report.engine.api.IEngineTask;
+import org.eclipse.birt.report.engine.api.IPageHandler;
 import org.eclipse.birt.report.engine.api.IRenderTask;
 import org.eclipse.birt.report.engine.api.IReportRunnable;
 import org.eclipse.birt.report.engine.api.IRunTask;
@@ -476,6 +477,11 @@ public class ReportGenerationQueueProcessor extends Thread
                 log.debug("Generation thread: setting up run task");
                 runTask = Reporter.getInstance().setupRunTaskForJob(job);
                 runTask.setErrorHandlingOption(IEngineTask.CANCEL_ON_ERROR);
+                
+                IPageHandler pageHandler = ReportPageRenderer.getInstance()
+                    .createPageHandlerForReport(report);
+
+                runTask.setPageHandler(pageHandler);
 
                 log.debug("Generation thread: running BIRT reporting task");
                 runTask.run(reportPath);

@@ -48,10 +48,6 @@ public class DescribeReportInputsPage extends ReporterComponent
 
     public NSDictionary<String, Object> parameter;
 
-    public NSArray<IRenderingMethod> renderingMethods;
-    public IRenderingMethod renderingMethod;
-    public IRenderingMethod selectedRenderingMethod;
-    
     public String reportDescription;
 
 
@@ -73,26 +69,6 @@ public class DescribeReportInputsPage extends ReporterComponent
             }
         }
         
-        renderingMethods = Reporter.getInstance().allRenderingMethods();
-
-        for (IRenderingMethod method : renderingMethods)
-        {
-            if (method.methodName().equals(
-                    localReportTemplate().preferredRenderer()))
-            {
-                selectedRenderingMethod = method;
-                break;
-            }
-        }
-
-        if (selectedRenderingMethod == null)
-        {
-            // Default to HTML if one isn't specified.
-
-            selectedRenderingMethod =
-                Reporter.getInstance().renderingMethodWithName("html");
-        }
-
         NSArray<QueryAssistantDescriptor> allAssistants =
             QueryAssistantManager.getInstance().allAssistants();
         
@@ -272,7 +248,6 @@ public class DescribeReportInputsPage extends ReporterComponent
         }
 
         setLocalReportDescription(desc);
-        setLocalRenderingMethod(selectedRenderingMethod.methodName());
 
         commitReportGeneration(modelWrappers);
         return pageWithName(GeneratedReportPage.class.getName());

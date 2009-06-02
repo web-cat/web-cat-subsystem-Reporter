@@ -41,12 +41,12 @@ import org.eclipse.birt.report.engine.api.script.IReportContext;
 
 //-------------------------------------------------------------------------
 /**
- * A BIRT image handler for HTML-rendered reports.
+ * A BIRT image handler for online HTML-rendered reports.
  *
  * @author Tony Allevato
  * @version $Id$
  */
-public class ReporterHTMLImageHandler
+public class DirectActionHTMLImageHandler
     extends HTMLImageHandler
 {
     //~ Constructor ...........................................................
@@ -58,7 +58,7 @@ public class ReporterHTMLImageHandler
      * @param renderedResourceActionUrl The base URL for accessing rendered
      *     images in the final report
      */
-    public ReporterHTMLImageHandler(
+    public DirectActionHTMLImageHandler(
         GeneratedReport report, String renderedResourceActionUrl)
     {
         this.report = report;
@@ -269,5 +269,5 @@ public class ReporterHTMLImageHandler
         new NSMutableDictionary<String, String>();
 
     private static Logger log =
-        Logger.getLogger(ReporterHTMLImageHandler.class);
+        Logger.getLogger(DirectActionHTMLImageHandler.class);
 }
