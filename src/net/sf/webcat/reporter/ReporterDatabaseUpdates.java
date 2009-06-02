@@ -83,6 +83,19 @@ public class ReporterDatabaseUpdates
         database().executeSQL("ALTER TABLE TREPORTTEMPLATE ADD COLUMN "
                 + "CUPDATEMUTABLEFIELDS BIT NOT NULL");
     }
+    
+    
+    // ----------------------------------------------------------
+    /**
+     * Drops the no-longer-used EnqueuedReportRenderJob table from the
+     * database.
+     *  
+     * @throws SQLException on error
+     */
+    public void updateIncrement2() throws SQLException
+    {
+        database().executeSQL("DROP TABLE TENQUEUEDREPORTRENDERJOB");
+    }
 
 
     //~ Private Methods .......................................................
