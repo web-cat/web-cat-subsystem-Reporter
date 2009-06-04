@@ -120,24 +120,6 @@ public class ReportExceptionTranslator
             while (!done);
         }
 
-/*        if (e.getCause() != null)
-        {
-            if (e.getCause().getMessage() != null)
-            {
-                errorInfo.setObjectForKey(e.getCause().getMessage(),
-                        "cause");
-            }
-            else
-            {
-                errorInfo.setObjectForKey(e.getCause().toString(), "cause");
-            }
-        }
-
-        if (e.getMessage() != null)
-        {
-            errorInfo.setObjectForKey(e.getMessage(), "message");
-        }
-*/
         return errorInfo;
     }
 

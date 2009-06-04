@@ -21,6 +21,8 @@
 
 package net.sf.webcat.reporter.queryassistants;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import com.webobjects.appserver.WOComponent;
 import com.webobjects.appserver.WOContext;
 import com.webobjects.appserver.WORequest;
@@ -71,7 +73,6 @@ public class AdvancedQueryAssistant
     public int comparandType;
     public Class<?> castType;
     public int index;
-    public KVCAttributeInfo keyPathCompletionItem;
 
     public ComponentIDGenerator idFor;
 
@@ -102,29 +103,34 @@ public class AdvancedQueryAssistant
 
 
     // ----------------------------------------------------------
-    public NSArray<KVCAttributeInfo> keyPathCompletionItems()
+    public String contentAssistActionURL()
     {
-        KeyPathParser kpp = new KeyPathParser(dataSet.wcEntityName(),
-            currentKeyPath(), 1);
+        NSMutableDictionary<String, Object> queryParameters =
+            new NSMutableDictionary<String, Object>();
+        
+        queryParameters.setObjectForKey(Integer.toString(256 * 256 + 256),
+                "designerVersion");
 
-        if (kpp.theClass() != null)
-        {
-            String prefix = kpp.remainingKeyPath();
-            return KVCAttributeFinder.attributesForClass(
-                kpp.theClass(), prefix);
-        }
-        else
-        {
-            return new NSArray<KVCAttributeInfo>();
-        }
+        return context().directActionURLForActionNamed(
+                "contentAssist/entityDescriptions", queryParameters);
     }
 
 
     // ----------------------------------------------------------
-    public String displayStringForKeyPathCompletionItem()
+    public JSONObject contentAssistDataStoreQuery()
     {
-        String[] components = keyPathCompletionItem.name().split("\\.");
-        return components[components.length - 1];
+        JSONObject query = new JSONObject();
+        
+        try
+        {
+            query.put("rootType", dataSet.wcEntityName());
+        }
+        catch (JSONException e)
+        {
+            // Do nothing.
+        }
+
+        return query;
     }
 
 
@@ -435,7 +441,14 @@ public class AdvancedQueryAssistant
     {
         if (comparandType == AdvancedQueryCriterion.COMPARAND_LITERAL)
         {
-            return "value";
+            if (doesCurrentComparisonSupportMultipleValues())
+            {
+                return "values";
+            }
+            else
+            {
+                return "value";
+            }
         }
         else
         {
@@ -599,33 +612,5 @@ public class AdvancedQueryAssistant
     {
         model.removeCriterionAtIndex(index);
         return null;
-    }
-
-
-    // ----------------------------------------------------------
-    public String idForCurrentCastTypeContainer()
-    {
-        return "castTypeContainer_" + index;
-    }
-
-
-    // ----------------------------------------------------------
-    public String idForCurrentComparisonContainer()
-    {
-        return "comparisonContainer_" + index;
-    }
-
-
-    // ----------------------------------------------------------
-    public String idForCurrentComparandTypeContainer()
-    {
-        return "comparandTypeContainer_" + index;
-    }
-
-
-    // ----------------------------------------------------------
-    public String idForCurrentValueContainer()
-    {
-        return "valueContainer_" + index;
     }
 }

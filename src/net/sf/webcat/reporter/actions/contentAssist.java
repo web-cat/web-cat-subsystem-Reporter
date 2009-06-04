@@ -36,8 +36,10 @@ import com.webobjects.eocontrol.EOEnterpriseObject;
 import com.webobjects.eocontrol.EOFetchSpecification;
 import com.webobjects.eocontrol.EOSortOrdering;
 import com.webobjects.foundation.NSArray;
+import com.webobjects.foundation.NSComparator;
 import com.webobjects.foundation.NSDictionary;
 import com.webobjects.foundation.NSMutableDictionary;
+import com.webobjects.foundation.NSComparator.ComparisonException;
 import er.extensions.appserver.ERXDirectAction;
 import net.sf.webcat.core.Application;
 import net.sf.webcat.core.EntityUtils;
@@ -237,6 +239,26 @@ public class contentAssist
 
                     NSArray<KVCAttributeInfo> attributes =
                         KVCAttributeFinder.attributesForClass(klass, "");
+
+                    try
+                    {
+                        attributes =
+                            attributes.sortedArrayUsingComparator(new NSComparator() {
+                                @Override
+                                public int compare(Object _lhs, Object _rhs)
+                                        throws ComparisonException
+                                {
+                                    KVCAttributeInfo lhs = (KVCAttributeInfo) _lhs;
+                                    KVCAttributeInfo rhs = (KVCAttributeInfo) _rhs;
+                                    
+                                    return lhs.name().compareTo(rhs.name());
+                                }
+                            });
+                    }
+                    catch (ComparisonException e)
+                    {
+                        // Do nothing.
+                    }
 
                     for (KVCAttributeInfo attr : attributes)
                     {
