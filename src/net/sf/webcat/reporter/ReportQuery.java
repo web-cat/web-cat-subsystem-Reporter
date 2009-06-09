@@ -65,7 +65,8 @@ public class ReportQuery extends _ReportQuery
         }
         else
         {
-            return (EOQualifier) info.objectForKey(KEY_QUALIFIER);
+            EOQualifier q = (EOQualifier) info.objectForKey(KEY_QUALIFIER);
+            return q;
         }
     }
 

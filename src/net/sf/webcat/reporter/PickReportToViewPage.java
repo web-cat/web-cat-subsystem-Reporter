@@ -96,11 +96,11 @@ public class PickReportToViewPage
 
 
     // ----------------------------------------------------------
-    public WOComponent deleteReport()
+    public WOActionResults deleteSelectedReports()
     {
         NSArray<GeneratedReport> reports =
             generatedReportsDisplayGroup.selectedObjects();
-        
+
         for (GeneratedReport report : reports)
         {
             localContext().deleteObject(report);
@@ -108,10 +108,12 @@ public class PickReportToViewPage
 
         localContext().saveChanges();
 
+        generatedReportsDisplayGroup.fetch();
+
         return null;
     }
 
-
+    
     // ----------------------------------------------------------
     public WOComponent viewReportProgress()
     {

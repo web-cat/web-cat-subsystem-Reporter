@@ -1,6 +1,7 @@
 package net.sf.webcat.reporter.queryassistants;
 
 import net.sf.webcat.core.User;
+import net.sf.webcat.reporter.QualifierSerialization;
 import net.sf.webcat.reporter.ReportDataSet;
 import net.sf.webcat.reporter.ReportQuery;
 import com.webobjects.eocontrol.EOEditingContext;
@@ -139,7 +140,11 @@ public class ModelOrQueryWrapper implements NSKeyValueCoding
             query.setQueryAssistantId(queryAssistant.id());
             query.setDescription(descriptionToSave);
             query.setUserRelationship(user.localInstance(ec));
-            query.setQualifier(model.qualifierFromValues());
+            
+            EOQualifier q = QualifierSerialization.convertEOsToGIDs(
+                    model.qualifierFromValues(), ec);
+
+            query.setQualifier(q);
             query.setWcEntityName(dataSet.wcEntityName());
 
             return query;
