@@ -47,6 +47,7 @@ import com.webobjects.foundation.NSArray;
 import com.webobjects.foundation.NSMutableArray;
 import er.extensions.eof.ERXConstant;
 import er.extensions.eof.ERXEOControlUtilities;
+import er.extensions.eof.ERXQ;
 
 //-------------------------------------------------------------------------
 /**
@@ -251,21 +252,13 @@ public class Reporter
     {
         EOEditingContext ec = Application.newPeerEditingContext();
 
-        NSMutableArray qualifiers = new NSMutableArray();
-        qualifiers.addObject( new EOKeyValueQualifier(
-            EnqueuedJob.DISCARDED_KEY,
-            EOQualifier.QualifierOperatorEqual,
-            ERXConstant.integerForInt( 0 )
-        ) );
-        qualifiers.addObject( new EOKeyValueQualifier(
-            EnqueuedJob.PAUSED_KEY,
-            EOQualifier.QualifierOperatorEqual,
-            ERXConstant.integerForInt( 0 )
-        ) );
+        EOQualifier qualifier = ERXQ.and(
+                ERXQ.is(EnqueuedJob.DISCARDED_KEY, 0),
+                ERXQ.is(EnqueuedJob.PAUSED_KEY, 0));
 
         jobCountAtLastThrottleCheck =
             ERXEOControlUtilities.objectCountWithQualifier(ec,
-                EnqueuedJob.ENTITY_NAME, new EOAndQualifier(qualifiers));
+                EnqueuedJob.ENTITY_NAME, qualifier);
 
         Application.releasePeerEditingContext(ec);
 

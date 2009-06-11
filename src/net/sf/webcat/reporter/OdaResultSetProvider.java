@@ -76,7 +76,7 @@ public class OdaResultSetProvider implements IWebCATResultSetProvider
         Integer dataSetId = Integer.parseInt(id);
         ReportQuery query = queryMap.objectForKey(dataSetId);
 
-        return new OdaResultSet(jobId, query);
+        return new OdaResultSet(dataSetId, jobId, query);
     }
 
 

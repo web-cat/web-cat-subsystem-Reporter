@@ -67,6 +67,8 @@ public class ReportExceptionTranslator
     {
         MutableDictionary errorInfo = new MutableDictionary();
 
+        errorInfo.setObjectForKey("exception", "entryKind");
+
         if (e instanceof BirtException)
         {
             errorInfo.setObjectForKey(ERXConstant

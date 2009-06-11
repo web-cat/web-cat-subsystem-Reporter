@@ -28,6 +28,7 @@ import com.webobjects.eocontrol.EOKeyValueQualifier;
 import com.webobjects.eocontrol.EOQualifier;
 import com.webobjects.eocontrol.EOSortOrdering;
 import com.webobjects.foundation.NSArray;
+import com.webobjects.foundation.NSDictionary;
 import com.webobjects.foundation.NSMutableArray;
 import com.webobjects.foundation.NSTimestamp;
 import er.extensions.eof.ERXConstant;
@@ -76,6 +77,7 @@ public class GeneratedReportPage
     public int refreshTimeout = 15;
     public GeneratedReport generatedReport;
     public Number reportGenerationJobId;
+    public boolean wasCanceled = false;
     public int currentPageNumber = 0;
     public NSArray<String> resultSetsToExtract;
     public String resultSet;
@@ -125,6 +127,11 @@ public class GeneratedReportPage
         }
         else
         {
+            if (generatedReport.isComplete())
+            {
+                return true;
+            }
+
             Properties props = generatedReport.renderingProperties();
             return Boolean.valueOf(props.getProperty("isComplete", "false"));
         }
@@ -189,7 +196,11 @@ public class GeneratedReportPage
         
         try
         {
-            if (generatedReport == null && reportGenerationJobId != null)
+            if (wasCanceled)
+            {
+                result.put("isCanceled", true);
+            }
+            else if (generatedReport == null && reportGenerationJobId != null)
             {
                 Integer reportId =
                     ReportGenerationTracker.getInstance().reportIdForJobId(
@@ -231,9 +242,15 @@ public class GeneratedReportPage
                 result.put("highestRenderedPageNumber", highestPage);
 
                 result.put("isComplete",
+                        generatedReport.isComplete() ||
                         Boolean.valueOf(props.getProperty(
                                 "isComplete", "false")));
 
+                MutableArray errors = generatedReport.errors();
+                boolean hasErrors = (errors != null && errors.count() > 0);
+
+                result.put("hasErrors", hasErrors);
+                
                 if (reportGenerationJobId == null)
                 {
                     result.put("progress", 100);
@@ -319,9 +336,36 @@ public class GeneratedReportPage
         {
             Reporter.getInstance().reportGenerationQueueProcessor()
                 .cancelJobWithId(localContext(), reportGenerationJobId);
+
+            reportGenerationJobId = null;
+            wasCanceled = true;
         }
     }
     
+    
+    // ----------------------------------------------------------
+    public NSDictionary<String, Object> generatedReportExtraErrorInfo()
+    {
+        if (generatedReport == null)
+        {
+            return null;
+        }
+        else
+        {
+            NSDictionary<String, Object> dict = (NSDictionary<String, Object>)
+                generatedReport.errors().objectAtIndex(0);
+
+            if ("extraInfo".equals(dict.objectForKey("entryKind")))
+            {
+                return dict;
+            }
+            else
+            {
+                return null;
+            }
+        }
+    }
+
     
     // ----------------------------------------------------------
     public NSArray<MutableDictionary> generatedReportErrors()
@@ -332,7 +376,29 @@ public class GeneratedReportPage
         }
         else
         {
-            return generatedReport.errors();
+            MutableArray _errors = generatedReport.errors();
+            
+            if (_errors != null)
+            {
+                MutableArray errors = new MutableArray(generatedReport.errors());
+                
+                if (errors.count() > 0)
+                {
+                    NSDictionary<String, Object> dict =
+                        (NSDictionary<String, Object>) errors.objectAtIndex(0);
+        
+                    if ("extraInfo".equals(dict.objectForKey("entryKind")))
+                    {
+                        errors.removeObjectAtIndex(0);
+                    }
+                }
+                
+                return errors;
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 
