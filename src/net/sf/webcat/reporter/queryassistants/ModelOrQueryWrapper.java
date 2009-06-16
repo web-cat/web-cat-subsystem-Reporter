@@ -161,11 +161,12 @@ public class ModelOrQueryWrapper implements NSKeyValueCoding
     {
         if (savedQuery != null)
         {
-            return savedQuery.description();
+            return "Use the previously saved query named <b>" +
+                savedQuery.description() + "</b>";
         }
         else if (queryAssistant != null)
         {
-            return queryAssistant.description();
+            return queryAssistant.description().replace("|", "");
         }
         else
         {
