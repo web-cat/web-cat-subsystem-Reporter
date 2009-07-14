@@ -92,20 +92,6 @@ public class QueryAssistantDescriptor
 
 
     // ----------------------------------------------------------
-    public NSArray<String> stylesheets()
-    {
-        return (NSArray<String>) info.objectForKey("stylesheets");
-    }
-
-    
-    // ----------------------------------------------------------
-    public NSArray<String> javascripts()
-    {
-        return (NSArray<String>) info.objectForKey("javascripts");
-    }
-
-    
-    // ----------------------------------------------------------
     public AbstractQueryAssistantModel createModel()
     {
         try

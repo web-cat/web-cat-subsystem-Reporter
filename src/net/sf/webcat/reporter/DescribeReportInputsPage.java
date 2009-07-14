@@ -33,12 +33,6 @@ public class DescribeReportInputsPage extends ReporterComponent
     
     //~ KVC attributes (must be public) .......................................
 
-    public NSArray<String> stylesheetsToImport;
-    public String stylesheetToImport;
-    
-    public NSArray<String> javascriptsToImport;
-    public String javascriptToImport;
-
     public NSArray<ReportDataSet> dataSets;
     public ReportDataSet dataSet;
     public int dataSetIndex;
@@ -69,21 +63,6 @@ public class DescribeReportInputsPage extends ReporterComponent
             }
         }
         
-        NSArray<QueryAssistantDescriptor> allAssistants =
-            QueryAssistantManager.getInstance().allAssistants();
-        
-        NSMutableSet<String> stylesheets = new NSMutableSet<String>();
-        NSMutableSet<String> javascripts = new NSMutableSet<String>();
-        
-        for (QueryAssistantDescriptor qad : allAssistants)
-        {
-            stylesheets.addObjectsFromArray(qad.stylesheets());
-            javascripts.addObjectsFromArray(qad.javascripts());
-        }
-
-        stylesheetsToImport = stylesheets.allObjects();
-        javascriptsToImport = javascripts.allObjects();
-
         parameterValues = new NSMutableDictionary<String, Object>();
 
         super.appendToResponse(response, context);
