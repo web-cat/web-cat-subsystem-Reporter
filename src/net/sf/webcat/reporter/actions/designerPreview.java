@@ -477,6 +477,10 @@ public class designerPreview
         {
             result = accessor.get(ognlContext, object);
         }
+        catch (NullPointerException e)
+        {
+            result = null;
+        }
         catch (NSKeyValueCoding.UnknownKeyException e)
         {
             // Translate the expression into something a little easier for the
