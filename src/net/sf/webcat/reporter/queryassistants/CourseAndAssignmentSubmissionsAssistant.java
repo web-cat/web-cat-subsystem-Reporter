@@ -108,16 +108,16 @@ public class CourseAndAssignmentSubmissionsAssistant
                 return null;
             }
         }
-        
-        
+
+
         // ----------------------------------------------------------
         @Override
         protected boolean itemHasChildren(Object parentItem)
         {
             return !(parentItem instanceof CourseOffering);
         }
-        
-        
+
+
         // ----------------------------------------------------------
         @Override
         protected String idForItem(Object item)
@@ -133,8 +133,8 @@ public class CourseAndAssignmentSubmissionsAssistant
                 return null;
             }
         }
-	    
-        
+
+
         // ----------------------------------------------------------
         @Override
         protected String labelForItem(Object item)
@@ -155,7 +155,7 @@ public class CourseAndAssignmentSubmissionsAssistant
                 return "";
             }
         }
-        
+
 
         // ----------------------------------------------------------
         private NSArray<Semester> allSemesters()
@@ -167,9 +167,10 @@ public class CourseAndAssignmentSubmissionsAssistant
 
             EOFetchSpecification fspec = new EOFetchSpecification(
                     Semester.ENTITY_NAME, null, orderings);
-            return localContext().objectsWithFetchSpecification(fspec);
+            return Semester
+                .objectsWithFetchSpecification(localContext(), fspec);
         }
-        
+
 
         // ----------------------------------------------------------
         private NSArray<CourseOffering> courseOfferingsForSemester(
@@ -216,9 +217,10 @@ public class CourseAndAssignmentSubmissionsAssistant
                     sortOrderings);
         fetchSpec.setUsesDistinct(true);
 
-        return localContext().objectsWithFetchSpecification(fetchSpec);
+        return Assignment.objectsWithFetchSpecification(
+            localContext(), fetchSpec);
     }
-    
+
 
     // ----------------------------------------------------------
     public void pruneAssignmentsFromUnselectedCourses()
@@ -252,8 +254,8 @@ public class CourseAndAssignmentSubmissionsAssistant
     {
         return model.containsAssignment(assignmentInRepetition);
     }
-    
-    
+
+
     // ----------------------------------------------------------
     public void setAssignmentInRepetitionChecked(boolean value)
     {

@@ -126,14 +126,16 @@ public class ReportGenerationQueueProcessor extends Thread
 
                 try
                 {
-                    jobList = editingContext
-                            .objectsWithFetchSpecification(fetchNewJobs);
+                    jobList = EnqueuedReportGenerationJob
+                        .objectsWithFetchSpecification(
+                            editingContext, fetchNewJobs);
                 }
                 catch (Exception e)
                 {
                     log.info("error fetching jobs: ", e);
-                    jobList = editingContext
-                            .objectsWithFetchSpecification(fetchNewJobs);
+                    jobList = EnqueuedReportGenerationJob
+                        .objectsWithFetchSpecification(
+                            editingContext, fetchNewJobs);
                 }
 
                 if (log.isDebugEnabled())
@@ -304,17 +306,17 @@ public class ReportGenerationQueueProcessor extends Thread
         MutableArray errors = ReportExceptionTranslator.translateExceptions(
                 exceptions);
 
-        NSDictionary<String, Object> _extraInfo = 
+        NSDictionary<String, Object> _extraInfo =
                 ReportGenerationTracker.getInstance().lastErrorInfoForJobId(
                         job.id().intValue());
-        
+
         if (_extraInfo != null)
         {
             MutableDictionary extraInfo = new MutableDictionary(_extraInfo);
             extraInfo.setObjectForKey("extraInfo", "entryKind");
             errors.insertObjectAtIndex(extraInfo, 0);
         }
-        
+
         report.setGeneratedTime(new NSTimestamp());
         report.setErrors(errors);
         report.setIsComplete(true);
@@ -396,7 +398,7 @@ public class ReportGenerationQueueProcessor extends Thread
             GeneratedReport report) throws ReportGenerationException
     {
         ThreadGroup group = new ThreadGroup("Report Generation Thread Group");
-        group.setMaxPriority((NORM_PRIORITY + MIN_PRIORITY) / 2); 
+        group.setMaxPriority((NORM_PRIORITY + MIN_PRIORITY) / 2);
         GenerateReportThread exeThread = new GenerateReportThread(
                 group, job.id(), report.id());
 
@@ -507,7 +509,7 @@ public class ReportGenerationQueueProcessor extends Thread
                 log.debug("Generation thread: setting up run task");
                 runTask = Reporter.getInstance().setupRunTaskForJob(job);
                 runTask.setErrorHandlingOption(IEngineTask.CANCEL_ON_ERROR);
-                
+
                 IPageHandler pageHandler = ReportPageRenderer.getInstance()
                     .createPageHandlerForReport(report);
 

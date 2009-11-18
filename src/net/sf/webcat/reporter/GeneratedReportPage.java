@@ -555,7 +555,7 @@ public class GeneratedReportPage
     // ----------------------------------------------------------
     static private class JobData
     {
-        public NSArray jobs;
+        public NSArray<EnqueuedReportGenerationJob> jobs;
         public int queueSize;
         public int queuePosition;
         long mostRecentWait;
@@ -580,8 +580,8 @@ public class GeneratedReportPage
                         )
                     } )
                 );
-            jobData.jobs =
-                localContext().objectsWithFetchSpecification(fetchSpec);
+            jobData.jobs = EnqueuedReportGenerationJob
+                .objectsWithFetchSpecification(localContext(), fetchSpec);
             jobData.queueSize = jobData.jobs.count();
             if ( oldQueuePos < 0
                  || oldQueuePos >= jobData.queueSize )
