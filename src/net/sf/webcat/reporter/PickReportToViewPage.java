@@ -64,7 +64,7 @@ public class PickReportToViewPage
     public void appendToResponse(WOResponse response, WOContext context)
     {
         NSMutableDictionary bindings;
-        
+
         bindings = generatedReportsDisplayGroup.queryBindings();
         bindings.setObjectForKey(user(), "user");
         generatedReportsDisplayGroup.fetch();
@@ -86,7 +86,7 @@ public class PickReportToViewPage
         if (report != null)
         {
             setLocalGeneratedReport(report);
-            return pageWithName(GeneratedReportPage.class.getName());
+            return pageWithName(GeneratedReportPage.class);
         }
         else
         {
@@ -113,7 +113,7 @@ public class PickReportToViewPage
         return null;
     }
 
-    
+
     // ----------------------------------------------------------
     public WOComponent viewReportProgress()
     {

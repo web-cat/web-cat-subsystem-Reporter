@@ -28,7 +28,7 @@ import com.webobjects.appserver.WOContext;
 
 //------------------------------------------------------------------------
 /**
- * Displays any errors that may have occurred when saving a report. 
+ * Displays any errors that may have occurred when saving a report.
  *
  * @author Tony Allevato
  * @version $Id$
@@ -36,19 +36,19 @@ import com.webobjects.appserver.WOContext;
 public class ReportDownloadErrorPage extends ReporterComponent
 {
     //~ Constructors ..........................................................
-    
+
     // ----------------------------------------------------------
     public ReportDownloadErrorPage(WOContext context)
     {
         super(context);
     }
-    
+
 
     //~ KVC attributes (must be public) .......................................
 
     public Throwable throwable;
     public GeneratedReport generatedReport;
-    
+
 
     //~ Methods ...............................................................
 
@@ -57,8 +57,8 @@ public class ReportDownloadErrorPage extends ReporterComponent
     {
         return "Error Downloading Report: " + generatedReport.description();
     }
-    
-    
+
+
     // ----------------------------------------------------------
     public String throwableStackTrace()
     {
@@ -72,8 +72,7 @@ public class ReportDownloadErrorPage extends ReporterComponent
     public WOActionResults goBack()
     {
         setLocalGeneratedReport(generatedReport);
-        GeneratedReportPage page = (GeneratedReportPage) pageWithName(
-                GeneratedReportPage.class.getName());
+        GeneratedReportPage page = pageWithName(GeneratedReportPage.class);
         return page;
     }
 }

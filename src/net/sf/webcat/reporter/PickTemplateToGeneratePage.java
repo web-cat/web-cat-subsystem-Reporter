@@ -92,7 +92,7 @@ public class PickTemplateToGeneratePage
             (ReportTemplate) reportTemplatesDisplayGroup.selectedObject();
 
         setLocalReportTemplate(template);
-        
-        return pageWithName(DescribeReportInputsPage.class.getName());
+
+        return pageWithName(DescribeReportInputsPage.class);
     }
 }

@@ -152,8 +152,7 @@ public class TemplateLibraryPage
         String deliveredName = reportTemplate.name() + "_"
             + reportTemplate.version() + ReportTemplate.TEMPLATE_EXTENSION;
 
-        DeliverFile myNextPage = (DeliverFile)pageWithName(
-                DeliverFile.class.getName() );
+        DeliverFile myNextPage = pageWithName(DeliverFile.class);
         myNextPage.setFileName( actualFile );
         myNextPage.setDeliveredName( deliveredName );
         myNextPage.setContentType( WCFile.mimeType( actualFile ) );
