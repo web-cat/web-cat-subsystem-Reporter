@@ -33,6 +33,7 @@ import net.sf.webcat.core.MutableArray;
 import net.sf.webcat.core.User;
 import com.webobjects.eocontrol.EOEditingContext;
 import com.webobjects.eocontrol.EOObjectStore;
+import com.webobjects.foundation.NSArray;
 import com.webobjects.foundation.NSData;
 
 // -------------------------------------------------------------------------
@@ -59,6 +60,22 @@ public class GeneratedReport
 
 
     //~ Methods ...............................................................
+
+    // ----------------------------------------------------------
+    public ReportGenerationJob reportGenerationJob()
+    {
+        NSArray<ReportGenerationJob> jobs = reportGenerationJobs();
+
+        if (jobs.count() > 0)
+        {
+            return jobs.objectAtIndex(0);
+        }
+        else
+        {
+            return null;
+        }
+    }
+
 
     // ----------------------------------------------------------
     private static String generatedReportDirForUser(User user)
@@ -298,8 +315,8 @@ public class GeneratedReport
     {
         return generatedReportFilePathForUser(user(), id());
     }
-    
-    
+
+
     // ----------------------------------------------------------
     public IReportDocument openReportDocument()
     {
@@ -372,6 +389,6 @@ public class GeneratedReport
     private String reportDocToDelete;
 
     private String renderedDirToDelete;
-    
+
     private static final Logger log = Logger.getLogger(GeneratedReport.class);
 }

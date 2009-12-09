@@ -86,7 +86,7 @@ public class PickReportToViewPage
         if (report != null)
         {
             setLocalGeneratedReport(report);
-            return pageWithName(GeneratedReportPage.class);
+            return pageWithName(GeneratedReportPage.class.getName());
         }
         else
         {
@@ -117,12 +117,13 @@ public class PickReportToViewPage
     // ----------------------------------------------------------
     public WOComponent viewReportProgress()
     {
-        EnqueuedReportGenerationJob job = (EnqueuedReportGenerationJob)
+        ReportGenerationJob job = (ReportGenerationJob)
             enqueuedReportsDisplayGroup.selectedObject();
+        GeneratedReport report = job.generatedReport();
 
-        if (job != null)
+        if (report != null)
         {
-            setLocalReportGenerationJob(job);
+            setLocalGeneratedReport(report);
             return pageWithName(GeneratedReportPage.class.getName());
         }
         else

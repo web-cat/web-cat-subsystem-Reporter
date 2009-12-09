@@ -89,7 +89,7 @@ public class DescribeReportInputsPage extends ReporterComponent
     // ----------------------------------------------------------
     public NSArray<ReportQuery> savedQueriesApplicableToDataSet()
     {
-        return ReportQuery.objectsForUserAndEntitySavedQueries(localContext(),
+        return ReportQuery.savedQueriesForUserAndEntity(localContext(),
                 user(), dataSet.wcEntityName());
     }
 

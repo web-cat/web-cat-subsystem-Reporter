@@ -75,20 +75,20 @@ public class CourseAndAssignmentSubmissionsAssistant
 
     //~ KVC Attributes (must be public) .......................................
 
-	public ReportDataSet                       dataSet;
-	public CourseAndAssignmentSubmissionsModel model;
-	public Assignment                          assignment;
-	public int                                 index;
-	public CourseTreeModel                     courseModel;
-	public Course                              courseInRepetition;
-	public Assignment                          assignmentInRepetition;
-	public ComponentIDGenerator                idFor;
+    public ReportDataSet                       dataSet;
+    public CourseAndAssignmentSubmissionsModel model;
+    public Assignment                          assignment;
+    public int                                 index;
+    public CourseTreeModel                     courseModel;
+    public Course                              courseInRepetition;
+    public Assignment                          assignmentInRepetition;
+    public ComponentIDGenerator                idFor;
 
 
-	//~ Public Nested Classes .................................................
+    //~ Public Nested Classes .................................................
 
-	public class CourseTreeModel extends AbstractTreeModel
-	{
+    public class CourseTreeModel extends AbstractTreeModel
+    {
         //~ Public Methods ....................................................
 
         // ----------------------------------------------------------
@@ -177,7 +177,7 @@ public class CourseAndAssignmentSubmissionsAssistant
                 Semester semester)
         {
             NSArray<CourseOffering> offerings =
-                CourseOffering.objectsForForSemester(localContext(), semester);
+                CourseOffering.offeringsForSemester(localContext(), semester);
 
             return ERXS.sorted(offerings,
                     ERXS.ascInsensitive(
@@ -188,7 +188,7 @@ public class CourseAndAssignmentSubmissionsAssistant
                             CourseOffering.COURSE_NUMBER_KEY),
                     ERXS.asc(CourseOffering.CRN_KEY));
         }
-	}
+    }
 
 
     //~ Public Methods ........................................................
@@ -197,9 +197,9 @@ public class CourseAndAssignmentSubmissionsAssistant
     public void appendToResponse(WOResponse response, WOContext context)
     {
         idFor = new ComponentIDGenerator(this);
-    	courseModel = new CourseTreeModel();
+        courseModel = new CourseTreeModel();
 
-    	super.appendToResponse(response, context);
+        super.appendToResponse(response, context);
     }
 
 
