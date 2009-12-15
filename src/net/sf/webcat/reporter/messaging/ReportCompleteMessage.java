@@ -28,7 +28,8 @@ import net.sf.webcat.reporter.GeneratedReport;
 
 //-------------------------------------------------------------------------
 /**
- * TODO add description
+ * A message that is sent to the user who requested that a report be generated,
+ * once the report is complete.
  *
  * @author Tony Allevato
  * @version $Id$
@@ -52,6 +53,9 @@ public class ReportCompleteMessage extends Message
     //~ Methods ...............................................................
 
     // ----------------------------------------------------------
+    /**
+     * Called by the subsystem init() to register the message.
+     */
     public static void register()
     {
         Message.registerMessage(
@@ -94,6 +98,8 @@ public class ReportCompleteMessage extends Message
     @Override
     public NSArray<User> users()
     {
+        // Returns an array containing the one user who generated this report.
+
         return new NSArray<User>(report.user());
     }
 
