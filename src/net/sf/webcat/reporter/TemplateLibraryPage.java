@@ -33,8 +33,6 @@ import net.sf.webcat.core.DeliverFile;
 import net.sf.webcat.core.User;
 import net.sf.webcat.core.WCComponent;
 import net.sf.webcat.core.WCFile;
-import net.sf.webcat.grader.PluginManagerPage;
-import net.sf.webcat.grader.ScriptFile;
 import org.apache.log4j.Logger;
 
 //-------------------------------------------------------------------------
