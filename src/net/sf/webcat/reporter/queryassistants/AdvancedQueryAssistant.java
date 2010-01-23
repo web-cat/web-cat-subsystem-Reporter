@@ -36,6 +36,7 @@ import com.webobjects.foundation.NSMutableDictionary;
 import com.webobjects.foundation.NSTimestamp;
 import net.sf.webcat.reporter.ReportDataSet;
 import net.sf.webcat.reporter.ReporterComponent;
+import net.sf.webcat.ui.generators.JavascriptGenerator;
 import net.sf.webcat.ui.util.ComponentIDGenerator;
 
 //-------------------------------------------------------------------------
@@ -88,7 +89,7 @@ public class AdvancedQueryAssistant
         super.appendToResponse(response, context);
     }
 
-    
+
     // ----------------------------------------------------------
     public void takeValuesFromRequest(WORequest request, WOContext context)
     {
@@ -107,7 +108,7 @@ public class AdvancedQueryAssistant
     {
         NSMutableDictionary<String, Object> queryParameters =
             new NSMutableDictionary<String, Object>();
-        
+
         queryParameters.setObjectForKey(Integer.toString(256 * 256 + 256),
                 "designerVersion");
 
@@ -120,7 +121,7 @@ public class AdvancedQueryAssistant
     public JSONObject contentAssistDataStoreQuery()
     {
         JSONObject query = new JSONObject();
-        
+
         try
         {
             query.put("rootType", dataSet.wcEntityName());
@@ -345,8 +346,8 @@ public class AdvancedQueryAssistant
 
         setComparisonForCriterion(comparison, criterion);
     }
-    
-    
+
+
     // ----------------------------------------------------------
     public void setCurrentComparison(AdvancedQueryComparison comparison)
     {
@@ -404,8 +405,8 @@ public class AdvancedQueryAssistant
 
         setComparandTypeForCriterion(comparandType, criterion);
     }
-    
-    
+
+
     // ----------------------------------------------------------
     public void setCurrentComparandType(Integer type)
     {
@@ -600,17 +601,21 @@ public class AdvancedQueryAssistant
 
 
     // ----------------------------------------------------------
-    public WOComponent addCriterion()
+    public JavascriptGenerator addCriterion()
     {
         model.insertNewCriterionAtIndex(index + 1);
-        return null;
+
+        return new JavascriptGenerator()
+            .refresh((String) idFor.valueForKey("criteriaContainer"));
     }
 
 
     // ----------------------------------------------------------
-    public WOComponent removeCriterion()
+    public JavascriptGenerator removeCriterion()
     {
         model.removeCriterionAtIndex(index);
-        return null;
+
+        return new JavascriptGenerator()
+            .refresh((String) idFor.valueForKey("criteriaContainer"));
     }
 }
