@@ -86,7 +86,7 @@ public class PickReportToViewPage
         if (report != null)
         {
             setLocalGeneratedReport(report);
-            return pageWithName(GeneratedReportPage.class.getName());
+            return pageWithName(GeneratedReportPage.class);
         }
         else
         {
@@ -124,7 +124,7 @@ public class PickReportToViewPage
         if (report != null)
         {
             setLocalGeneratedReport(report);
-            return pageWithName(GeneratedReportPage.class.getName());
+            return pageWithName(GeneratedReportPage.class);
         }
         else
         {

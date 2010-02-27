@@ -365,8 +365,7 @@ public class GeneratedReportPage
         if (error != null)
         {
             ReportDownloadErrorPage page =
-                (ReportDownloadErrorPage) pageWithName(
-                    ReportDownloadErrorPage.class.getName());
+                pageWithName(ReportDownloadErrorPage.class);
             page.throwable = error;
             page.generatedReport = generatedReport;
             return page;
