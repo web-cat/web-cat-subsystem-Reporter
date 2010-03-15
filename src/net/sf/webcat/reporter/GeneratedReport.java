@@ -365,7 +365,7 @@ public class GeneratedReport
                 File dir = new File(renderedDirToDelete);
                 if (dir.exists())
                 {
-                    net.sf.webcat.archives.FileUtilities.deleteDirectory(dir);
+                    net.sf.webcat.core.FileUtilities.deleteDirectory(dir);
                 }
             }
         }

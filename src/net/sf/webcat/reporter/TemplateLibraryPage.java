@@ -30,9 +30,9 @@ import er.extensions.foundation.ERXValueUtilities;
 import java.io.File;
 import java.util.Iterator;
 import net.sf.webcat.core.DeliverFile;
+import net.sf.webcat.core.FileUtilities;
 import net.sf.webcat.core.User;
 import net.sf.webcat.core.WCComponent;
-import net.sf.webcat.core.WCFile;
 import org.apache.log4j.Logger;
 
 //-------------------------------------------------------------------------
@@ -153,8 +153,8 @@ public class TemplateLibraryPage
         DeliverFile myNextPage = pageWithName(DeliverFile.class);
         myNextPage.setFileName( actualFile );
         myNextPage.setDeliveredName( deliveredName );
-        myNextPage.setContentType( WCFile.mimeType( actualFile ) );
-        myNextPage.setStartDownload( !WCFile.showInline( actualFile ) );
+        myNextPage.setContentType( FileUtilities.mimeType( actualFile ) );
+        myNextPage.setStartDownload( !FileUtilities.showInline( actualFile ) );
         return myNextPage;
     }
 
