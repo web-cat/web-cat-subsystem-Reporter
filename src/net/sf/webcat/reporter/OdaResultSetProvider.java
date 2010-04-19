@@ -23,6 +23,7 @@ package net.sf.webcat.reporter;
 
 import com.webobjects.foundation.NSArray;
 import com.webobjects.foundation.NSMutableDictionary;
+import net.sf.webcat.core.ObjectQuery;
 import net.sf.webcat.oda.commons.IWebCATResultSet;
 import net.sf.webcat.oda.commons.IWebCATResultSetProvider;
 
@@ -56,7 +57,7 @@ public class OdaResultSetProvider implements IWebCATResultSetProvider
         job.beginTask("Generating report", dataSetRefs);
 
         dataSetQueries = job.generatedReport().dataSetQueries();
-        queryMap = new NSMutableDictionary<Integer, ReportQuery>();
+        queryMap = new NSMutableDictionary<Integer, ObjectQuery>();
 
         // Construct the mapping from data set IDs to queries that define the
         // data to be retrieved.
@@ -64,7 +65,7 @@ public class OdaResultSetProvider implements IWebCATResultSetProvider
         for (ReportDataSetQuery dataSetQuery : dataSetQueries)
         {
             Number dataSetId = dataSetQuery.dataSet().id();
-            ReportQuery query = dataSetQuery.reportQuery();
+            ObjectQuery query = dataSetQuery.objectQuery();
 
             queryMap.setObjectForKey(query,
                     Integer.valueOf(dataSetId.intValue()));
@@ -78,7 +79,7 @@ public class OdaResultSetProvider implements IWebCATResultSetProvider
     public IWebCATResultSet resultSetWithId(String id)
     {
         Integer dataSetId = Integer.parseInt(id);
-        ReportQuery query = queryMap.objectForKey(dataSetId);
+        ObjectQuery query = queryMap.objectForKey(dataSetId);
 
         return new OdaResultSet(dataSetId, job, query);
     }
@@ -111,5 +112,5 @@ public class OdaResultSetProvider implements IWebCATResultSetProvider
 
     private ManagedReportGenerationJob job;
     private NSArray<ReportDataSetQuery> dataSetQueries;
-    private NSMutableDictionary<Integer, ReportQuery> queryMap;
+    private NSMutableDictionary<Integer, ObjectQuery> queryMap;
 }

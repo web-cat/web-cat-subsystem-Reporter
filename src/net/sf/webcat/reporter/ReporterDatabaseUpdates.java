@@ -117,6 +117,22 @@ public class ReporterDatabaseUpdates
     }
 
 
+    // ----------------------------------------------------------
+    /**
+     * Truncates existing generated reports since the report query mechanism
+     * has been generalized and moved into Core.
+     *
+     * @throws SQLException on error
+     */
+    public void updateIncrement4() throws SQLException
+    {
+        database().executeSQL("TRUNCATE TABLE TREPORTDATASETQUERY");
+        database().executeSQL("TRUNCATE TABLE TGENERATEDREPORT");
+
+        database().executeSQL("DROP TABLE TREPORTQUERY");
+    }
+
+
     //~ Private Methods .......................................................
 
     // ----------------------------------------------------------

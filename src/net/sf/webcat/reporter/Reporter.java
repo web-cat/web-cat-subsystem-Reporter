@@ -87,7 +87,7 @@ public class Reporter
 
 
     // ----------------------------------------------------------
-    public void startup()
+    public void start()
     {
         new ReportGenerationWorkerThread().start();
 

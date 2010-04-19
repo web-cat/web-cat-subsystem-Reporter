@@ -462,7 +462,8 @@ public class ReportTemplate extends _ReportTemplate
         ERXArrayUtilities.addObjectsFromArrayWithoutDuplicates(allTemplates,
                 publishedTemplates);
 
-        ERXArrayUtilities.sortArrayWithKey(allTemplates, "name");
+        ERXArrayUtilities.sortArrayWithKey(allTemplates,
+                ReportTemplate.NAME_KEY);
 
         return allTemplates;
     }
