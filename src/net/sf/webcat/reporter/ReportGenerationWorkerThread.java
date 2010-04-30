@@ -114,8 +114,7 @@ public class ReportGenerationWorkerThread extends
 
         // Send a notification that the report was completed.
 
-        ReportCompleteMessage message = new ReportCompleteMessage(report);
-        message.send();
+        new ReportCompleteMessage(report).send();
     }
 
 
