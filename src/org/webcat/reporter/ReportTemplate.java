@@ -451,7 +451,7 @@ public class ReportTemplate extends _ReportTemplate
         // data set silently fails, so we have to use the caveman approach
         // instead.
 
-        String templateContents =
+        /*String templateContents =
             FileUtilities.stringWithContentsOfFile(filePath());
 
         if (templateContents != null)
@@ -473,7 +473,7 @@ public class ReportTemplate extends _ReportTemplate
         {
             log.error("Could not load template file contents for migration: "
                     + filePath());
-        }
+        }*/
     }
 
 
