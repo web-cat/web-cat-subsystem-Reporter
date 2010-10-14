@@ -133,6 +133,36 @@ public class ReporterDatabaseUpdates
     }
 
 
+    // ----------------------------------------------------------
+    /**
+     * Add indexes for better performance.
+     * @throws SQLException on error
+     */
+    public void updateIncrement5() throws SQLException
+    {
+        // Indices for GeneratedReport
+        createIndexFor("TGENERATEDREPORT", "CUSERID");
+        createIndexFor("TGENERATEDREPORT", "CREPORTTEMPLATEID");
+
+        // Indices for ReportDataSet
+        createIndexFor("TREPORTDATASET", "CREPORTTEMPLATEID");
+
+        // Indices for ReportDataSetQuery
+        createIndexFor("TREPORTDATASETQUERY", "CDATASETID");
+        createIndexFor("TREPORTDATASETQUERY", "CGENERATEDREPORTID");
+        createIndexFor("TREPORTDATASETQUERY", "CREPORTQUERYID");
+
+        // Indices for ReportGenerationJob
+        // None
+
+        // Indices for ReportTemplate
+        createIndexFor("TREPORTTEMPLATE", "CBRANCHEDFROMTEMPLATEID");
+        createIndexFor("TREPORTTEMPLATE", "CPREDECESSORTEMPLATEID");
+        createIndexFor("TREPORTTEMPLATE", "CROOTTEMPLATEID");
+        createIndexFor("TREPORTTEMPLATE", "CUSERID");
+    }
+
+
     //~ Private Methods .......................................................
 
     // ----------------------------------------------------------
