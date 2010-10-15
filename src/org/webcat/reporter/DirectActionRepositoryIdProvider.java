@@ -68,7 +68,7 @@ public class DirectActionRepositoryIdProvider implements IRepositoryIdProvider
         String params = "id=" + templateId;
 
         String handler = Application.application()
-                .directActionRequestHandlerKey();
+            .directActionRequestHandlerKey();
 
         return Application.completeURLWithRequestHandlerKey(
             context, handler, actionName,
