@@ -21,7 +21,6 @@
 
 package org.webcat.reporter;
 
-import java.io.IOException;
 import java.util.Hashtable;
 import java.util.Map;
 import org.apache.log4j.Logger;
@@ -32,9 +31,7 @@ import org.eclipse.birt.report.engine.api.IReportDocument;
 import org.eclipse.birt.report.engine.api.IReportEngine;
 import org.eclipse.birt.report.engine.api.IReportRunnable;
 import org.eclipse.birt.report.engine.api.IRunTask;
-import org.eclipse.birt.report.model.api.DesignFileException;
 import org.eclipse.birt.report.model.api.IDesignEngine;
-import org.eclipse.birt.report.model.api.ReportDesignHandle;
 import org.eclipse.birt.report.model.api.SessionHandle;
 import org.webcat.birtruntime.BIRTRuntime;
 import org.webcat.core.Application;
@@ -52,8 +49,9 @@ import er.extensions.eof.ERXQ;
 /**
  * The primary class of the Reporter subsystem.
  *
- * @author Tony Allevato
- * @version $Id$
+ * @author  Tony Allevato
+ * @author  Last changed by: $Author$
+ * @version $Revision$, $Date$
  */
 public class Reporter
     extends Subsystem
