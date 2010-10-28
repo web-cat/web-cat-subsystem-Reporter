@@ -26,7 +26,6 @@ import org.webcat.core.CourseOffering;
 import org.webcat.core.Department;
 import org.webcat.core.Semester;
 import org.webcat.ui.AbstractTreeModel;
-import org.webcat.ui.util.WCTableLayoutBuilder;
 import com.webobjects.appserver.WOComponent;
 import com.webobjects.appserver.WOContext;
 import com.webobjects.appserver.WODisplayGroup;
@@ -61,6 +60,7 @@ public class PickTemplateToGeneratePage
 
     //~ KVC Attributes (must be public) .......................................
 
+    public ReportTemplate reportTemplate;
     public WODisplayGroup reportTemplatesDisplayGroup;
 
 
@@ -87,11 +87,7 @@ public class PickTemplateToGeneratePage
     public WOComponent templateChosen()
     {
         clearLocalReportState();
-
-        ReportTemplate template =
-            (ReportTemplate) reportTemplatesDisplayGroup.selectedObject();
-
-        setLocalReportTemplate(template);
+        setLocalReportTemplate(reportTemplate);
 
         return pageWithName(DescribeReportInputsPage.class);
     }

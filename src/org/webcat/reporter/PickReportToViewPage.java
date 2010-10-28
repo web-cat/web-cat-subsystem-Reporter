@@ -28,6 +28,8 @@ import com.webobjects.eocontrol.EOSortOrdering;
 import com.webobjects.foundation.NSArray;
 import com.webobjects.foundation.NSMutableArray;
 import com.webobjects.foundation.NSMutableDictionary;
+import er.extensions.appserver.ERXDisplayGroup;
+import er.extensions.batching.ERXBatchingDisplayGroup;
 
 //-------------------------------------------------------------------------
 /**
@@ -54,8 +56,11 @@ public class PickReportToViewPage
 
     //~ KVC Attributes (must be public) .......................................
 
-    public WODisplayGroup generatedReportsDisplayGroup;
-    public WODisplayGroup enqueuedReportsDisplayGroup;
+    public ERXDisplayGroup generatedReportsDisplayGroup;
+    public ERXDisplayGroup enqueuedReportsDisplayGroup;
+
+    public ReportGenerationJob reportJob;
+    public GeneratedReport generatedReport;
 
 
     //~ Methods ...............................................................
@@ -80,12 +85,9 @@ public class PickReportToViewPage
     // ----------------------------------------------------------
     public WOComponent viewReport()
     {
-        GeneratedReport report = (GeneratedReport)
-            generatedReportsDisplayGroup.selectedObject();
-
-        if (report != null)
+        if (generatedReport != null)
         {
-            setLocalGeneratedReport(report);
+            setLocalGeneratedReport(generatedReport);
             return pageWithName(GeneratedReportPage.class);
         }
         else
@@ -117,9 +119,7 @@ public class PickReportToViewPage
     // ----------------------------------------------------------
     public WOComponent viewReportProgress()
     {
-        ReportGenerationJob job = (ReportGenerationJob)
-            enqueuedReportsDisplayGroup.selectedObject();
-        GeneratedReport report = job.generatedReport();
+        GeneratedReport report = reportJob.generatedReport();
 
         if (report != null)
         {
