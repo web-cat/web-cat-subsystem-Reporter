@@ -1,7 +1,7 @@
 /*==========================================================================*\
  |  $Id$
  |*-------------------------------------------------------------------------*|
- |  Copyright (C) 2006-2008 Virginia Tech
+ |  Copyright (C) 2006-2011 Virginia Tech
  |
  |  This file is part of Web-CAT.
  |
@@ -21,22 +21,18 @@
 
 package org.webcat.reporter;
 
-import org.webcat.core.MutableDictionary;
 import com.webobjects.appserver.*;
-import com.webobjects.eoaccess.EODatabaseDataSource;
-import com.webobjects.eocontrol.EOSortOrdering;
 import com.webobjects.foundation.NSArray;
-import com.webobjects.foundation.NSMutableArray;
 import com.webobjects.foundation.NSMutableDictionary;
 import er.extensions.appserver.ERXDisplayGroup;
-import er.extensions.batching.ERXBatchingDisplayGroup;
 
 //-------------------------------------------------------------------------
 /**
  * This page allows the user to select among already-generated reports.
  *
- * @author Tony Allevato
- * @version $Id$
+ * @author  Tony Allevato
+ * @author  Last changed by $Author$
+ * @version $Revision$, $Date$
  */
 public class PickReportToViewPage
     extends ReporterComponent
@@ -56,8 +52,8 @@ public class PickReportToViewPage
 
     //~ KVC Attributes (must be public) .......................................
 
-    public ERXDisplayGroup generatedReportsDisplayGroup;
-    public ERXDisplayGroup enqueuedReportsDisplayGroup;
+    public ERXDisplayGroup<GeneratedReport> generatedReportsDisplayGroup;
+    public ERXDisplayGroup<ReportGenerationJob> enqueuedReportsDisplayGroup;
 
     public ReportGenerationJob reportJob;
     public GeneratedReport generatedReport;
@@ -68,7 +64,7 @@ public class PickReportToViewPage
     // ----------------------------------------------------------
     public void appendToResponse(WOResponse response, WOContext context)
     {
-        NSMutableDictionary bindings;
+        NSMutableDictionary<?, ?> bindings;
 
         bindings = generatedReportsDisplayGroup.queryBindings();
         bindings.setObjectForKey(user(), "user");

@@ -45,7 +45,7 @@ public class MultiIterator<T>
      * Construct a new object.
      * @param iters The sequence of iterators to traverse
      */
-    public MultiIterator(Iterator[] iters)
+    public MultiIterator(Iterator<T>[] iters)
     {
         this.iterators = iters;
         index = 0;
@@ -69,7 +69,7 @@ public class MultiIterator<T>
     // ----------------------------------------------------------
     public T next()
     {
-        return (T)iterators[index].next();
+        return iterators[index].next();
     }
 
 
@@ -82,6 +82,6 @@ public class MultiIterator<T>
 
     //~ Instance/static variables .............................................
 
-    private Iterator[] iterators;
+    private Iterator<T>[] iterators;
     private int index;
 }
