@@ -1,5 +1,5 @@
 /*==========================================================================*\
- |  $Id$
+ |  $Id: PickReportToViewPage.java,v 1.3 2011/05/27 15:36:46 stedwar2 Exp $
  |*-------------------------------------------------------------------------*|
  |  Copyright (C) 2006-2011 Virginia Tech
  |
@@ -31,8 +31,8 @@ import er.extensions.appserver.ERXDisplayGroup;
  * This page allows the user to select among already-generated reports.
  *
  * @author  Tony Allevato
- * @author  Last changed by $Author$
- * @version $Revision$, $Date$
+ * @author  Last changed by $Author: stedwar2 $
+ * @version $Revision: 1.3 $, $Date: 2011/05/27 15:36:46 $
  */
 public class PickReportToViewPage
     extends ReporterComponent

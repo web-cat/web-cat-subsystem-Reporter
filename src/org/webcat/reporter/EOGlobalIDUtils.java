@@ -1,5 +1,5 @@
 /*==========================================================================*\
- |  $Id$
+ |  $Id: EOGlobalIDUtils.java,v 1.2 2011/05/27 15:36:46 stedwar2 Exp $
  |*-------------------------------------------------------------------------*|
  |  Copyright (C) 2006-2011 Virginia Tech
  |
@@ -43,8 +43,8 @@ import java.util.Map;
  * object are skipped and returned unmodified.
  *
  * @author Tony Allevato
- * @author  Last changed by $Author$
- * @version $Revision$, $Date$
+ * @author  Last changed by $Author: stedwar2 $
+ * @version $Revision: 1.2 $, $Date: 2011/05/27 15:36:46 $
  */
 public class EOGlobalIDUtils
 {

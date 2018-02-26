@@ -1,5 +1,5 @@
 /*==========================================================================*\
- |  $Id$
+ |  $Id: DirectActionHTMLImageHandler.java,v 1.2 2011/05/27 15:36:46 stedwar2 Exp $
  |*-------------------------------------------------------------------------*|
  |  Copyright (C) 2006-2011 Virginia Tech
  |
@@ -37,8 +37,8 @@ import org.eclipse.birt.report.engine.api.IImage;
  * A BIRT image handler for online HTML-rendered reports.
  *
  * @author Tony Allevato
- * @author  Last changed by $Author$
- * @version $Revision$, $Date$
+ * @author  Last changed by $Author: stedwar2 $
+ * @version $Revision: 1.2 $, $Date: 2011/05/27 15:36:46 $
  */
 public class DirectActionHTMLImageHandler
     extends HTMLImageHandler

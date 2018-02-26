@@ -19,7 +19,7 @@ import com.webobjects.foundation.NSMutableSet;
 /**
  *
  * @author Tony Allevato
- * @version $Id$
+ * @version $Id: DescribeReportInputsPage.java,v 1.1 2010/05/11 14:51:48 aallowat Exp $
  */
 public class DescribeReportInputsPage extends ReporterComponent
 {

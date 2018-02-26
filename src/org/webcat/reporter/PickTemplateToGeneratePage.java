@@ -1,5 +1,5 @@
 /*==========================================================================*\
- |  $Id$
+ |  $Id: PickTemplateToGeneratePage.java,v 1.3 2010/12/17 16:10:12 stedwar2 Exp $
  |*-------------------------------------------------------------------------*|
  |  Copyright (C) 2006-2008 Virginia Tech
  |
@@ -32,8 +32,8 @@ import er.extensions.appserver.ERXDisplayGroup;
  * This page allows the user to select the template to use for a new report.
  *
  * @author  Tony Allevato
- * @author  Last changed by $Author$
- * @version $Revision$, $Date$
+ * @author  Last changed by $Author: stedwar2 $
+ * @version $Revision: 1.3 $, $Date: 2010/12/17 16:10:12 $
  */
 public class PickTemplateToGeneratePage
     extends ReporterComponent

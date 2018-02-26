@@ -1,5 +1,5 @@
 /*==========================================================================*\
- |  $Id$
+ |  $Id: ReportTemplate.java,v 1.3 2011/05/27 15:36:46 stedwar2 Exp $
  |*-------------------------------------------------------------------------*|
  |  Copyright (C) 2006-2011 Virginia Tech
  |
@@ -50,8 +50,8 @@ import er.extensions.foundation.ERXArrayUtilities;
  * Represents a BIRT report template and its associated metadata.
  *
  * @author Tony Allevato
- * @author  Last changed by $Author$
- * @version $Revision$, $Date$
+ * @author  Last changed by $Author: stedwar2 $
+ * @version $Revision: 1.3 $, $Date: 2011/05/27 15:36:46 $
  */
 public class ReportTemplate extends _ReportTemplate
 {

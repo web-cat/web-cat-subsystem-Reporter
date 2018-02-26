@@ -1,5 +1,5 @@
 /*==========================================================================*\
- |  $Id$
+ |  $Id: GeneratedReport.java,v 1.1 2010/05/11 14:51:48 aallowat Exp $
  |*-------------------------------------------------------------------------*|
  |  Copyright (C) 2006-2008 Virginia Tech
  |
@@ -42,7 +42,7 @@ import com.webobjects.foundation.NSData;
  * report template.
  *
  * @author Tony Allevato
- * @version $Id$
+ * @version $Id: GeneratedReport.java,v 1.1 2010/05/11 14:51:48 aallowat Exp $
  */
 public class GeneratedReport
     extends _GeneratedReport

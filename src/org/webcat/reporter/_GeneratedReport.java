@@ -717,7 +717,8 @@ public abstract class _GeneratedReport
     @SuppressWarnings("unchecked")
     public NSArray<org.webcat.reporter.ReportDataSetQuery> dataSetQueries()
     {
-        return (NSArray)storedValueForKey( "dataSetQueries" );
+        return (NSArray<org.webcat.reporter.ReportDataSetQuery>)
+            storedValueForKey("dataSetQueries");
     }
 
 
@@ -728,14 +729,15 @@ public abstract class _GeneratedReport
      *
      * @param value The new set of entities to relate to
      */
-    public void setDataSetQueries( NSMutableArray<org.webcat.reporter.ReportDataSetQuery>  value )
+    public void setDataSetQueries(
+        NSMutableArray<org.webcat.reporter.ReportDataSetQuery>  value)
     {
         if (log.isDebugEnabled())
         {
-            log.debug( "setDataSetQueries("
-                + value + "): was " + dataSetQueries() );
+            log.debug("setDataSetQueries("
+                + value + "): was " + dataSetQueries());
         }
-        takeStoredValueForKey( value, "dataSetQueries" );
+        takeStoredValueForKey(value, "dataSetQueries");
     }
 
 
@@ -895,7 +897,8 @@ public abstract class _GeneratedReport
     @SuppressWarnings("unchecked")
     public NSArray<org.webcat.reporter.ReportGenerationJob> reportGenerationJobs()
     {
-        return (NSArray)storedValueForKey( "reportGenerationJobs" );
+        return (NSArray<org.webcat.reporter.ReportGenerationJob>)
+            storedValueForKey("reportGenerationJobs");
     }
 
 
@@ -906,14 +909,15 @@ public abstract class _GeneratedReport
      *
      * @param value The new set of entities to relate to
      */
-    public void setReportGenerationJobs( NSMutableArray<org.webcat.reporter.ReportGenerationJob>  value )
+    public void setReportGenerationJobs(
+        NSMutableArray<org.webcat.reporter.ReportGenerationJob>  value)
     {
         if (log.isDebugEnabled())
         {
-            log.debug( "setReportGenerationJobs("
-                + value + "): was " + reportGenerationJobs() );
+            log.debug("setReportGenerationJobs("
+                + value + "): was " + reportGenerationJobs());
         }
-        takeStoredValueForKey( value, "reportGenerationJobs" );
+        takeStoredValueForKey(value, "reportGenerationJobs");
     }
 
 
@@ -1129,8 +1133,8 @@ public abstract class _GeneratedReport
         EOQualifier qualifier,
         NSArray<EOSortOrdering> sortOrderings)
     {
-        @SuppressWarnings("unchecked")
-        EOFetchSpecification fspec = new WCFetchSpecification(
+        WCFetchSpecification<GeneratedReport> fspec =
+            new WCFetchSpecification<GeneratedReport>(
                 ENTITY_NAME, qualifier, sortOrderings);
         fspec.setUsesDistinct(true);
         return objectsWithFetchSpecification(context, fspec);
@@ -1153,8 +1157,13 @@ public abstract class _GeneratedReport
         EOQualifier qualifier,
         NSArray<EOSortOrdering> sortOrderings)
     {
+        WCFetchSpecification<GeneratedReport> fspec =
+            new WCFetchSpecification<GeneratedReport>(
+                ENTITY_NAME, qualifier, sortOrderings);
+        fspec.setUsesDistinct(true);
+        fspec.setFetchLimit(1);
         NSArray<GeneratedReport> objects =
-            objectsMatchingQualifier(context, qualifier, sortOrderings);
+            objectsWithFetchSpecification(context, fspec);
         return (objects.size() > 0)
             ? objects.get(0)
             : null;
@@ -1246,7 +1255,7 @@ public abstract class _GeneratedReport
                     + java.util.Arrays.toString(keysAndValues));
             }
 
-            valueDictionary.setObjectForKey(value, key);
+            valueDictionary.setObjectForKey(value, (String)key);
         }
 
         return objectsMatchingValues(context, valueDictionary);
@@ -1318,7 +1327,7 @@ public abstract class _GeneratedReport
                     + java.util.Arrays.toString(keysAndValues));
             }
 
-            valueDictionary.setObjectForKey(value, key);
+            valueDictionary.setObjectForKey(value, (String)key);
         }
 
         return firstObjectMatchingValues(
@@ -1342,8 +1351,8 @@ public abstract class _GeneratedReport
         NSArray<EOSortOrdering> sortOrderings,
         NSDictionary<String, Object> keysAndValues)
     {
-        @SuppressWarnings("unchecked")
-        EOFetchSpecification fspec = new WCFetchSpecification(
+        WCFetchSpecification<GeneratedReport> fspec =
+            new WCFetchSpecification<GeneratedReport>(
                 ENTITY_NAME,
                 EOQualifier.qualifierToMatchAllValues(keysAndValues),
                 sortOrderings);
@@ -1409,7 +1418,7 @@ public abstract class _GeneratedReport
                     + java.util.Arrays.toString(keysAndValues));
             }
 
-            valueDictionary.setObjectForKey(value, key);
+            valueDictionary.setObjectForKey(value, (String)key);
         }
 
         return uniqueObjectMatchingValues(context, valueDictionary);
@@ -1519,7 +1528,7 @@ public abstract class _GeneratedReport
                     + java.util.Arrays.toString(keysAndValues));
             }
 
-            valueDictionary.setObjectForKey(value, key);
+            valueDictionary.setObjectForKey(value, (String)key);
         }
 
         return countOfObjectsMatchingValues(context, valueDictionary);

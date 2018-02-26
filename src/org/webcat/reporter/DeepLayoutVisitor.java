@@ -1,5 +1,5 @@
 /*==========================================================================*\
- |  $Id$
+ |  $Id: DeepLayoutVisitor.java,v 1.1 2010/05/11 14:51:48 aallowat Exp $
  |*-------------------------------------------------------------------------*|
  |  Copyright (C) 2006-2008 Virginia Tech
  |
@@ -41,7 +41,7 @@ import org.eclipse.birt.report.model.api.SlotHandle;
  * {@link ReportDesignHandle}.
  *
  * @author Tony Allevato
- * @version $Id$
+ * @version $Id: DeepLayoutVisitor.java,v 1.1 2010/05/11 14:51:48 aallowat Exp $
  */
 public class DeepLayoutVisitor extends DesignVisitor
 {

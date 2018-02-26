@@ -1,5 +1,5 @@
 /*==========================================================================*\
- |  $Id$
+ |  $Id: MultiIterator.java,v 1.2 2011/05/27 15:36:46 stedwar2 Exp $
  |*-------------------------------------------------------------------------*|
  |  Copyright (C) 2006-2008 Virginia Tech
  |
@@ -33,7 +33,7 @@ import java.util.Iterator;
  *            within this multi-iterator.
  *
  * @author  Tony Allevato
- * @version $Id$
+ * @version $Id: MultiIterator.java,v 1.2 2011/05/27 15:36:46 stedwar2 Exp $
  */
 public class MultiIterator<T>
     implements Iterator<T>

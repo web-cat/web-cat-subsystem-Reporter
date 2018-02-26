@@ -1,5 +1,5 @@
 /*==========================================================================*\
- |  $Id$
+ |  $Id: DirectActionRepositoryIdProvider.java,v 1.2 2010/10/15 00:47:37 stedwar2 Exp $
  |*-------------------------------------------------------------------------*|
  |  Copyright (C) 2006-2008 Virginia Tech
  |
@@ -32,7 +32,7 @@ import er.extensions.appserver.ERXWOContext;
  * direct action URL parameterized with the database ID of a report template.
  *
  * @author Tony Allevato
- * @version $Id$
+ * @version $Id: DirectActionRepositoryIdProvider.java,v 1.2 2010/10/15 00:47:37 stedwar2 Exp $
  */
 public class DirectActionRepositoryIdProvider implements IRepositoryIdProvider
 {

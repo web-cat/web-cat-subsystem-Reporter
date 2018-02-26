@@ -1,5 +1,5 @@
 /*==========================================================================*\
- |  $Id$
+ |  $Id: ReportGenerationWorkerThread.java,v 1.2 2011/12/25 21:18:25 stedwar2 Exp $
  |*-------------------------------------------------------------------------*|
  |  Copyright (C) 2006-2011 Virginia Tech
  |
@@ -40,8 +40,8 @@ import com.webobjects.foundation.NSTimestamp;
  * A worker thread that generates reports using the BIRT reporting engine.
  *
  * @author  Tony Allevato
- * @author  Last changed by $Author$
- * @version $Revision$, $Date$
+ * @author  Last changed by $Author: stedwar2 $
+ * @version $Revision: 1.2 $, $Date: 2011/12/25 21:18:25 $
  */
 public class ReportGenerationWorkerThread extends
         WorkerThread<ReportGenerationJob>

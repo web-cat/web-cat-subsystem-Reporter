@@ -1,5 +1,5 @@
 /*==========================================================================*\
- |  $Id$
+ |  $Id: ReportCompleteMessage.java,v 1.2 2011/12/06 18:42:09 stedwar2 Exp $
  |*-------------------------------------------------------------------------*|
  |  Copyright (C) 2009 Virginia Tech
  |
@@ -33,7 +33,7 @@ import com.webobjects.foundation.NSArray;
  * once the report is complete.
  *
  * @author Tony Allevato
- * @version $Id$
+ * @version $Id: ReportCompleteMessage.java,v 1.2 2011/12/06 18:42:09 stedwar2 Exp $
  */
 public class ReportCompleteMessage extends Message
 {

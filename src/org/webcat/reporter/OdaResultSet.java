@@ -1,5 +1,5 @@
 /*==========================================================================*\
- |  $Id$
+ |  $Id: OdaResultSet.java,v 1.3 2012/05/09 14:34:43 stedwar2 Exp $
  |*-------------------------------------------------------------------------*|
  |  Copyright (C) 2006-2012 Virginia Tech
  |
@@ -48,8 +48,8 @@ import er.extensions.eof.ERXFetchSpecificationBatchIterator;
  * A result set for a report.
  *
  * @author  Tony Allevato
- * @author  Last changed by $Author$
- * @version $Revision$, $Date$
+ * @author  Last changed by $Author: stedwar2 $
+ * @version $Revision: 1.3 $, $Date: 2012/05/09 14:34:43 $
  */
 public class OdaResultSet
     implements IWebCATResultSet

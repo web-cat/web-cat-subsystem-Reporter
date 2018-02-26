@@ -1069,7 +1069,8 @@ public abstract class _ReportTemplate
     @SuppressWarnings("unchecked")
     public NSArray<org.webcat.reporter.ReportTemplate> branchedTemplates()
     {
-        return (NSArray)storedValueForKey( "branchedTemplates" );
+        return (NSArray<org.webcat.reporter.ReportTemplate>)
+            storedValueForKey("branchedTemplates");
     }
 
 
@@ -1080,14 +1081,15 @@ public abstract class _ReportTemplate
      *
      * @param value The new set of entities to relate to
      */
-    public void setBranchedTemplates( NSMutableArray<org.webcat.reporter.ReportTemplate>  value )
+    public void setBranchedTemplates(
+        NSMutableArray<org.webcat.reporter.ReportTemplate>  value)
     {
         if (log.isDebugEnabled())
         {
-            log.debug( "setBranchedTemplates("
-                + value + "): was " + branchedTemplates() );
+            log.debug("setBranchedTemplates("
+                + value + "): was " + branchedTemplates());
         }
-        takeStoredValueForKey( value, "branchedTemplates" );
+        takeStoredValueForKey(value, "branchedTemplates");
     }
 
 
@@ -1247,7 +1249,8 @@ public abstract class _ReportTemplate
     @SuppressWarnings("unchecked")
     public NSArray<org.webcat.reporter.ReportDataSet> dataSets()
     {
-        return (NSArray)storedValueForKey( "dataSets" );
+        return (NSArray<org.webcat.reporter.ReportDataSet>)
+            storedValueForKey("dataSets");
     }
 
 
@@ -1258,14 +1261,15 @@ public abstract class _ReportTemplate
      *
      * @param value The new set of entities to relate to
      */
-    public void setDataSets( NSMutableArray<org.webcat.reporter.ReportDataSet>  value )
+    public void setDataSets(
+        NSMutableArray<org.webcat.reporter.ReportDataSet>  value)
     {
         if (log.isDebugEnabled())
         {
-            log.debug( "setDataSets("
-                + value + "): was " + dataSets() );
+            log.debug("setDataSets("
+                + value + "): was " + dataSets());
         }
-        takeStoredValueForKey( value, "dataSets" );
+        takeStoredValueForKey(value, "dataSets");
     }
 
 
@@ -1481,8 +1485,8 @@ public abstract class _ReportTemplate
         EOQualifier qualifier,
         NSArray<EOSortOrdering> sortOrderings)
     {
-        @SuppressWarnings("unchecked")
-        EOFetchSpecification fspec = new WCFetchSpecification(
+        WCFetchSpecification<ReportTemplate> fspec =
+            new WCFetchSpecification<ReportTemplate>(
                 ENTITY_NAME, qualifier, sortOrderings);
         fspec.setUsesDistinct(true);
         return objectsWithFetchSpecification(context, fspec);
@@ -1505,8 +1509,13 @@ public abstract class _ReportTemplate
         EOQualifier qualifier,
         NSArray<EOSortOrdering> sortOrderings)
     {
+        WCFetchSpecification<ReportTemplate> fspec =
+            new WCFetchSpecification<ReportTemplate>(
+                ENTITY_NAME, qualifier, sortOrderings);
+        fspec.setUsesDistinct(true);
+        fspec.setFetchLimit(1);
         NSArray<ReportTemplate> objects =
-            objectsMatchingQualifier(context, qualifier, sortOrderings);
+            objectsWithFetchSpecification(context, fspec);
         return (objects.size() > 0)
             ? objects.get(0)
             : null;
@@ -1598,7 +1607,7 @@ public abstract class _ReportTemplate
                     + java.util.Arrays.toString(keysAndValues));
             }
 
-            valueDictionary.setObjectForKey(value, key);
+            valueDictionary.setObjectForKey(value, (String)key);
         }
 
         return objectsMatchingValues(context, valueDictionary);
@@ -1670,7 +1679,7 @@ public abstract class _ReportTemplate
                     + java.util.Arrays.toString(keysAndValues));
             }
 
-            valueDictionary.setObjectForKey(value, key);
+            valueDictionary.setObjectForKey(value, (String)key);
         }
 
         return firstObjectMatchingValues(
@@ -1694,8 +1703,8 @@ public abstract class _ReportTemplate
         NSArray<EOSortOrdering> sortOrderings,
         NSDictionary<String, Object> keysAndValues)
     {
-        @SuppressWarnings("unchecked")
-        EOFetchSpecification fspec = new WCFetchSpecification(
+        WCFetchSpecification<ReportTemplate> fspec =
+            new WCFetchSpecification<ReportTemplate>(
                 ENTITY_NAME,
                 EOQualifier.qualifierToMatchAllValues(keysAndValues),
                 sortOrderings);
@@ -1761,7 +1770,7 @@ public abstract class _ReportTemplate
                     + java.util.Arrays.toString(keysAndValues));
             }
 
-            valueDictionary.setObjectForKey(value, key);
+            valueDictionary.setObjectForKey(value, (String)key);
         }
 
         return uniqueObjectMatchingValues(context, valueDictionary);
@@ -1871,7 +1880,7 @@ public abstract class _ReportTemplate
                     + java.util.Arrays.toString(keysAndValues));
             }
 
-            valueDictionary.setObjectForKey(value, key);
+            valueDictionary.setObjectForKey(value, (String)key);
         }
 
         return countOfObjectsMatchingValues(context, valueDictionary);

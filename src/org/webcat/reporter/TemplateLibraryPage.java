@@ -1,5 +1,5 @@
 /*==========================================================================*\
- |  $Id$
+ |  $Id: TemplateLibraryPage.java,v 1.1 2010/05/11 14:51:48 aallowat Exp $
  |*-------------------------------------------------------------------------*|
  |  Copyright (C) 2006-2008 Virginia Tech
  |
@@ -41,7 +41,7 @@ import org.webcat.core.WCComponent;
  * templates or manage existing ones.
  *
  * @author Tony Allevato
- * @version $Id$
+ * @version $Id: TemplateLibraryPage.java,v 1.1 2010/05/11 14:51:48 aallowat Exp $
  */
 public class TemplateLibraryPage
     extends WCComponent

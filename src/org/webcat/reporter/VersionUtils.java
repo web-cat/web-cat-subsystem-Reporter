@@ -1,5 +1,5 @@
 /*==========================================================================*\
- |  $Id$
+ |  $Id: VersionUtils.java,v 1.1 2010/05/11 14:51:48 aallowat Exp $
  |*-------------------------------------------------------------------------*|
  |  Copyright (C) 2006-2008 Virginia Tech
  |
@@ -27,7 +27,7 @@ package org.webcat.reporter;
  * templates.
  *
  * @author Tony Allevato
- * @version $Id$
+ * @version $Id: VersionUtils.java,v 1.1 2010/05/11 14:51:48 aallowat Exp $
  */
 public class VersionUtils
 {

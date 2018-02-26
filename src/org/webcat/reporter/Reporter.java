@@ -1,5 +1,5 @@
 /*==========================================================================*\
- |  $Id$
+ |  $Id: Reporter.java,v 1.3 2011/12/25 21:18:25 stedwar2 Exp $
  |*-------------------------------------------------------------------------*|
  |  Copyright (C) 2006-2011 Virginia Tech
  |
@@ -51,8 +51,8 @@ import er.extensions.eof.ERXEOControlUtilities;
  * The primary class of the Reporter subsystem.
  *
  * @author  Tony Allevato
- * @author  Last changed by: $Author$
- * @version $Revision$, $Date$
+ * @author  Last changed by: $Author: stedwar2 $
+ * @version $Revision: 1.3 $, $Date: 2011/12/25 21:18:25 $
  */
 public class Reporter
     extends Subsystem

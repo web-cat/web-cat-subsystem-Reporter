@@ -1,5 +1,5 @@
 /*==========================================================================*\
- |  $Id$
+ |  $Id: ReporterDatabaseUpdates.java,v 1.2 2010/10/14 18:45:10 stedwar2 Exp $
  |*-------------------------------------------------------------------------*|
  |  Copyright (C) 2006-2008 Virginia Tech
  |
@@ -33,7 +33,7 @@ import org.webcat.jobqueue.JobQueueDatabaseUpdates;
  * output for this class uses its parent class' logger.
  *
  * @author Tony Allevato
- * @version $Id$
+ * @version $Id: ReporterDatabaseUpdates.java,v 1.2 2010/10/14 18:45:10 stedwar2 Exp $
  */
 public class ReporterDatabaseUpdates
     extends UpdateSet

@@ -1,5 +1,5 @@
 /*==========================================================================*\
- |  $Id$
+ |  $Id: ReportDownloadErrorPage.java,v 1.1 2010/05/11 14:51:48 aallowat Exp $
  |*-------------------------------------------------------------------------*|
  |  Copyright (C) 2006-2008 Virginia Tech
  |
@@ -31,7 +31,7 @@ import com.webobjects.appserver.WOContext;
  * Displays any errors that may have occurred when saving a report.
  *
  * @author Tony Allevato
- * @version $Id$
+ * @version $Id: ReportDownloadErrorPage.java,v 1.1 2010/05/11 14:51:48 aallowat Exp $
  */
 public class ReportDownloadErrorPage extends ReporterComponent
 {

@@ -1,5 +1,5 @@
 /*==========================================================================*\
- |  $Id$
+ |  $Id: ReporterComponent.java,v 1.1 2010/05/11 14:51:48 aallowat Exp $
  |*-------------------------------------------------------------------------*|
  |  Copyright (C) 2006-2008 Virginia Tech
  |
@@ -34,7 +34,7 @@ import com.webobjects.foundation.NSArray;
  * A base class for pages and subcomponents in the Reporter subsystem.
  *
  * @author Tony Allevato
- * @version $Id$
+ * @version $Id: ReporterComponent.java,v 1.1 2010/05/11 14:51:48 aallowat Exp $
  */
 public class ReporterComponent
     extends WCComponent

@@ -1,5 +1,5 @@
 /*==========================================================================*\
- |  $Id$
+ |  $Id: OgnlQualifierUtils.java,v 1.5 2010/09/27 00:59:42 stedwar2 Exp $
  |*-------------------------------------------------------------------------*|
  |  Copyright (C) 2006-2008 Virginia Tech
  |
@@ -40,8 +40,8 @@ import com.webobjects.foundation.NSSelector;
  * in the ognl package is easier than using reflection everywhere.
  *
  * @author  Tony Allevato
- * @author  Last changed by $Author$
- * @version $Revision$, $Date$
+ * @author  Last changed by $Author: stedwar2 $
+ * @version $Revision: 1.5 $, $Date: 2010/09/27 00:59:42 $
  */
 public class OgnlQualifierUtils
 {

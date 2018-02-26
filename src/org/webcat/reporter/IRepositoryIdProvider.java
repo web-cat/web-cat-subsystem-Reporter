@@ -1,5 +1,5 @@
 /*==========================================================================*\
- |  $Id$
+ |  $Id: IRepositoryIdProvider.java,v 1.1 2010/05/11 14:51:48 aallowat Exp $
  |*-------------------------------------------------------------------------*|
  |  Copyright (C) 2006-2008 Virginia Tech
  |
@@ -34,7 +34,7 @@ package org.webcat.reporter;
  * </p>
  *
  * @author Tony Allevato
- * @version $Id$
+ * @version $Id: IRepositoryIdProvider.java,v 1.1 2010/05/11 14:51:48 aallowat Exp $
  */
 public interface IRepositoryIdProvider
 {
