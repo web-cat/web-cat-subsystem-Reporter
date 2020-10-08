@@ -1,6 +1,5 @@
 package org.webcat.reporter;
 
-import org.webcat.jobqueue.JobBase;
 import org.webcat.jobqueue.ManagedJobBase;
 
 public class ManagedReportGenerationJob extends ManagedJobBase

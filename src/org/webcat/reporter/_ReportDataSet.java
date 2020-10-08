@@ -133,6 +133,21 @@ public abstract class _ReportDataSet
      * @return The object, or null if no such id exists
      */
     public static ReportDataSet forId(
+        EOEditingContext ec, EOGlobalID id)
+    {
+        return (ReportDataSet)ec.faultForGlobalID(id, ec);
+    }
+
+
+    // ----------------------------------------------------------
+    /**
+     * Look up an object by id number.  Assumes the editing
+     * context is appropriately locked.
+     * @param ec The editing context to use
+     * @param id The id to look up
+     * @return The object, or null if no such id exists
+     */
+    public static ReportDataSet forId(
         EOEditingContext ec, String id)
     {
         return forId(ec, er.extensions.foundation.ERXValueUtilities.intValue(id));
@@ -189,6 +204,19 @@ public abstract class _ReportDataSet
 
     // ----------------------------------------------------------
     /**
+     * Refetch this object from the database.
+     * @param editingContext The target editing context
+     * @return An instance of this object in the target editing context
+     */
+    public ReportDataSet refetch(EOEditingContext editingContext)
+    {
+        return (ReportDataSet)refetchObjectFromDBinEditingContext(
+            editingContext);
+    }
+
+
+    // ----------------------------------------------------------
+    /**
      * Get a list of changes between this object's current state and the
      * last committed version.
      * @return a dictionary of the changes that have not yet been committed
@@ -219,6 +247,7 @@ public abstract class _ReportDataSet
         }
     }
 
+
     //-- Local mutable cache --
     private org.webcat.core.MutableArray constraintsCache;
     private NSData constraintsRawCache;
@@ -247,26 +276,26 @@ public abstract class _ReportDataSet
                 constraintsRawCache = dbValue;
                 org.webcat.core.MutableArray newValue =
                     org.webcat.core.MutableArray
-                    .objectWithArchiveData( dbValue );
-                if ( constraintsCache != null )
+                    .objectWithArchiveData(dbValue);
+                if (constraintsCache != null)
                 {
-                    constraintsCache.copyFrom( newValue );
+                    constraintsCache.copyFrom(newValue);
                 }
                 else
                 {
                     constraintsCache = newValue;
                 }
-                constraintsCache.setOwner( this );
-                setUpdateMutableFields( true );
+                constraintsCache.setOwner(this);
+                setUpdateMutableFields(true);
             }
         }
-        else if ( dbValue == null && constraintsCache == null )
+        else if (dbValue == null && constraintsCache == null)
         {
             constraintsCache =
                 org.webcat.core.MutableArray
-                .objectWithArchiveData( dbValue );
-             constraintsCache.setOwner( this );
-             setUpdateMutableFields( true );
+                .objectWithArchiveData(dbValue);
+             constraintsCache.setOwner(this);
+             setUpdateMutableFields(true);
         }
         return constraintsCache;
     }
@@ -279,26 +308,26 @@ public abstract class _ReportDataSet
      *
      * @param value The new value for this property
      */
-    public void setConstraints( org.webcat.core.MutableArray value )
+    public void setConstraints(org.webcat.core.MutableArray value)
     {
         if (log.isDebugEnabled())
         {
-            log.debug( "setConstraints("
-                + value + ")" );
+            log.debug("setConstraints("
+                + value + ")");
         }
-        if ( constraintsCache == null )
+        if (constraintsCache == null)
         {
             constraintsCache = value;
             value.setHasChanged( false );
             constraintsRawCache = value.archiveData();
-            takeStoredValueForKey( constraintsRawCache, "constraints" );
+            takeStoredValueForKey(constraintsRawCache, "constraints");
         }
-        else if ( constraintsCache != value )  // ( constraintsCache != null )
+        else if (constraintsCache != value)  // ( constraintsCache != null )
         {
-            constraintsCache.copyFrom( value );
-            setUpdateMutableFields( true );
+            constraintsCache.copyFrom(value);
+            setUpdateMutableFields(true);
         }
-        else  // ( constraintsCache == non-null value )
+        else  // (constraintsCache == non-null value)
         {
             // no nothing
         }
@@ -314,9 +343,9 @@ public abstract class _ReportDataSet
     {
         if (log.isDebugEnabled())
         {
-            log.debug( "clearConstraints()" );
+            log.debug("clearConstraints()");
         }
-        takeStoredValueForKey( null, "constraints" );
+        takeStoredValueForKey(null, "constraints");
         constraintsRawCache = null;
         constraintsCache = null;
     }
@@ -733,6 +762,7 @@ public abstract class _ReportDataSet
             new WCFetchSpecification<ReportDataSet>(
                 ENTITY_NAME, qualifier, sortOrderings);
         fspec.setUsesDistinct(true);
+        fspec.setRefreshesRefetchedObjects(true);
         return objectsWithFetchSpecification(context, fspec);
     }
 
@@ -757,6 +787,7 @@ public abstract class _ReportDataSet
             new WCFetchSpecification<ReportDataSet>(
                 ENTITY_NAME, qualifier, sortOrderings);
         fspec.setUsesDistinct(true);
+        fspec.setRefreshesRefetchedObjects(true);
         fspec.setFetchLimit(1);
         NSArray<ReportDataSet> objects =
             objectsWithFetchSpecification(context, fspec);
@@ -952,6 +983,8 @@ public abstract class _ReportDataSet
                 ENTITY_NAME,
                 EOQualifier.qualifierToMatchAllValues(keysAndValues),
                 sortOrderings);
+        fspec.setUsesDistinct(true);
+        fspec.setRefreshesRefetchedObjects(true);
         fspec.setFetchLimit(1);
 
         NSArray<ReportDataSet> objects =
@@ -1163,6 +1196,33 @@ public abstract class _ReportDataSet
     public String toString()
     {
         return userPresentableDescription();
+    }
+
+
+    // ----------------------------------------------------------
+    /**
+     * Hack to workaround bugs in ERXEOAccessUtilities.reapplyChanges().
+     *
+     * @param value the new value of the key
+     * @param key the key to access
+     */
+    public void takeValueForKey(Object value, String key)
+    {
+        // if (ERXValueUtilities.isNull(value))
+        if (value == NSKeyValueCoding.NullValue
+            || value instanceof NSKeyValueCoding.Null)
+        {
+            value = null;
+        }
+
+        if (value instanceof NSData)
+        {
+            super.takeStoredValueForKey(value, key);
+        }
+        else
+        {
+            super.takeValueForKey(value, key);
+        }
     }
 
 

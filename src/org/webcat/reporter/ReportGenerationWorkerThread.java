@@ -1,7 +1,5 @@
 /*==========================================================================*\
- |  $Id: ReportGenerationWorkerThread.java,v 1.2 2011/12/25 21:18:25 stedwar2 Exp $
- |*-------------------------------------------------------------------------*|
- |  Copyright (C) 2006-2011 Virginia Tech
+ |  Copyright (C) 2006-2021 Virginia Tech
  |
  |  This file is part of Web-CAT.
  |
@@ -40,8 +38,6 @@ import com.webobjects.foundation.NSTimestamp;
  * A worker thread that generates reports using the BIRT reporting engine.
  *
  * @author  Tony Allevato
- * @author  Last changed by $Author: stedwar2 $
- * @version $Revision: 1.2 $, $Date: 2011/12/25 21:18:25 $
  */
 public class ReportGenerationWorkerThread extends
         WorkerThread<ReportGenerationJob>
@@ -65,12 +61,10 @@ public class ReportGenerationWorkerThread extends
      * Called by the superclass to carry out the tasks for this job.
      */
     @Override
-    protected void processJob()
+    protected void processJob(EOEditingContext ec)
     {
-        ReportGenerationJob job = currentJob();
+        ReportGenerationJob job = currentJob(ec);
         GeneratedReport report = job.generatedReport();
-
-        EOEditingContext ec = localContext();
 
         log.info("Processing report for: "
                 + job.user().userName() + " (template: "
@@ -86,9 +80,9 @@ public class ReportGenerationWorkerThread extends
         //ReportGenerationTracker.getInstance().startReportForJobId(
         //        job.id().intValue(), report.id().intValue(), dataSetRefs);
 
-        runReport(report);
+        runReport(ec, report);
 
-        if (isCancelling())
+        if (isCancelling(ec))
         {
             // Delete the GeneratedReport (and accompanying file) if it was
             // already created by this point.
@@ -99,7 +93,7 @@ public class ReportGenerationWorkerThread extends
             return;
         }
 
-        storeErrorsInReportObject(report);
+        storeErrorsInReportObject(ec, report);
 
         report.setGeneratedTime(new NSTimestamp());
         report.setIsComplete(true);
@@ -108,7 +102,7 @@ public class ReportGenerationWorkerThread extends
 
         // Send a notification that the report was completed.
 
-        new ReportCompleteMessage(report).send();
+        new ReportCompleteMessage(ec, report).send();
     }
 
 
@@ -132,9 +126,9 @@ public class ReportGenerationWorkerThread extends
     /**
      * Spawns the BIRT report engine task that runs the report.
      */
-    private void runReport(GeneratedReport report)
+    private void runReport(EOEditingContext ec, GeneratedReport report)
     {
-        ReportGenerationJob job = currentJob();
+        ReportGenerationJob job = currentJob(ec);
         String reportPath = report.generatedReportFile();
         List<Exception> exceptions = null;
 
@@ -202,9 +196,10 @@ public class ReportGenerationWorkerThread extends
      * were produced by the result sets and stores them as a MutableArray
      * inside the GeneratedReport object.
      */
-    private void storeErrorsInReportObject(GeneratedReport report)
+    private void storeErrorsInReportObject(
+        EOEditingContext ec, GeneratedReport report)
     {
-        ReportGenerationJob job = currentJob();
+        ReportGenerationJob job = currentJob(ec);
 
         MutableArray errors = ReportExceptionTranslator.translateExceptions(
                 errorsDuringRun);
@@ -232,11 +227,11 @@ public class ReportGenerationWorkerThread extends
      * Cancels the job by killing the BIRT report engine task.
      */
     @Override
-    protected void cancelJob()
+    protected void cancelJob(EOEditingContext ec)
     {
-        ReportGenerationJob job = currentJob();
+        ReportGenerationJob job = currentJob(ec);
 
-        super.cancelJob();
+        super.cancelJob(ec);
 
         runTask.cancel();
 

@@ -1,7 +1,5 @@
 /*==========================================================================*\
- |  $Id: Reporter.java,v 1.3 2011/12/25 21:18:25 stedwar2 Exp $
- |*-------------------------------------------------------------------------*|
- |  Copyright (C) 2006-2011 Virginia Tech
+ |  Copyright (C) 2006-2021 Virginia Tech
  |
  |  This file is part of Web-CAT.
  |
@@ -42,7 +40,6 @@ import org.webcat.reporter.messaging.ReportCompleteMessage;
 import org.webcat.woextensions.ECAction;
 import org.webcat.woextensions.WCEC;
 import static org.webcat.woextensions.ECAction.run;
-import com.webobjects.eocontrol.EOEditingContext;
 import com.webobjects.eocontrol.EOQualifier;
 import er.extensions.eof.ERXEOControlUtilities;
 
@@ -51,8 +48,6 @@ import er.extensions.eof.ERXEOControlUtilities;
  * The primary class of the Reporter subsystem.
  *
  * @author  Tony Allevato
- * @author  Last changed by: $Author: stedwar2 $
- * @version $Revision: 1.3 $, $Date: 2011/12/25 21:18:25 $
  */
 public class Reporter
     extends Subsystem
@@ -253,9 +248,10 @@ public class Reporter
 
     //~ Instance/static variables .............................................
 
-    private SessionHandle    designSession;
-    private int              jobCountAtLastThrottleCheck;
-    private EOEditingContext jobCountEC = WCEC.newEditingContext();
+    private SessionHandle designSession;
+    private int jobCountAtLastThrottleCheck;
+    private WCEC jobCountEC =
+        WCEC.factoryWithToolOSC()._newEditingContext();
 
     /**
      * This is the sole instance of the reporter subsystem, initialized by the

@@ -136,6 +136,21 @@ public abstract class _ReportTemplate
      * @return The object, or null if no such id exists
      */
     public static ReportTemplate forId(
+        EOEditingContext ec, EOGlobalID id)
+    {
+        return (ReportTemplate)ec.faultForGlobalID(id, ec);
+    }
+
+
+    // ----------------------------------------------------------
+    /**
+     * Look up an object by id number.  Assumes the editing
+     * context is appropriately locked.
+     * @param ec The editing context to use
+     * @param id The id to look up
+     * @return The object, or null if no such id exists
+     */
+    public static ReportTemplate forId(
         EOEditingContext ec, String id)
     {
         return forId(ec, er.extensions.foundation.ERXValueUtilities.intValue(id));
@@ -228,6 +243,19 @@ public abstract class _ReportTemplate
 
     // ----------------------------------------------------------
     /**
+     * Refetch this object from the database.
+     * @param editingContext The target editing context
+     * @return An instance of this object in the target editing context
+     */
+    public ReportTemplate refetch(EOEditingContext editingContext)
+    {
+        return (ReportTemplate)refetchObjectFromDBinEditingContext(
+            editingContext);
+    }
+
+
+    // ----------------------------------------------------------
+    /**
      * Get a list of changes between this object's current state and the
      * last committed version.
      * @return a dictionary of the changes that have not yet been committed
@@ -257,6 +285,7 @@ public abstract class _ReportTemplate
             return er.extensions.eof.ERXConstant.ZeroInteger;
         }
     }
+
 
     // ----------------------------------------------------------
     /**
@@ -524,26 +553,26 @@ public abstract class _ReportTemplate
                 parametersRawCache = dbValue;
                 org.webcat.core.MutableArray newValue =
                     org.webcat.core.MutableArray
-                    .objectWithArchiveData( dbValue );
-                if ( parametersCache != null )
+                    .objectWithArchiveData(dbValue);
+                if (parametersCache != null)
                 {
-                    parametersCache.copyFrom( newValue );
+                    parametersCache.copyFrom(newValue);
                 }
                 else
                 {
                     parametersCache = newValue;
                 }
-                parametersCache.setOwner( this );
-                setUpdateMutableFields( true );
+                parametersCache.setOwner(this);
+                setUpdateMutableFields(true);
             }
         }
-        else if ( dbValue == null && parametersCache == null )
+        else if (dbValue == null && parametersCache == null)
         {
             parametersCache =
                 org.webcat.core.MutableArray
-                .objectWithArchiveData( dbValue );
-             parametersCache.setOwner( this );
-             setUpdateMutableFields( true );
+                .objectWithArchiveData(dbValue);
+             parametersCache.setOwner(this);
+             setUpdateMutableFields(true);
         }
         return parametersCache;
     }
@@ -556,26 +585,26 @@ public abstract class _ReportTemplate
      *
      * @param value The new value for this property
      */
-    public void setParameters( org.webcat.core.MutableArray value )
+    public void setParameters(org.webcat.core.MutableArray value)
     {
         if (log.isDebugEnabled())
         {
-            log.debug( "setParameters("
-                + value + ")" );
+            log.debug("setParameters("
+                + value + ")");
         }
-        if ( parametersCache == null )
+        if (parametersCache == null)
         {
             parametersCache = value;
             value.setHasChanged( false );
             parametersRawCache = value.archiveData();
-            takeStoredValueForKey( parametersRawCache, "parameters" );
+            takeStoredValueForKey(parametersRawCache, "parameters");
         }
-        else if ( parametersCache != value )  // ( parametersCache != null )
+        else if (parametersCache != value)  // ( parametersCache != null )
         {
-            parametersCache.copyFrom( value );
-            setUpdateMutableFields( true );
+            parametersCache.copyFrom(value);
+            setUpdateMutableFields(true);
         }
-        else  // ( parametersCache == non-null value )
+        else  // (parametersCache == non-null value)
         {
             // no nothing
         }
@@ -591,9 +620,9 @@ public abstract class _ReportTemplate
     {
         if (log.isDebugEnabled())
         {
-            log.debug( "clearParameters()" );
+            log.debug("clearParameters()");
         }
-        takeStoredValueForKey( null, "parameters" );
+        takeStoredValueForKey(null, "parameters");
         parametersRawCache = null;
         parametersCache = null;
     }
@@ -1489,6 +1518,7 @@ public abstract class _ReportTemplate
             new WCFetchSpecification<ReportTemplate>(
                 ENTITY_NAME, qualifier, sortOrderings);
         fspec.setUsesDistinct(true);
+        fspec.setRefreshesRefetchedObjects(true);
         return objectsWithFetchSpecification(context, fspec);
     }
 
@@ -1513,6 +1543,7 @@ public abstract class _ReportTemplate
             new WCFetchSpecification<ReportTemplate>(
                 ENTITY_NAME, qualifier, sortOrderings);
         fspec.setUsesDistinct(true);
+        fspec.setRefreshesRefetchedObjects(true);
         fspec.setFetchLimit(1);
         NSArray<ReportTemplate> objects =
             objectsWithFetchSpecification(context, fspec);
@@ -1708,6 +1739,8 @@ public abstract class _ReportTemplate
                 ENTITY_NAME,
                 EOQualifier.qualifierToMatchAllValues(keysAndValues),
                 sortOrderings);
+        fspec.setUsesDistinct(true);
+        fspec.setRefreshesRefetchedObjects(true);
         fspec.setFetchLimit(1);
 
         NSArray<ReportTemplate> objects =
@@ -2007,6 +2040,33 @@ public abstract class _ReportTemplate
     public String toString()
     {
         return userPresentableDescription();
+    }
+
+
+    // ----------------------------------------------------------
+    /**
+     * Hack to workaround bugs in ERXEOAccessUtilities.reapplyChanges().
+     *
+     * @param value the new value of the key
+     * @param key the key to access
+     */
+    public void takeValueForKey(Object value, String key)
+    {
+        // if (ERXValueUtilities.isNull(value))
+        if (value == NSKeyValueCoding.NullValue
+            || value instanceof NSKeyValueCoding.Null)
+        {
+            value = null;
+        }
+
+        if (value instanceof NSData)
+        {
+            super.takeStoredValueForKey(value, key);
+        }
+        else
+        {
+            super.takeValueForKey(value, key);
+        }
     }
 
 

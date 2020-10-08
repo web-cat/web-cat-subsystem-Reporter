@@ -21,7 +21,7 @@
 
 package org.webcat.reporter.actions;
 
-import org.webcat.core.DirectAction;
+import org.webcat.core.actions.WCDirectAction;
 import com.webobjects.appserver.WOActionResults;
 import com.webobjects.appserver.WORequest;
 
@@ -35,7 +35,8 @@ import com.webobjects.appserver.WORequest;
  * @author Tony Allevato
  * @version $Id: reportTemplate.java,v 1.1 2010/05/11 14:51:48 aallowat Exp $
  */
-public class reportTemplate extends DirectAction
+public class reportTemplate
+    extends WCDirectAction
 {
     //~ Constructor ...........................................................
 

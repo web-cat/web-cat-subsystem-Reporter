@@ -1,7 +1,5 @@
 /*==========================================================================*\
- |  $Id: ReportCompleteMessage.java,v 1.2 2011/12/06 18:42:09 stedwar2 Exp $
- |*-------------------------------------------------------------------------*|
- |  Copyright (C) 2009 Virginia Tech
+ |  Copyright (C) 2009-2021 Virginia Tech
  |
  |  This file is part of Web-CAT.
  |
@@ -25,15 +23,15 @@ import org.webcat.core.User;
 import org.webcat.core.messaging.Message;
 import org.webcat.reporter.GeneratedReport;
 import com.webobjects.eocontrol.EOEditingContext;
+import com.webobjects.eocontrol.EOGlobalID;
 import com.webobjects.foundation.NSArray;
 
 //-------------------------------------------------------------------------
 /**
- * A message that is sent to the user who requested that a report be generated,
- * once the report is complete.
+ * A message that is sent to the user who requested that a report be
+ * generated once the report is complete.
  *
  * @author Tony Allevato
- * @version $Id: ReportCompleteMessage.java,v 1.2 2011/12/06 18:42:09 stedwar2 Exp $
  */
 public class ReportCompleteMessage extends Message
 {
@@ -45,18 +43,11 @@ public class ReportCompleteMessage extends Message
      *
      * @param report the report that was completed
      */
-    public ReportCompleteMessage(GeneratedReport report)
+    public ReportCompleteMessage(EOEditingContext ec, GeneratedReport report)
     {
-        EOEditingContext ec = editingContext();
-        try
-        {
-            ec.lock();
-            this.report = report.localInstance(ec);
-        }
-        finally
-        {
-            ec.unlock();
-        }
+        description = report.description();
+        setUserEmails(new NSArray<String>(report.user().email()));
+        setUserIds(new NSArray<EOGlobalID>(report.user().globalId()));
     }
 
 
@@ -82,7 +73,7 @@ public class ReportCompleteMessage extends Message
     public String fullBody()
     {
         // TODO make this better
-        return "The report named \"" + report.description() +
+        return "The report named \"" + description +
             "\" was generated.";
     }
 
@@ -91,7 +82,7 @@ public class ReportCompleteMessage extends Message
     @Override
     public String shortBody()
     {
-        return "The report named \"" + report.description() +
+        return "The report named \"" + description +
             "\" was generated.";
     }
 
@@ -100,29 +91,11 @@ public class ReportCompleteMessage extends Message
     @Override
     public String title()
     {
-        return "Report completed: " + report.description();
-    }
-
-
-    // ----------------------------------------------------------
-    @Override
-    public NSArray<User> users()
-    {
-        // Returns an array containing the one user who generated this report.
-        EOEditingContext ec = editingContext();
-        try
-        {
-            ec.lock();
-            return new NSArray<User>(report.user());
-        }
-        finally
-        {
-            ec.unlock();
-        }
+        return "Report completed: " + description;
     }
 
 
     //~ Static/instance variables .............................................
 
-    private GeneratedReport report;
+    private String description;
 }

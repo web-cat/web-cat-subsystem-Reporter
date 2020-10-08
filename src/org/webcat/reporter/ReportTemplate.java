@@ -1,7 +1,5 @@
 /*==========================================================================*\
- |  $Id: ReportTemplate.java,v 1.3 2011/05/27 15:36:46 stedwar2 Exp $
- |*-------------------------------------------------------------------------*|
- |  Copyright (C) 2006-2011 Virginia Tech
+ |  Copyright (C) 2006-2021 Virginia Tech
  |
  |  This file is part of Web-CAT.
  |
@@ -50,8 +48,6 @@ import er.extensions.foundation.ERXArrayUtilities;
  * Represents a BIRT report template and its associated metadata.
  *
  * @author Tony Allevato
- * @author  Last changed by $Author: stedwar2 $
- * @version $Revision: 1.3 $, $Date: 2011/05/27 15:36:46 $
  */
 public class ReportTemplate extends _ReportTemplate
 {
@@ -591,8 +587,8 @@ public class ReportTemplate extends _ReportTemplate
      * @return a String indicating any errors that occurred, or null if it was
      *         successful
      */
-    private String deeplyVisitTemplate(EOEditingContext ec,
-            ReportDesignHandle reportHandle)
+    private String deeplyVisitTemplate(
+        EOEditingContext ec, ReportDesignHandle reportHandle)
     {
         UploadedTemplateVisitor visitor = new UploadedTemplateVisitor();
         visitor.apply(reportHandle);

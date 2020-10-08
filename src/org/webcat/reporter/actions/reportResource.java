@@ -29,7 +29,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import org.apache.log4j.Logger;
-import org.webcat.core.DirectAction;
+import org.webcat.core.actions.WCDirectAction;
 import org.webcat.reporter.GeneratedReport;
 import org.webcat.woextensions.ECAction;
 import static org.webcat.woextensions.ECAction.run;
@@ -46,7 +46,7 @@ import static org.webcat.woextensions.ECAction.run;
  * @version $Revision: 1.2 $, $Date: 2011/12/25 21:18:25 $
  */
 public class reportResource
-    extends DirectAction
+    extends WCDirectAction
 {
     //~ Constructor ...........................................................
 

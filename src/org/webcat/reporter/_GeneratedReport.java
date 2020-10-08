@@ -136,6 +136,21 @@ public abstract class _GeneratedReport
      * @return The object, or null if no such id exists
      */
     public static GeneratedReport forId(
+        EOEditingContext ec, EOGlobalID id)
+    {
+        return (GeneratedReport)ec.faultForGlobalID(id, ec);
+    }
+
+
+    // ----------------------------------------------------------
+    /**
+     * Look up an object by id number.  Assumes the editing
+     * context is appropriately locked.
+     * @param ec The editing context to use
+     * @param id The id to look up
+     * @return The object, or null if no such id exists
+     */
+    public static GeneratedReport forId(
         EOEditingContext ec, String id)
     {
         return forId(ec, er.extensions.foundation.ERXValueUtilities.intValue(id));
@@ -201,6 +216,19 @@ public abstract class _GeneratedReport
 
     // ----------------------------------------------------------
     /**
+     * Refetch this object from the database.
+     * @param editingContext The target editing context
+     * @return An instance of this object in the target editing context
+     */
+    public GeneratedReport refetch(EOEditingContext editingContext)
+    {
+        return (GeneratedReport)refetchObjectFromDBinEditingContext(
+            editingContext);
+    }
+
+
+    // ----------------------------------------------------------
+    /**
      * Get a list of changes between this object's current state and the
      * last committed version.
      * @return a dictionary of the changes that have not yet been committed
@@ -230,6 +258,7 @@ public abstract class _GeneratedReport
             return er.extensions.eof.ERXConstant.ZeroInteger;
         }
     }
+
 
     // ----------------------------------------------------------
     /**
@@ -288,26 +317,26 @@ public abstract class _GeneratedReport
                 errorsRawCache = dbValue;
                 org.webcat.core.MutableArray newValue =
                     org.webcat.core.MutableArray
-                    .objectWithArchiveData( dbValue );
-                if ( errorsCache != null )
+                    .objectWithArchiveData(dbValue);
+                if (errorsCache != null)
                 {
-                    errorsCache.copyFrom( newValue );
+                    errorsCache.copyFrom(newValue);
                 }
                 else
                 {
                     errorsCache = newValue;
                 }
-                errorsCache.setOwner( this );
-                setUpdateMutableFields( true );
+                errorsCache.setOwner(this);
+                setUpdateMutableFields(true);
             }
         }
-        else if ( dbValue == null && errorsCache == null )
+        else if (dbValue == null && errorsCache == null)
         {
             errorsCache =
                 org.webcat.core.MutableArray
-                .objectWithArchiveData( dbValue );
-             errorsCache.setOwner( this );
-             setUpdateMutableFields( true );
+                .objectWithArchiveData(dbValue);
+             errorsCache.setOwner(this);
+             setUpdateMutableFields(true);
         }
         return errorsCache;
     }
@@ -320,26 +349,26 @@ public abstract class _GeneratedReport
      *
      * @param value The new value for this property
      */
-    public void setErrors( org.webcat.core.MutableArray value )
+    public void setErrors(org.webcat.core.MutableArray value)
     {
         if (log.isDebugEnabled())
         {
-            log.debug( "setErrors("
-                + value + ")" );
+            log.debug("setErrors("
+                + value + ")");
         }
-        if ( errorsCache == null )
+        if (errorsCache == null)
         {
             errorsCache = value;
             value.setHasChanged( false );
             errorsRawCache = value.archiveData();
-            takeStoredValueForKey( errorsRawCache, "errors" );
+            takeStoredValueForKey(errorsRawCache, "errors");
         }
-        else if ( errorsCache != value )  // ( errorsCache != null )
+        else if (errorsCache != value)  // ( errorsCache != null )
         {
-            errorsCache.copyFrom( value );
-            setUpdateMutableFields( true );
+            errorsCache.copyFrom(value);
+            setUpdateMutableFields(true);
         }
-        else  // ( errorsCache == non-null value )
+        else  // (errorsCache == non-null value)
         {
             // no nothing
         }
@@ -355,9 +384,9 @@ public abstract class _GeneratedReport
     {
         if (log.isDebugEnabled())
         {
-            log.debug( "clearErrors()" );
+            log.debug("clearErrors()");
         }
-        takeStoredValueForKey( null, "errors" );
+        takeStoredValueForKey(null, "errors");
         errorsRawCache = null;
         errorsCache = null;
     }
@@ -1137,6 +1166,7 @@ public abstract class _GeneratedReport
             new WCFetchSpecification<GeneratedReport>(
                 ENTITY_NAME, qualifier, sortOrderings);
         fspec.setUsesDistinct(true);
+        fspec.setRefreshesRefetchedObjects(true);
         return objectsWithFetchSpecification(context, fspec);
     }
 
@@ -1161,6 +1191,7 @@ public abstract class _GeneratedReport
             new WCFetchSpecification<GeneratedReport>(
                 ENTITY_NAME, qualifier, sortOrderings);
         fspec.setUsesDistinct(true);
+        fspec.setRefreshesRefetchedObjects(true);
         fspec.setFetchLimit(1);
         NSArray<GeneratedReport> objects =
             objectsWithFetchSpecification(context, fspec);
@@ -1356,6 +1387,8 @@ public abstract class _GeneratedReport
                 ENTITY_NAME,
                 EOQualifier.qualifierToMatchAllValues(keysAndValues),
                 sortOrderings);
+        fspec.setUsesDistinct(true);
+        fspec.setRefreshesRefetchedObjects(true);
         fspec.setFetchLimit(1);
 
         NSArray<GeneratedReport> objects =
@@ -1681,6 +1714,33 @@ public abstract class _GeneratedReport
     public String toString()
     {
         return userPresentableDescription();
+    }
+
+
+    // ----------------------------------------------------------
+    /**
+     * Hack to workaround bugs in ERXEOAccessUtilities.reapplyChanges().
+     *
+     * @param value the new value of the key
+     * @param key the key to access
+     */
+    public void takeValueForKey(Object value, String key)
+    {
+        // if (ERXValueUtilities.isNull(value))
+        if (value == NSKeyValueCoding.NullValue
+            || value instanceof NSKeyValueCoding.Null)
+        {
+            value = null;
+        }
+
+        if (value instanceof NSData)
+        {
+            super.takeStoredValueForKey(value, key);
+        }
+        else
+        {
+            super.takeValueForKey(value, key);
+        }
     }
 
 
